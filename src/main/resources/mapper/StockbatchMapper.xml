@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.StockbatchDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Stockbatch" >
+        <id column="StockCode" property="stockcode" jdbcType="VARCHAR" />
+        <result column="Warehouse_No" property="warehouseNo" jdbcType="VARCHAR" />
+        <result column="GoodsID" property="goodsid" jdbcType="VARCHAR" />
+        <result column="BatchNumber" property="batchnumber" jdbcType="VARCHAR" />
+        <result column="Quantity" property="quantity" jdbcType="INTEGER" />
+        <result column="F2" property="f2" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        StockCode, Warehouse_No, GoodsID, BatchNumber, Quantity, F2
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from stockbatch
+        where StockCode = #{stockcode,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from stockbatch
+        where StockCode = #{stockcode,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Stockbatch" >
+        insert into stockbatch (StockCode, Warehouse_No, GoodsID, 
+            BatchNumber, Quantity, F2
+            )
+        values (#{stockcode,jdbcType=VARCHAR}, #{warehouseNo,jdbcType=VARCHAR}, #{goodsid,jdbcType=VARCHAR}, 
+            #{batchnumber,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, #{f2,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertStockBatch" parameterType="java.util.List">
+         insert into stockbatch (StockCode, Warehouse_No, GoodsID,
+            BatchNumber, Quantity, F2
+            )
+        values
+        <foreach collection="stockbatchList" item="e" separator=",">
+            (#{e.stockcode,jdbcType=VARCHAR}, #{e.warehouseNo,jdbcType=VARCHAR}, #{e.goodsid,jdbcType=VARCHAR},
+            #{e.batchnumber,jdbcType=VARCHAR}, #{e.quantity,jdbcType=INTEGER}, #{e.f2,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Stockbatch" >
+        insert into stockbatch
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="stockcode != null" >
+                StockCode,
+            </if>
+            <if test="warehouseNo != null" >
+                Warehouse_No,
+            </if>
+            <if test="goodsid != null" >
+                GoodsID,
+            </if>
+            <if test="batchnumber != null" >
+                BatchNumber,
+            </if>
+            <if test="quantity != null" >
+                Quantity,
+            </if>
+            <if test="f2 != null" >
+                F2,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="stockcode != null" >
+                #{stockcode,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseNo != null" >
+                #{warehouseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsid != null" >
+                #{goodsid,jdbcType=VARCHAR},
+            </if>
+            <if test="batchnumber != null" >
+                #{batchnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null" >
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="f2 != null" >
+                #{f2,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Stockbatch" >
+        update stockbatch
+        <set >
+            <if test="warehouseNo != null" >
+                Warehouse_No = #{warehouseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsid != null" >
+                GoodsID = #{goodsid,jdbcType=VARCHAR},
+            </if>
+            <if test="batchnumber != null" >
+                BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null" >
+                Quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="f2 != null" >
+                F2 = #{f2,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where StockCode = #{stockcode,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Stockbatch" >
+        update stockbatch
+        set Warehouse_No = #{warehouseNo,jdbcType=VARCHAR},
+            GoodsID = #{goodsid,jdbcType=VARCHAR},
+            BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+            Quantity = #{quantity,jdbcType=INTEGER},
+            F2 = #{f2,jdbcType=VARCHAR}
+        where StockCode = #{stockcode,jdbcType=VARCHAR}
+    </update>
+</mapper>

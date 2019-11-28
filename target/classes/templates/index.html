@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<h1>主页，不需要任何权限即可访问</h1>
+<a href="/index">主页</a>
+<a href="/user">用户页面</a>
+<a href="/admin">管理员页面</a>
+<a href="/login">登录页面</a>
+
+<form action="/goods/insertGoods" method="post" enctype="multipart/form-data">
+    文件上传 <input type="file" name="files" /><br>
+    文件上传 <input type="file" name="files" /><br>
+     货品名称 <input type="text" name="goodsname"/><br>
+    货品编号 <input type="text" name="goodsno" /><br>
+    厂家编号 <input type="text" name="goodsmanuno"><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

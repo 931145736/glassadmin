@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.PurchasegoodsDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Purchasegoods" >
+        <id column="PurchaseGoodsID" property="purchasegoodsid" jdbcType="VARCHAR" />
+        <result column="Purchase_ID" property="purchaseId" jdbcType="VARCHAR" />
+        <result column="Goods_No" property="goodsNo" jdbcType="VARCHAR" />
+        <result column="Warehouse_No" property="warehouseNo" jdbcType="VARCHAR" />
+        <result column="Deliver_Date" property="deliverDate" jdbcType="TIMESTAMP" />
+        <result column="Discount" property="discount" jdbcType="DECIMAL" />
+        <result column="Quantity" property="quantity" jdbcType="INTEGER" />
+        <result column="Amount" property="amount" jdbcType="DECIMAL" />
+        <result column="TaxRate" property="taxrate" jdbcType="DECIMAL" />
+        <result column="BatchNumber" property="batchnumber" jdbcType="VARCHAR" />
+        <result column="Manu_Date" property="manuDate" jdbcType="TIMESTAMP" />
+        <result column="Expiry_Date" property="expiryDate" jdbcType="TIMESTAMP" />
+        <result column="MaterialPrice" property="materialprice" jdbcType="DECIMAL" />
+        <result column="CurrencyPrice" property="currencyprice" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        PurchaseGoodsID, Purchase_ID, Goods_No, Warehouse_No, Deliver_Date, Discount, Quantity, 
+        Amount, TaxRate, BatchNumber, Manu_Date, Expiry_Date, MaterialPrice, CurrencyPrice
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from purchasegoods
+        where PurchaseGoodsID = #{purchasegoodsid,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from purchasegoods
+        where PurchaseGoodsID = #{purchasegoodsid,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Purchasegoods" >
+        insert into purchasegoods (PurchaseGoodsID, Purchase_ID, Goods_No, 
+            Warehouse_No, Deliver_Date, Discount, 
+            Quantity, Amount, TaxRate, 
+            BatchNumber, Manu_Date, Expiry_Date, 
+            MaterialPrice, CurrencyPrice)
+        values (#{purchasegoodsid,jdbcType=VARCHAR}, #{purchaseId,jdbcType=VARCHAR}, #{goodsNo,jdbcType=VARCHAR}, 
+            #{warehouseNo,jdbcType=VARCHAR}, #{deliverDate,jdbcType=TIMESTAMP}, #{discount,jdbcType=DECIMAL}, 
+            #{quantity,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{taxrate,jdbcType=DECIMAL}, 
+            #{batchnumber,jdbcType=VARCHAR}, #{manuDate,jdbcType=TIMESTAMP}, #{expiryDate,jdbcType=TIMESTAMP}, 
+            #{materialprice,jdbcType=DECIMAL}, #{currencyprice,jdbcType=DECIMAL})
+    </insert>
+    <!--批量添加采购的货品-->
+    <insert id="insertGoodsBatch" parameterType="java.util.List">
+          insert into purchasegoods (PurchaseGoodsID, Purchase_ID, Goods_No,
+            Warehouse_No, Deliver_Date, Discount,
+            Quantity, Amount, TaxRate,
+            BatchNumber, Manu_Date, Expiry_Date,
+            MaterialPrice, CurrencyPrice)
+        values
+          <foreach collection="purchasegoods" item="e" separator=",">
+              (#{e.purchasegoodsid,jdbcType=VARCHAR}, #{e.purchaseId,jdbcType=VARCHAR}, #{e.goodsNo,jdbcType=VARCHAR},
+              #{e.warehouseNo,jdbcType=VARCHAR}, #{e.deliverDate,jdbcType=TIMESTAMP}, #{e.discount,jdbcType=DECIMAL},
+              #{e.quantity,jdbcType=INTEGER}, #{e.amount,jdbcType=DECIMAL}, #{e.taxrate,jdbcType=DECIMAL},
+              #{e.batchnumber,jdbcType=VARCHAR}, #{e.manuDate,jdbcType=TIMESTAMP}, #{e.expiryDate,jdbcType=TIMESTAMP},
+              #{e.materialprice,jdbcType=DECIMAL}, #{e.currencyprice,jdbcType=DECIMAL})
+          </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Purchasegoods" >
+        insert into purchasegoods
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="purchasegoodsid != null" >
+                PurchaseGoodsID,
+            </if>
+            <if test="purchaseId != null" >
+                Purchase_ID,
+            </if>
+            <if test="goodsNo != null" >
+                Goods_No,
+            </if>
+            <if test="warehouseNo != null" >
+                Warehouse_No,
+            </if>
+            <if test="deliverDate != null" >
+                Deliver_Date,
+            </if>
+            <if test="discount != null" >
+                Discount,
+            </if>
+            <if test="quantity != null" >
+                Quantity,
+            </if>
+            <if test="amount != null" >
+                Amount,
+            </if>
+            <if test="taxrate != null" >
+                TaxRate,
+            </if>
+            <if test="batchnumber != null" >
+                BatchNumber,
+            </if>
+            <if test="manuDate != null" >
+                Manu_Date,
+            </if>
+            <if test="expiryDate != null" >
+                Expiry_Date,
+            </if>
+            <if test="materialprice != null" >
+                MaterialPrice,
+            </if>
+            <if test="currencyprice != null" >
+                CurrencyPrice,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="purchasegoodsid != null" >
+                #{purchasegoodsid,jdbcType=VARCHAR},
+            </if>
+            <if test="purchaseId != null" >
+                #{purchaseId,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsNo != null" >
+                #{goodsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseNo != null" >
+                #{warehouseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverDate != null" >
+                #{deliverDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="discount != null" >
+                #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null" >
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="amount != null" >
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="taxrate != null" >
+                #{taxrate,jdbcType=DECIMAL},
+            </if>
+            <if test="batchnumber != null" >
+                #{batchnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="manuDate != null" >
+                #{manuDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expiryDate != null" >
+                #{expiryDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="materialprice != null" >
+                #{materialprice,jdbcType=DECIMAL},
+            </if>
+            <if test="currencyprice != null" >
+                #{currencyprice,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Purchasegoods" >
+        update purchasegoods
+        <set >
+            <if test="purchaseId != null" >
+                Purchase_ID = #{purchaseId,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsNo != null" >
+                Goods_No = #{goodsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseNo != null" >
+                Warehouse_No = #{warehouseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="deliverDate != null" >
+                Deliver_Date = #{deliverDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="discount != null" >
+                Discount = #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null" >
+                Quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="amount != null" >
+                Amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="taxrate != null" >
+                TaxRate = #{taxrate,jdbcType=DECIMAL},
+            </if>
+            <if test="batchnumber != null" >
+                BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="manuDate != null" >
+                Manu_Date = #{manuDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expiryDate != null" >
+                Expiry_Date = #{expiryDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="materialprice != null" >
+                MaterialPrice = #{materialprice,jdbcType=DECIMAL},
+            </if>
+            <if test="currencyprice != null" >
+                CurrencyPrice = #{currencyprice,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where PurchaseGoodsID = #{purchasegoodsid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Purchasegoods" >
+        update purchasegoods
+        set Purchase_ID = #{purchaseId,jdbcType=VARCHAR},
+            Goods_No = #{goodsNo,jdbcType=VARCHAR},
+            Warehouse_No = #{warehouseNo,jdbcType=VARCHAR},
+            Deliver_Date = #{deliverDate,jdbcType=TIMESTAMP},
+            Discount = #{discount,jdbcType=DECIMAL},
+            Quantity = #{quantity,jdbcType=INTEGER},
+            Amount = #{amount,jdbcType=DECIMAL},
+            TaxRate = #{taxrate,jdbcType=DECIMAL},
+            BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+            Manu_Date = #{manuDate,jdbcType=TIMESTAMP},
+            Expiry_Date = #{expiryDate,jdbcType=TIMESTAMP},
+            MaterialPrice = #{materialprice,jdbcType=DECIMAL},
+            CurrencyPrice = #{currencyprice,jdbcType=DECIMAL}
+        where PurchaseGoodsID = #{purchasegoodsid,jdbcType=VARCHAR}
+    </update>
+    <select id="getPurchaseGoodsId" parameterType="java.lang.String" resultType="java.lang.String">
+        select PurchaseGoodsID
+         from purchasegoods
+          where Purchase_ID = #{purchaseId,jdbcType=VARCHAR} and delete_flag = 1
+    </select>
+    <update id="deleteGoods" parameterType="java.lang.String">
+        update purchasegoods
+          set delete_flag = 0
+           where Purchase_ID = #{purchaseId,jdbcType=VARCHAR} and delete_flag = 1
+    </update>
+</mapper>

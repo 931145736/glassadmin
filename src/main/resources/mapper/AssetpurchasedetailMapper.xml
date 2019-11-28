@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.AssetpurchasedetailDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Assetpurchasedetail" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="asset_purchase_id" property="assetPurchaseId" jdbcType="VARCHAR" />
+        <result column="asset_purchase_materials" property="assetPurchaseMaterials" jdbcType="VARCHAR" />
+        <result column="asset_purchase_version" property="assetPurchaseVersion" jdbcType="VARCHAR" />
+        <result column="asset_purchase_unitprice" property="assetPurchaseUnitprice" jdbcType="DECIMAL" />
+        <result column="asset_purchase_count" property="assetPurchaseCount" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, asset_purchase_id, asset_purchase_materials, asset_purchase_version, asset_purchase_unitprice, 
+        asset_purchase_count, delete_flag
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from assetpurchasedetail
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="queryPurchaseAssetInfo" parameterType="com.xjt.dto.AssetpurchaseReqDto" resultType="com.xjt.entity.Assetpurchasedetail" resultMap="BaseResultMap">
+        SELECT t1.asset_purchase_id,t2.asset_name assetName,t1.asset_purchase_materials,t1.asset_purchase_version,t1.asset_purchase_unitprice,t1.asset_purchase_count
+        FROM assetpurchasedetail t1 INNER JOIN assetinfo t2 ON t1.asset_purchase_materials = t2.asset_id
+        WHERE t1.asset_purchase_id = #{purchaseId} and t1.delete_flag = 1
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from assetpurchasedetail
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Assetpurchasedetail" >
+        insert into assetpurchasedetail (id, asset_purchase_id, asset_purchase_materials, 
+            asset_purchase_version, asset_purchase_unitprice, 
+            asset_purchase_count, delete_flag)
+        values (#{id,jdbcType=INTEGER}, #{assetPurchaseId,jdbcType=VARCHAR}, #{assetPurchaseMaterials,jdbcType=VARCHAR}, 
+            #{assetPurchaseVersion,jdbcType=VARCHAR}, #{assetPurchaseUnitprice,jdbcType=DECIMAL}, 
+            #{assetPurchaseCount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertDetailsBatch" parameterType="java.util.List">
+        insert into assetpurchasedetail (asset_purchase_id, asset_purchase_materials,
+            asset_purchase_version, asset_purchase_unitprice,
+            asset_purchase_count, delete_flag)
+        values
+        <foreach collection="details" item="e" separator=",">
+            (#{e.assetPurchaseId,jdbcType=VARCHAR}, #{e.assetPurchaseMaterials,jdbcType=VARCHAR},
+            #{e.assetPurchaseVersion,jdbcType=VARCHAR}, #{e.assetPurchaseUnitprice,jdbcType=DECIMAL},
+            #{e.assetPurchaseCount,jdbcType=INTEGER}, #{e.deleteFlag,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Assetpurchasedetail" >
+        insert into assetpurchasedetail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="assetPurchaseId != null" >
+                asset_purchase_id,
+            </if>
+            <if test="assetPurchaseMaterials != null" >
+                asset_purchase_materials,
+            </if>
+            <if test="assetPurchaseVersion != null" >
+                asset_purchase_version,
+            </if>
+            <if test="assetPurchaseUnitprice != null" >
+                asset_purchase_unitprice,
+            </if>
+            <if test="assetPurchaseCount != null" >
+                asset_purchase_count,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="assetPurchaseId != null" >
+                #{assetPurchaseId,jdbcType=VARCHAR},
+            </if>
+            <if test="assetPurchaseMaterials != null" >
+                #{assetPurchaseMaterials,jdbcType=VARCHAR},
+            </if>
+            <if test="assetPurchaseVersion != null" >
+                #{assetPurchaseVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="assetPurchaseUnitprice != null" >
+                #{assetPurchaseUnitprice,jdbcType=DECIMAL},
+            </if>
+            <if test="assetPurchaseCount != null" >
+                #{assetPurchaseCount,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Assetpurchasedetail" >
+        update assetpurchasedetail
+        <set >
+            <if test="assetPurchaseId != null" >
+                asset_purchase_id = #{assetPurchaseId,jdbcType=VARCHAR},
+            </if>
+            <if test="assetPurchaseMaterials != null" >
+                asset_purchase_materials = #{assetPurchaseMaterials,jdbcType=VARCHAR},
+            </if>
+            <if test="assetPurchaseVersion != null" >
+                asset_purchase_version = #{assetPurchaseVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="assetPurchaseUnitprice != null" >
+                asset_purchase_unitprice = #{assetPurchaseUnitprice,jdbcType=DECIMAL},
+            </if>
+            <if test="assetPurchaseCount != null" >
+                asset_purchase_count = #{assetPurchaseCount,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Assetpurchasedetail" >
+        update assetpurchasedetail
+        set asset_purchase_id = #{assetPurchaseId,jdbcType=VARCHAR},
+            asset_purchase_materials = #{assetPurchaseMaterials,jdbcType=VARCHAR},
+            asset_purchase_version = #{assetPurchaseVersion,jdbcType=VARCHAR},
+            asset_purchase_unitprice = #{assetPurchaseUnitprice,jdbcType=DECIMAL},
+            asset_purchase_count = #{assetPurchaseCount,jdbcType=INTEGER},
+            delete_flag = #{deleteFlag,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

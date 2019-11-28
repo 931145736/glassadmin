@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.AssetinfoDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Assetinfo" >
+        <id column="asset_id" property="assetId" jdbcType="VARCHAR" />
+        <result column="asset_name" property="assetName" jdbcType="VARCHAR" />
+        <result column="asset_count" property="assetCount" jdbcType="INTEGER" />
+        <result column="asset_version" property="assetVersion" jdbcType="LONGVARCHAR" />
+        <result column="is_loss" property="isLoss" jdbcType="INTEGER" />
+        <result column="input_person" property="inputPerson" jdbcType="VARCHAR" />
+        <result column="input_date" property="inputDate" jdbcType="TIMESTAMP" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        asset_id, asset_name, asset_count, asset_version, is_loss, input_person, input_date, 
+        remark
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from assetinfo
+        where asset_id = #{assetId,jdbcType=VARCHAR}
+    </select>
+    <select id="queryAssetList" resultMap="BaseResultMap">
+        select  asset_id, asset_name,asset_version
+         from assetinfo
+    </select>
+    <select id="queryByAssetId" parameterType="java.util.List" resultMap="BaseResultMap">
+        select   <include refid="Base_Column_List" />
+        from assetinfo
+        where asset_id in
+          <foreach collection="assetIds" item="id" separator="," open="(" close=")" index="index">
+              #{id}
+          </foreach>
+        #{assetId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from assetinfo
+        where asset_id = #{assetId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Assetinfo" >
+        insert into assetinfo (asset_id, asset_name, asset_count, 
+            asset_version, is_loss, input_person, 
+            input_date, remark)
+        values (#{assetId,jdbcType=VARCHAR}, #{assetName,jdbcType=VARCHAR}, #{assetCount,jdbcType=INTEGER}, 
+            #{assetVersion,jdbcType=LONGVARCHAR}, #{isLoss,jdbcType=INTEGER}, #{inputPerson,jdbcType=VARCHAR}, 
+            #{inputDate,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertAssetinfoBatch" parameterType="java.util.List">
+         insert into assetinfo (asset_id, asset_name, asset_count,
+            asset_version, is_loss, input_person,
+            input_date, remark)
+        values
+        <foreach collection="reqDtos" item="e" separator=",">
+            (#{e.assetId,jdbcType=VARCHAR}, #{e.assetName,jdbcType=VARCHAR}, #{e.assetCount,jdbcType=INTEGER},
+            #{e.assetVersion,jdbcType=LONGVARCHAR}, #{e.isLoss,jdbcType=INTEGER}, #{e.inputPerson,jdbcType=VARCHAR},
+            #{e.inputDate,jdbcType=TIMESTAMP}, #{e.remark,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Assetinfo" >
+        insert into assetinfo
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="assetId != null" >
+                asset_id,
+            </if>
+            <if test="assetName != null" >
+                asset_name,
+            </if>
+            <if test="assetCount != null" >
+                asset_count,
+            </if>
+            <if test="assetVersion != null" >
+                asset_version,
+            </if>
+            <if test="isLoss != null" >
+                is_loss,
+            </if>
+            <if test="inputPerson != null" >
+                input_person,
+            </if>
+            <if test="inputDate != null" >
+                input_date,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="assetId != null" >
+                #{assetId,jdbcType=VARCHAR},
+            </if>
+            <if test="assetName != null" >
+                #{assetName,jdbcType=VARCHAR},
+            </if>
+            <if test="assetCount != null" >
+                #{assetCount,jdbcType=INTEGER},
+            </if>
+            <if test="assetVersion != null" >
+                #{assetVersion,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="isLoss != null" >
+                #{isLoss,jdbcType=INTEGER},
+            </if>
+            <if test="inputPerson != null" >
+                #{inputPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="inputDate != null" >
+                #{inputDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Assetinfo" >
+        update assetinfo
+        <set >
+            <if test="assetName != null" >
+                asset_name = #{assetName,jdbcType=VARCHAR},
+            </if>
+            <if test="assetCount != null" >
+                asset_count = #{assetCount,jdbcType=INTEGER},
+            </if>
+            <if test="assetVersion != null" >
+                asset_version = #{assetVersion,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="isLoss != null" >
+                is_loss = #{isLoss,jdbcType=INTEGER},
+            </if>
+            <if test="inputPerson != null" >
+                input_person = #{inputPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="inputDate != null" >
+                input_date = #{inputDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where asset_id = #{assetId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Assetinfo" >
+        update assetinfo
+        set asset_name = #{assetName,jdbcType=VARCHAR},
+            asset_count = #{assetCount,jdbcType=INTEGER},
+            asset_version = #{assetVersion,jdbcType=LONGVARCHAR},
+            is_loss = #{isLoss,jdbcType=INTEGER},
+            input_person = #{inputPerson,jdbcType=VARCHAR},
+            input_date = #{inputDate,jdbcType=TIMESTAMP},
+            remark = #{remark,jdbcType=VARCHAR}
+        where asset_id = #{assetId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateAssetCount" parameterType="java.util.List">
+        <foreach collection="assetinfos" index="index" item="e" separator=";">
+            update assetinfo
+            set  asset_count = asset_count - #{e.assetCount}
+            where asset_id = #{e.assetId}
+        </foreach>
+    </update>
+</mapper>

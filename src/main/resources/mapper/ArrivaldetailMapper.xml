@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.ArrivaldetailDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Arrivaldetail" >
+        <id column="AutoID" property="autoid" jdbcType="INTEGER" />
+        <result column="ArrivalGoodsID" property="arrivalgoodsid" jdbcType="VARCHAR" />
+        <result column="ColorID" property="colorid" jdbcType="VARCHAR" />
+        <result column="Dioptre" property="dioptre" jdbcType="DECIMAL" />
+        <result column="Astigmia" property="astigmia" jdbcType="DECIMAL" />
+        <result column="Quantity" property="quantity" jdbcType="INTEGER" />
+        <result column="Price" property="price" jdbcType="DECIMAL" />
+        <result column="Discount" property="discount" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        AutoID, ArrivalGoodsID, ColorID, Dioptre, Astigmia, Quantity, Price, Discount
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from arrivaldetail
+        where AutoID = #{autoid,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from arrivaldetail
+        where AutoID = #{autoid,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Arrivaldetail" >
+        insert into arrivaldetail (AutoID, ArrivalGoodsID, ColorID, 
+            Dioptre, Astigmia, Quantity, 
+            Price, Discount)
+        values (#{autoid,jdbcType=INTEGER}, #{arrivalgoodsid,jdbcType=VARCHAR}, #{colorid,jdbcType=VARCHAR}, 
+            #{dioptre,jdbcType=DECIMAL}, #{astigmia,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}, 
+            #{price,jdbcType=DECIMAL}, #{discount,jdbcType=DECIMAL})
+    </insert>
+    <!--批量添加货品明细-->
+    <insert id="insertArrivalDetailBatch" parameterType="java.util.List">
+        insert into arrivaldetail (AutoID, ArrivalGoodsID, ColorID,
+            Dioptre, Astigmia, Quantity,
+            Price, Discount)
+        values
+        <foreach collection="arrivaldetails" item="e" separator=",">
+            (#{e.autoid,jdbcType=INTEGER}, #{e.arrivalgoodsid,jdbcType=VARCHAR}, #{e.colorid,jdbcType=VARCHAR},
+            #{e.dioptre,jdbcType=DECIMAL}, #{e.astigmia,jdbcType=DECIMAL}, #{e.quantity,jdbcType=INTEGER},
+            #{e.price,jdbcType=DECIMAL}, #{e.discount,jdbcType=DECIMAL})
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Arrivaldetail" >
+        insert into arrivaldetail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="autoid != null" >
+                AutoID,
+            </if>
+            <if test="arrivalgoodsid != null" >
+                ArrivalGoodsID,
+            </if>
+            <if test="colorid != null" >
+                ColorID,
+            </if>
+            <if test="dioptre != null" >
+                Dioptre,
+            </if>
+            <if test="astigmia != null" >
+                Astigmia,
+            </if>
+            <if test="quantity != null" >
+                Quantity,
+            </if>
+            <if test="price != null" >
+                Price,
+            </if>
+            <if test="discount != null" >
+                Discount,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="autoid != null" >
+                #{autoid,jdbcType=INTEGER},
+            </if>
+            <if test="arrivalgoodsid != null" >
+                #{arrivalgoodsid,jdbcType=VARCHAR},
+            </if>
+            <if test="colorid != null" >
+                #{colorid,jdbcType=VARCHAR},
+            </if>
+            <if test="dioptre != null" >
+                #{dioptre,jdbcType=DECIMAL},
+            </if>
+            <if test="astigmia != null" >
+                #{astigmia,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null" >
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="price != null" >
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="discount != null" >
+                #{discount,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Arrivaldetail" >
+        update arrivaldetail
+        <set >
+            <if test="arrivalgoodsid != null" >
+                ArrivalGoodsID = #{arrivalgoodsid,jdbcType=VARCHAR},
+            </if>
+            <if test="colorid != null" >
+                ColorID = #{colorid,jdbcType=VARCHAR},
+            </if>
+            <if test="dioptre != null" >
+                Dioptre = #{dioptre,jdbcType=DECIMAL},
+            </if>
+            <if test="astigmia != null" >
+                Astigmia = #{astigmia,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null" >
+                Quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="price != null" >
+                Price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="discount != null" >
+                Discount = #{discount,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where AutoID = #{autoid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Arrivaldetail" >
+        update arrivaldetail
+        set ArrivalGoodsID = #{arrivalgoodsid,jdbcType=VARCHAR},
+            ColorID = #{colorid,jdbcType=VARCHAR},
+            Dioptre = #{dioptre,jdbcType=DECIMAL},
+            Astigmia = #{astigmia,jdbcType=DECIMAL},
+            Quantity = #{quantity,jdbcType=INTEGER},
+            Price = #{price,jdbcType=DECIMAL},
+            Discount = #{discount,jdbcType=DECIMAL}
+        where AutoID = #{autoid,jdbcType=INTEGER}
+    </update>
+</mapper>

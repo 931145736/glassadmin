@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.GoodscolorDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.GoodscolorKey" >
+        <id column="GoodsID" property="goodsid" jdbcType="VARCHAR" />
+        <id column="ColorID" property="colorid" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.xjt.entity.GoodscolorKey" >
+        delete from goodscolor
+        where GoodsID = #{goodsid,jdbcType=VARCHAR}
+          and ColorID = #{colorid,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.GoodscolorKey" >
+        insert into goodscolor (GoodsID, ColorID)
+        values (#{goodsid,jdbcType=VARCHAR}, #{colorid,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertGoodsColorBatch" parameterType="java.util.List">
+        insert into goodscolor (GoodsID, ColorID)
+        values
+        <foreach collection="goodscolorKeys" item="e" separator=",">
+            (#{e.goodsid,jdbcType=VARCHAR}, #{e.colorid,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.GoodscolorKey" >
+        insert into goodscolor
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="goodsid != null" >
+                GoodsID,
+            </if>
+            <if test="colorid != null" >
+                ColorID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="goodsid != null" >
+                #{goodsid,jdbcType=VARCHAR},
+            </if>
+            <if test="colorid != null" >
+                #{colorid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

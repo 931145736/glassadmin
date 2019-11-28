@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.ArrivalDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Arrival" >
+        <id column="ArrivalID" property="arrivalid" jdbcType="VARCHAR" />
+        <result column="Warehouse_No" property="warehouseNo" jdbcType="VARCHAR" />
+        <result column="Esti_Date" property="estiDate" jdbcType="TIMESTAMP" />
+        <result column="Operator" property="operator" jdbcType="VARCHAR" />
+        <result column="Remark" property="remark" jdbcType="LONGVARCHAR" />
+        <result column="Purchase_ID" property="purchaseId" jdbcType="VARCHAR" />
+        <result column="Flag" property="flag" jdbcType="INTEGER" />
+        <result column="Supply_No" property="supplyNo" jdbcType="VARCHAR" />
+        <result column="Posted" property="posted" jdbcType="INTEGER" />
+        <result column="PostUser" property="postuser" jdbcType="VARCHAR" />
+        <result column="PostedDate" property="posteddate" jdbcType="TIMESTAMP" />
+        <result column="Modi_Date" property="modiDate" jdbcType="TIMESTAMP" />
+        <result column="Input_Date" property="inputDate" jdbcType="TIMESTAMP" />
+        <result column="Manual_ID" property="manualId" jdbcType="VARCHAR" />
+        <result column="ReceiptMode" property="receiptmode" jdbcType="VARCHAR" />
+        <result column="GoodsType" property="goodstype" jdbcType="VARCHAR" />
+        <result column="Customer_ID" property="customerId" jdbcType="VARCHAR" />
+        <result column="cType" property="ctype" jdbcType="INTEGER" />
+        <result column="SendWare" property="sendware" jdbcType="VARCHAR" />
+        <result column="PrepDistributeAID" property="prepdistributeaid" jdbcType="VARCHAR" />
+        <result column="DistributeMode" property="distributemode" jdbcType="INTEGER" />
+        <result column="BoxFlag" property="boxflag" jdbcType="INTEGER" />
+        <result column="CP_Flag" property="cpFlag" jdbcType="INTEGER" />
+        <result column="PreAssignGoods_Date" property="preassigngoodsDate" jdbcType="TIMESTAMP" />
+        <result column="BuildBoxFlag" property="buildboxflag" jdbcType="INTEGER" />
+        <result column="DeliveryID" property="deliveryid" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ArrivalID, Warehouse_No, Esti_Date, Operator, Remark, Purchase_ID, Flag, Supply_No, 
+        Posted, PostUser, PostedDate, Modi_Date, Input_Date, Manual_ID, ReceiptMode, GoodsType, 
+        Customer_ID, cType, SendWare, PrepDistributeAID, DistributeMode, BoxFlag, CP_Flag, 
+        PreAssignGoods_Date, BuildBoxFlag, DeliveryID
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultType="com.xjt.entity.OrderEntity">
+        SELECT t1.ArrivalID orderId,t6.Supply_Na supplyName,t2.Goods_No goodsNo,t5.GoodsName goodsName,t7.Warehouse_Na warehouseName,t3.Astigmia astigmia,t3.Dioptre dioptre,t3.Discount discount,t3.Price price,t3.Quantity quantity,t4.ColorName colorName,t2.BatchNumber batchNumber,
+ t2.ManuDate productDate,t2.ExpiryDate validityDaies
+        FROM arrival t1
+        LEFT JOIN arrivalgoods t2 ON t1.ArrivalID = t2.ArrivalID
+        LEFT JOIN arrivaldetail t3 ON t2.ArrivalGoodsID = t3.ArrivalGoodsID
+        LEFT JOIN warehouse t7 ON t1.Warehouse_No = t7.Warehouse_No
+        LEFT JOIN dictcolor t4 ON t3.ColorID = t4.ColorID
+        INNER JOIN goods t5 ON t2.Goods_No = t5.GoodsNo
+        INNER JOIN supply t6 ON t1.Supply_No = t6.Supply_No
+        WHERE t1.ArrivalID = #{arrivalid}
+
+    </select>
+    <select id="queryArrivalOrderList" parameterType="com.xjt.entity.OrderEntity" resultType="com.xjt.entity.OrderEntity" >
+      SELECT t1.ArrivalID orderId,t3.Supply_Na supplyName,SUM(t5.Price*t5.Quantity*t5.Discount) amount,SUM(t5.Quantity) quantity,t1.Input_Date inputDate,t1.Manual_ID manualId,t1.Esti_Date orderDate,t1.cType orderType,t1.Posted,t1.PostedDate,t4.name postUser FROM arrival t1
+        INNER JOIN arrivalgoods t2 ON t1.ArrivalID = t2.ArrivalID
+        INNER JOIN arrivaldetail t5 ON t2.ArrivalGoodsID = t5.ArrivalGoodsID
+        LEFT JOIN supply t3 ON t1.Supply_No = t3.Supply_No
+        LEFT JOIN `master` t4 ON t1.PostUser = t4.id
+        WHERE t1.delete_flag = 1
+        <if test="supplyName != null and supplyName != ''">
+            and t3.Supply_Na like concat ('%',#{supplyName},'%')
+        </if>
+        <if test="manualId != null and manualId != ''">
+            and t1.Manual_ID like concat ('%',#{manualId},'%')
+        </if>
+        <if test="posted != null">
+            and t1.Posted  = #{posted}
+        </if>
+        <if test="orderType != null">
+            and t1.cType  = #{orderType}
+        </if>
+        <if test="startTime != null and startTime != '' and endTime != null and endTime != ''" >
+            and t1.Input_Date between #{startTime} and #{endTime}
+        </if>
+        GROUP BY t1.ArrivalID
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from arrival
+        where ArrivalID = #{arrivalid,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Arrival" >
+        insert into arrival (ArrivalID, Warehouse_No, Esti_Date, 
+            Operator, Remark, Purchase_ID, 
+            Flag, Supply_No, Posted, 
+            PostUser, PostedDate, Modi_Date, 
+            Input_Date, Manual_ID, ReceiptMode, 
+            GoodsType, Customer_ID, cType, 
+            SendWare, PrepDistributeAID, DistributeMode, 
+            BoxFlag, CP_Flag, PreAssignGoods_Date, 
+            BuildBoxFlag, DeliveryID)
+        values (#{arrivalid,jdbcType=VARCHAR}, #{warehouseNo,jdbcType=VARCHAR}, #{estiDate,jdbcType=TIMESTAMP},
+            #{operator,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}, #{purchaseId,jdbcType=VARCHAR}, 
+            #{flag,jdbcType=INTEGER}, #{supplyNo,jdbcType=VARCHAR}, #{posted,jdbcType=INTEGER}, 
+            #{postuser,jdbcType=VARCHAR}, #{posteddate,jdbcType=TIMESTAMP}, #{modiDate,jdbcType=TIMESTAMP}, 
+            #{inputDate,jdbcType=TIMESTAMP}, #{manualId,jdbcType=VARCHAR}, #{receiptmode,jdbcType=VARCHAR}, 
+            #{goodstype,jdbcType=VARCHAR}, #{customerId,jdbcType=VARCHAR}, #{ctype,jdbcType=INTEGER}, 
+            #{sendware,jdbcType=VARCHAR}, #{prepdistributeaid,jdbcType=VARCHAR}, #{distributemode,jdbcType=INTEGER}, 
+            #{boxflag,jdbcType=INTEGER}, #{cpFlag,jdbcType=INTEGER}, #{preassigngoodsDate,jdbcType=TIMESTAMP}, 
+            #{buildboxflag,jdbcType=INTEGER}, #{deliveryid,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Arrival" >
+        insert into arrival
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="arrivalid != null" >
+                ArrivalID,
+            </if>
+            <if test="warehouseNo != null" >
+                Warehouse_No,
+            </if>
+            <if test="estiDate != null" >
+                Esti_Date,
+            </if>
+            <if test="operator != null" >
+                Operator,
+            </if>
+            <if test="remark != null" >
+                Remark,
+            </if>
+            <if test="purchaseId != null" >
+                Purchase_ID,
+            </if>
+            <if test="flag != null" >
+                Flag,
+            </if>
+            <if test="supplyNo != null" >
+                Supply_No,
+            </if>
+            <if test="posted != null" >
+                Posted,
+            </if>
+            <if test="postuser != null" >
+                PostUser,
+            </if>
+            <if test="posteddate != null" >
+                PostedDate,
+            </if>
+            <if test="modiDate != null" >
+                Modi_Date,
+            </if>
+            <if test="inputDate != null" >
+                Input_Date,
+            </if>
+            <if test="manualId != null" >
+                Manual_ID,
+            </if>
+            <if test="receiptmode != null" >
+                ReceiptMode,
+            </if>
+            <if test="goodstype != null" >
+                GoodsType,
+            </if>
+            <if test="customerId != null" >
+                Customer_ID,
+            </if>
+            <if test="ctype != null" >
+                cType,
+            </if>
+            <if test="sendware != null" >
+                SendWare,
+            </if>
+            <if test="prepdistributeaid != null" >
+                PrepDistributeAID,
+            </if>
+            <if test="distributemode != null" >
+                DistributeMode,
+            </if>
+            <if test="boxflag != null" >
+                BoxFlag,
+            </if>
+            <if test="cpFlag != null" >
+                CP_Flag,
+            </if>
+            <if test="preassigngoodsDate != null" >
+                PreAssignGoods_Date,
+            </if>
+            <if test="buildboxflag != null" >
+                BuildBoxFlag,
+            </if>
+            <if test="deliveryid != null" >
+                DeliveryID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="arrivalid != null" >
+                #{arrivalid,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseNo != null" >
+                #{warehouseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="estiDate != null" >
+                #{estiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operator != null" >
+                #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="purchaseId != null" >
+                #{purchaseId,jdbcType=VARCHAR},
+            </if>
+            <if test="flag != null" >
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="supplyNo != null" >
+                #{supplyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="posted != null" >
+                #{posted,jdbcType=INTEGER},
+            </if>
+            <if test="postuser != null" >
+                #{postuser,jdbcType=VARCHAR},
+            </if>
+            <if test="posteddate != null" >
+                #{posteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modiDate != null" >
+                #{modiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="inputDate != null" >
+                #{inputDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="manualId != null" >
+                #{manualId,jdbcType=VARCHAR},
+            </if>
+            <if test="receiptmode != null" >
+                #{receiptmode,jdbcType=VARCHAR},
+            </if>
+            <if test="goodstype != null" >
+                #{goodstype,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null" >
+                #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="ctype != null" >
+                #{ctype,jdbcType=INTEGER},
+            </if>
+            <if test="sendware != null" >
+                #{sendware,jdbcType=VARCHAR},
+            </if>
+            <if test="prepdistributeaid != null" >
+                #{prepdistributeaid,jdbcType=VARCHAR},
+            </if>
+            <if test="distributemode != null" >
+                #{distributemode,jdbcType=INTEGER},
+            </if>
+            <if test="boxflag != null" >
+                #{boxflag,jdbcType=INTEGER},
+            </if>
+            <if test="cpFlag != null" >
+                #{cpFlag,jdbcType=INTEGER},
+            </if>
+            <if test="preassigngoodsDate != null" >
+                #{preassigngoodsDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="buildboxflag != null" >
+                #{buildboxflag,jdbcType=INTEGER},
+            </if>
+            <if test="deliveryid != null" >
+                #{deliveryid,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Arrival" >
+        update arrival
+        <set >
+            <if test="warehouseNo != null" >
+                Warehouse_No = #{warehouseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="estiDate != null" >
+                Esti_Date = #{estiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operator != null" >
+                Operator = #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                Remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="purchaseId != null" >
+                Purchase_ID = #{purchaseId,jdbcType=VARCHAR},
+            </if>
+            <if test="flag != null" >
+                Flag = #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="supplyNo != null" >
+                Supply_No = #{supplyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="posted != null" >
+                Posted = #{posted,jdbcType=INTEGER},
+            </if>
+            <if test="postuser != null" >
+                PostUser = #{postuser,jdbcType=VARCHAR},
+            </if>
+            <if test="posteddate != null" >
+                PostedDate = #{posteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modiDate != null" >
+                Modi_Date = #{modiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="inputDate != null" >
+                Input_Date = #{inputDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="manualId != null" >
+                Manual_ID = #{manualId,jdbcType=VARCHAR},
+            </if>
+            <if test="receiptmode != null" >
+                ReceiptMode = #{receiptmode,jdbcType=VARCHAR},
+            </if>
+            <if test="goodstype != null" >
+                GoodsType = #{goodstype,jdbcType=VARCHAR},
+            </if>
+            <if test="customerId != null" >
+                Customer_ID = #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="ctype != null" >
+                cType = #{ctype,jdbcType=INTEGER},
+            </if>
+            <if test="sendware != null" >
+                SendWare = #{sendware,jdbcType=VARCHAR},
+            </if>
+            <if test="prepdistributeaid != null" >
+                PrepDistributeAID = #{prepdistributeaid,jdbcType=VARCHAR},
+            </if>
+            <if test="distributemode != null" >
+                DistributeMode = #{distributemode,jdbcType=INTEGER},
+            </if>
+            <if test="boxflag != null" >
+                BoxFlag = #{boxflag,jdbcType=INTEGER},
+            </if>
+            <if test="cpFlag != null" >
+                CP_Flag = #{cpFlag,jdbcType=INTEGER},
+            </if>
+            <if test="preassigngoodsDate != null" >
+                PreAssignGoods_Date = #{preassigngoodsDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="buildboxflag != null" >
+                BuildBoxFlag = #{buildboxflag,jdbcType=INTEGER},
+            </if>
+            <if test="deliveryid != null" >
+                DeliveryID = #{deliveryid,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ArrivalID = #{arrivalid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Arrival" >
+        update arrival
+        set Warehouse_No = #{warehouseNo,jdbcType=VARCHAR},
+            Esti_Date = #{estiDate,jdbcType=TIMESTAMP},
+            Operator = #{operator,jdbcType=VARCHAR},
+            Remark = #{remark,jdbcType=LONGVARCHAR},
+            Purchase_ID = #{purchaseId,jdbcType=VARCHAR},
+            Flag = #{flag,jdbcType=INTEGER},
+            Supply_No = #{supplyNo,jdbcType=VARCHAR},
+            Posted = #{posted,jdbcType=INTEGER},
+            PostUser = #{postuser,jdbcType=VARCHAR},
+            PostedDate = #{posteddate,jdbcType=TIMESTAMP},
+            Modi_Date = #{modiDate,jdbcType=TIMESTAMP},
+            Input_Date = #{inputDate,jdbcType=TIMESTAMP},
+            Manual_ID = #{manualId,jdbcType=VARCHAR},
+            ReceiptMode = #{receiptmode,jdbcType=VARCHAR},
+            GoodsType = #{goodstype,jdbcType=VARCHAR},
+            Customer_ID = #{customerId,jdbcType=VARCHAR},
+            cType = #{ctype,jdbcType=INTEGER},
+            SendWare = #{sendware,jdbcType=VARCHAR},
+            PrepDistributeAID = #{prepdistributeaid,jdbcType=VARCHAR},
+            DistributeMode = #{distributemode,jdbcType=INTEGER},
+            BoxFlag = #{boxflag,jdbcType=INTEGER},
+            CP_Flag = #{cpFlag,jdbcType=INTEGER},
+            PreAssignGoods_Date = #{preassigngoodsDate,jdbcType=TIMESTAMP},
+            BuildBoxFlag = #{buildboxflag,jdbcType=INTEGER},
+            DeliveryID = #{deliveryid,jdbcType=VARCHAR}
+        where ArrivalID = #{arrivalid,jdbcType=VARCHAR}
+    </update>
+    <!--审核到货通知单-->
+    <update id="checkArrivalOrder" parameterType="com.xjt.dto.ArrivalReqDto">
+         update arrival
+        set  Posted = #{posted,jdbcType=INTEGER},
+            PostUser = #{postuser,jdbcType=VARCHAR},
+            PostedDate = #{posteddate,jdbcType=TIMESTAMP}
+        where ArrivalID = #{arrivalid,jdbcType=VARCHAR}
+    </update>
+</mapper>

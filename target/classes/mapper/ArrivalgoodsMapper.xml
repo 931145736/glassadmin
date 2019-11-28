@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.ArrivalgoodsDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Arrivalgoods" >
+        <id column="ArrivalGoodsID" property="arrivalgoodsid" jdbcType="CHAR" />
+        <result column="ArrivalID" property="arrivalid" jdbcType="CHAR" />
+        <result column="Goods_No" property="goodsNo" jdbcType="VARCHAR" />
+        <result column="Grade" property="grade" jdbcType="VARCHAR" />
+        <result column="BatchNumber" property="batchnumber" jdbcType="VARCHAR" />
+        <result column="Quantity" property="quantity" jdbcType="BIT" />
+        <result column="Discount" property="discount" jdbcType="DECIMAL" />
+        <result column="Amount" property="amount" jdbcType="DECIMAL" />
+        <result column="Customer_ID" property="customerId" jdbcType="VARCHAR" />
+        <result column="ManuDate" property="manudate" jdbcType="TIMESTAMP" />
+        <result column="ExpiryDate" property="expirydate" jdbcType="INTEGER" />
+        <result column="SterilizeNumber" property="sterilizenumber" jdbcType="VARCHAR" />
+        <result column="SterilizeDate" property="sterilizedate" jdbcType="TIMESTAMP" />
+        <result column="Appearance" property="appearance" jdbcType="CHAR" />
+        <result column="cExplain" property="cexplain" jdbcType="VARCHAR" />
+        <result column="CartonFlag" property="cartonflag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ArrivalGoodsID, ArrivalID, Goods_No, Grade, BatchNumber, Quantity, Discount, Amount,
+        Customer_ID, ManuDate, ExpiryDate, SterilizeNumber, SterilizeDate, Appearance, cExplain,
+        CartonFlag
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from arrivalgoods
+        where ArrivalGoodsID = #{arrivalgoodsid,jdbcType=CHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from arrivalgoods
+        where ArrivalGoodsID = #{arrivalgoodsid,jdbcType=CHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Arrivalgoods" >
+        insert into arrivalgoods (ArrivalGoodsID, ArrivalID, Goods_No,
+            Grade, BatchNumber, Quantity,
+            Discount, Amount, Customer_ID,
+            ManuDate, ExpiryDate, SterilizeNumber,
+            SterilizeDate, Appearance, cExplain,
+            CartonFlag)
+        values (#{arrivalgoodsid,jdbcType=CHAR}, #{arrivalid,jdbcType=CHAR}, #{goodsNo,jdbcType=VARCHAR},
+            #{grade,jdbcType=VARCHAR}, #{batchnumber,jdbcType=VARCHAR}, #{quantity,jdbcType=BIT},
+            #{discount,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, #{customerId,jdbcType=VARCHAR},
+            #{manudate,jdbcType=TIMESTAMP}, #{expirydate,jdbcType=INTEGER}, #{sterilizenumber,jdbcType=VARCHAR},
+            #{sterilizedate,jdbcType=TIMESTAMP}, #{appearance,jdbcType=CHAR}, #{cexplain,jdbcType=VARCHAR},
+            #{cartonflag,jdbcType=BIT})
+    </insert>
+    <!--批量添加通知单货品-->
+    <insert id="insertArrivalGoods" parameterType="java.util.List">
+        insert into arrivalgoods (ArrivalGoodsID, ArrivalID, Goods_No,
+        Grade, BatchNumber, Quantity,
+        Discount, Amount, Customer_ID,
+        ManuDate, ExpiryDate, SterilizeNumber,
+        SterilizeDate, Appearance, cExplain,
+        CartonFlag)
+        values
+        <foreach collection="arrivalgoods" item="e" separator=",">
+            (#{e.arrivalgoodsid,jdbcType=CHAR}, #{e.arrivalid,jdbcType=CHAR}, #{e.goodsNo,jdbcType=VARCHAR},
+            #{e.grade,jdbcType=VARCHAR}, #{e.batchnumber,jdbcType=VARCHAR}, #{e.quantity,jdbcType=BIT},
+            #{e.discount,jdbcType=DECIMAL}, #{e.amount,jdbcType=DECIMAL}, #{e.customerId,jdbcType=VARCHAR},
+            #{e.manudate,jdbcType=TIMESTAMP}, #{e.expirydate,jdbcType=INTEGER}, #{e.sterilizenumber,jdbcType=VARCHAR},
+            #{e.sterilizedate,jdbcType=TIMESTAMP}, #{e.appearance,jdbcType=CHAR}, #{e.cexplain,jdbcType=VARCHAR},
+            #{e.cartonflag,jdbcType=BIT})
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Arrivalgoods" >
+        insert into arrivalgoods
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="arrivalgoodsid != null" >
+                ArrivalGoodsID,
+            </if>
+            <if test="arrivalid != null" >
+                ArrivalID,
+            </if>
+            <if test="goodsNo != null" >
+                Goods_No,
+            </if>
+            <if test="grade != null" >
+                Grade,
+            </if>
+            <if test="batchnumber != null" >
+                BatchNumber,
+            </if>
+            <if test="quantity != null" >
+                Quantity,
+            </if>
+            <if test="discount != null" >
+                Discount,
+            </if>
+            <if test="amount != null" >
+                Amount,
+            </if>
+            <if test="customerId != null" >
+                Customer_ID,
+            </if>
+            <if test="manudate != null" >
+                ManuDate,
+            </if>
+            <if test="expirydate != null" >
+                ExpiryDate,
+            </if>
+            <if test="sterilizenumber != null" >
+                SterilizeNumber,
+            </if>
+            <if test="sterilizedate != null" >
+                SterilizeDate,
+            </if>
+            <if test="appearance != null" >
+                Appearance,
+            </if>
+            <if test="cexplain != null" >
+                cExplain,
+            </if>
+            <if test="cartonflag != null" >
+                CartonFlag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="arrivalgoodsid != null" >
+                #{arrivalgoodsid,jdbcType=CHAR},
+            </if>
+            <if test="arrivalid != null" >
+                #{arrivalid,jdbcType=CHAR},
+            </if>
+            <if test="goodsNo != null" >
+                #{goodsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null" >
+                #{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="batchnumber != null" >
+                #{batchnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null" >
+                #{quantity,jdbcType=BIT},
+            </if>
+            <if test="discount != null" >
+                #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null" >
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="customerId != null" >
+                #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="manudate != null" >
+                #{manudate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expirydate != null" >
+                #{expirydate,jdbcType=INTEGER},
+            </if>
+            <if test="sterilizenumber != null" >
+                #{sterilizenumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sterilizedate != null" >
+                #{sterilizedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appearance != null" >
+                #{appearance,jdbcType=CHAR},
+            </if>
+            <if test="cexplain != null" >
+                #{cexplain,jdbcType=VARCHAR},
+            </if>
+            <if test="cartonflag != null" >
+                #{cartonflag,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Arrivalgoods" >
+        update arrivalgoods
+        <set >
+            <if test="arrivalid != null" >
+                ArrivalID = #{arrivalid,jdbcType=CHAR},
+            </if>
+            <if test="goodsNo != null" >
+                Goods_No = #{goodsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null" >
+                Grade = #{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="batchnumber != null" >
+                BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null" >
+                Quantity = #{quantity,jdbcType=BIT},
+            </if>
+            <if test="discount != null" >
+                Discount = #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null" >
+                Amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="customerId != null" >
+                Customer_ID = #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="manudate != null" >
+                ManuDate = #{manudate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expirydate != null" >
+                ExpiryDate = #{expirydate,jdbcType=INTEGER},
+            </if>
+            <if test="sterilizenumber != null" >
+                SterilizeNumber = #{sterilizenumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sterilizedate != null" >
+                SterilizeDate = #{sterilizedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appearance != null" >
+                Appearance = #{appearance,jdbcType=CHAR},
+            </if>
+            <if test="cexplain != null" >
+                cExplain = #{cexplain,jdbcType=VARCHAR},
+            </if>
+            <if test="cartonflag != null" >
+                CartonFlag = #{cartonflag,jdbcType=BIT},
+            </if>
+        </set>
+        where ArrivalGoodsID = #{arrivalgoodsid,jdbcType=CHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Arrivalgoods" >
+        update arrivalgoods
+        set ArrivalID = #{arrivalid,jdbcType=CHAR},
+            Goods_No = #{goodsNo,jdbcType=VARCHAR},
+            Grade = #{grade,jdbcType=VARCHAR},
+            BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+            Quantity = #{quantity,jdbcType=BIT},
+            Discount = #{discount,jdbcType=DECIMAL},
+            Amount = #{amount,jdbcType=DECIMAL},
+            Customer_ID = #{customerId,jdbcType=VARCHAR},
+            ManuDate = #{manudate,jdbcType=TIMESTAMP},
+            ExpiryDate = #{expirydate,jdbcType=INTEGER},
+            SterilizeNumber = #{sterilizenumber,jdbcType=VARCHAR},
+            SterilizeDate = #{sterilizedate,jdbcType=TIMESTAMP},
+            Appearance = #{appearance,jdbcType=CHAR},
+            cExplain = #{cexplain,jdbcType=VARCHAR},
+            CartonFlag = #{cartonflag,jdbcType=BIT}
+        where ArrivalGoodsID = #{arrivalgoodsid,jdbcType=CHAR}
+    </update>
+</mapper>

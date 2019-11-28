@@ -1,0 +1,509 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.PurchaseDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Purchase" >
+        <id column="Purchase_ID" property="purchaseId" jdbcType="VARCHAR" />
+        <result column="Supply_No" property="supplyNo" jdbcType="VARCHAR" />
+        <result column="Purch_Date" property="purchDate" jdbcType="TIMESTAMP" />
+        <result column="Modi_Date" property="modiDate" jdbcType="TIMESTAMP" />
+        <result column="Flag" property="flag" jdbcType="INTEGER" />
+        <result column="Manual_ID" property="manualId" jdbcType="VARCHAR" />
+        <result column="Remark" property="remark" jdbcType="LONGVARCHAR" />
+        <result column="Operator" property="operator" jdbcType="VARCHAR" />
+        <result column="Posted" property="posted" jdbcType="INTEGER" />
+        <result column="PostUser" property="postuser" jdbcType="VARCHAR" />
+        <result column="PostedDate" property="posteddate" jdbcType="TIMESTAMP" />
+        <result column="Input_Date" property="inputDate" jdbcType="TIMESTAMP" />
+        <result column="Kind" property="kind" jdbcType="VARCHAR" />
+        <result column="Company_ID" property="companyId" jdbcType="VARCHAR" />
+        <result column="Mode" property="mode" jdbcType="VARCHAR" />
+        <result column="Currency" property="currency" jdbcType="VARCHAR" />
+        <result column="JiZhang" property="jizhang" jdbcType="INTEGER" />
+        <result column="JiZhangOperator" property="jizhangoperator" jdbcType="VARCHAR" />
+        <result column="JiZhangDate" property="jizhangdate" jdbcType="TIMESTAMP" />
+        <result column="Input_Time" property="inputTime" jdbcType="TIMESTAMP" />
+        <result column="MasterPlanID" property="masterplanid" jdbcType="CHAR" />
+        <result column="WareOutPlanFlag" property="wareoutplanflag" jdbcType="INTEGER" />
+        <result column="Year" property="year" jdbcType="VARCHAR" />
+        <result column="WaveRange" property="waverange" jdbcType="VARCHAR" />
+        <result column="IsAgentPurchase" property="isagentpurchase" jdbcType="INTEGER" />
+        <result column="AgentCustomerNo" property="agentcustomerno" jdbcType="VARCHAR" />
+        <result column="PriceType" property="pricetype" jdbcType="VARCHAR" />
+        <result column="MSend_Flag" property="msendFlag" jdbcType="INTEGER" />
+        <result column="PostedPurchaseProcess" property="postedpurchaseprocess" jdbcType="INTEGER" />
+        <result column="ProcessPosted" property="processposted" jdbcType="INTEGER" />
+        <result column="ProcessPostedDate" property="processposteddate" jdbcType="TIMESTAMP" />
+        <result column="ProcessPostUser" property="processpostuser" jdbcType="VARCHAR" />
+        <result column="GoodsDate" property="goodsdate" jdbcType="INTEGER" />
+        <result column="CP_Flag" property="cpFlag" jdbcType="INTEGER" />
+        <result column="BuildBoxFlag" property="buildboxflag" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        Purchase_ID, Supply_No, Purch_Date, Modi_Date, Flag, Manual_ID, Remark, Operator, 
+        Posted, PostUser, PostedDate, Input_Date, Kind, Company_ID, Mode, Currency, JiZhang, 
+        JiZhangOperator, JiZhangDate, Input_Time, MasterPlanID, WareOutPlanFlag, Year, WaveRange, 
+        IsAgentPurchase, AgentCustomerNo, PriceType, MSend_Flag, PostedPurchaseProcess, ProcessPosted, 
+        ProcessPostedDate, ProcessPostUser, GoodsDate, CP_Flag, BuildBoxFlag
+    </sql>
+
+    <select id="selectByPrimaryKey"  parameterType="java.lang.String" resultType="com.xjt.entity.OrderEntity">
+       SELECT t1.Purchase_ID orderId,t6.Supply_Na supplyName,t2.Goods_No goodsNo,t5.GoodsName goodsName,t7.Warehouse_Na warehouseName,t2.Deliver_Date orderDate,t3.Astigmia astigmia,t3.Dioptre dioptre,t3.Discount discount,t3.Price price,t3.Quantity quantity,t4.ColorName colorName
+        FROM purchase t1
+        LEFT JOIN purchasegoods t2 ON t1.Purchase_ID = t2.Purchase_ID
+        LEFT JOIN purchasedetail t3 ON t2.PurchaseGoodsID = t3.PurchaseGoodsID
+        LEFT JOIN warehouse t7 ON t2.Warehouse_No = t7.Warehouse_No
+        LEFT  JOIN dictcolor t4 ON t3.ColorID = t4.ColorID
+        INNER JOIN goods t5 ON t2.Goods_No = t5.GoodsNo
+        INNER JOIN supply t6 ON t1.Supply_No = t6.Supply_No
+        WHERE t1.Purchase_ID = #{purchaseId};
+    </select>
+
+    <select id="queryPurchaseList" parameterType="com.xjt.entity.OrderEntity" resultType="com.xjt.entity.OrderEntity">
+      SELECT t1.Purchase_ID orderId,t3.Supply_Na supplyName,t1.Input_Date inputDate,t1.Manual_ID manualId, t1.Purch_Date orderDate,SUM(t2.Quantity)  quantity,SUM(t5.Price*t5.Quantity*t5.Discount) amount ,t1.Posted,t1.PostedDate,t4.name postUser
+        FROM purchase t1
+        INNER JOIN purchasegoods t2 ON t1.Purchase_ID = t2.Purchase_ID
+        INNER JOIN purchasedetail t5 ON t2.PurchaseGoodsID = t5.PurchaseGoodsID
+        INNER JOIN supply t3 ON t1.Supply_No = t3.Supply_No
+        LEFT JOIN `master` t4 ON t1.PostUser = t4.id
+        WHERE t1.delete_flag = 1
+        <if test="supplyName != null and supplyName != ''">
+           and t3.Supply_Na like concat ('%',#{supplyName},'%')
+        </if>
+        <if test="manualId != null and manualId != ''">
+            and t1.Manual_ID like concat ('%',#{manualId},'%')
+        </if>
+        <if test="posted != null">
+            and t1.Posted  = #{posted}
+        </if>
+        <if test="startTime != null and startTime != '' and endTime != null and endTime != ''" >
+            and t1.Input_Date between #{startTime} and #{endTime}
+        </if>
+        GROUP BY t1.Purchase_ID
+
+
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from purchase
+        where Purchase_ID = #{purchaseId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Purchase" >
+        insert into purchase (Purchase_ID, Supply_No, Purch_Date, 
+            Modi_Date, Flag, Manual_ID, 
+            Remark, Operator, Posted, 
+            PostUser, PostedDate, Input_Date, 
+            Kind, Company_ID, Mode, 
+            Currency, JiZhang, JiZhangOperator, 
+            JiZhangDate, Input_Time, MasterPlanID, 
+            WareOutPlanFlag, Year, WaveRange, 
+            IsAgentPurchase, AgentCustomerNo, PriceType, 
+            MSend_Flag, PostedPurchaseProcess, ProcessPosted, 
+            ProcessPostedDate, ProcessPostUser, 
+            GoodsDate, CP_Flag, BuildBoxFlag
+            )
+        values (#{purchaseId,jdbcType=VARCHAR}, #{supplyNo,jdbcType=VARCHAR}, #{purchDate,jdbcType=TIMESTAMP}, 
+            #{modiDate,jdbcType=TIMESTAMP}, #{flag,jdbcType=INTEGER}, #{manualId,jdbcType=VARCHAR}, 
+            #{remark,jdbcType=LONGVARCHAR}, #{operator,jdbcType=VARCHAR}, #{posted,jdbcType=INTEGER}, 
+            #{postuser,jdbcType=VARCHAR}, #{posteddate,jdbcType=TIMESTAMP}, #{inputDate,jdbcType=TIMESTAMP}, 
+            #{kind,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, #{mode,jdbcType=VARCHAR}, 
+            #{currency,jdbcType=VARCHAR}, #{jizhang,jdbcType=INTEGER}, #{jizhangoperator,jdbcType=VARCHAR}, 
+            #{jizhangdate,jdbcType=TIMESTAMP}, #{inputTime,jdbcType=TIMESTAMP}, #{masterplanid,jdbcType=CHAR}, 
+            #{wareoutplanflag,jdbcType=INTEGER}, #{year,jdbcType=VARCHAR}, #{waverange,jdbcType=VARCHAR}, 
+            #{isagentpurchase,jdbcType=INTEGER}, #{agentcustomerno,jdbcType=VARCHAR}, #{pricetype,jdbcType=VARCHAR}, 
+            #{msendFlag,jdbcType=INTEGER}, #{postedpurchaseprocess,jdbcType=INTEGER}, #{processposted,jdbcType=INTEGER}, 
+            #{processposteddate,jdbcType=TIMESTAMP}, #{processpostuser,jdbcType=VARCHAR}, 
+            #{goodsdate,jdbcType=INTEGER}, #{cpFlag,jdbcType=INTEGER}, #{buildboxflag,jdbcType=INTEGER}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Purchase" >
+        insert into purchase
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="purchaseId != null" >
+                Purchase_ID,
+            </if>
+            <if test="supplyNo != null" >
+                Supply_No,
+            </if>
+            <if test="purchDate != null" >
+                Purch_Date,
+            </if>
+            <if test="modiDate != null" >
+                Modi_Date,
+            </if>
+            <if test="flag != null" >
+                Flag,
+            </if>
+            <if test="manualId != null" >
+                Manual_ID,
+            </if>
+            <if test="remark != null" >
+                Remark,
+            </if>
+            <if test="operator != null" >
+                Operator,
+            </if>
+            <if test="posted != null" >
+                Posted,
+            </if>
+            <if test="postuser != null" >
+                PostUser,
+            </if>
+            <if test="posteddate != null" >
+                PostedDate,
+            </if>
+            <if test="inputDate != null" >
+                Input_Date,
+            </if>
+            <if test="kind != null" >
+                Kind,
+            </if>
+            <if test="companyId != null" >
+                Company_ID,
+            </if>
+            <if test="mode != null" >
+                Mode,
+            </if>
+            <if test="currency != null" >
+                Currency,
+            </if>
+            <if test="jizhang != null" >
+                JiZhang,
+            </if>
+            <if test="jizhangoperator != null" >
+                JiZhangOperator,
+            </if>
+            <if test="jizhangdate != null" >
+                JiZhangDate,
+            </if>
+            <if test="inputTime != null" >
+                Input_Time,
+            </if>
+            <if test="masterplanid != null" >
+                MasterPlanID,
+            </if>
+            <if test="wareoutplanflag != null" >
+                WareOutPlanFlag,
+            </if>
+            <if test="year != null" >
+                Year,
+            </if>
+            <if test="waverange != null" >
+                WaveRange,
+            </if>
+            <if test="isagentpurchase != null" >
+                IsAgentPurchase,
+            </if>
+            <if test="agentcustomerno != null" >
+                AgentCustomerNo,
+            </if>
+            <if test="pricetype != null" >
+                PriceType,
+            </if>
+            <if test="msendFlag != null" >
+                MSend_Flag,
+            </if>
+            <if test="postedpurchaseprocess != null" >
+                PostedPurchaseProcess,
+            </if>
+            <if test="processposted != null" >
+                ProcessPosted,
+            </if>
+            <if test="processposteddate != null" >
+                ProcessPostedDate,
+            </if>
+            <if test="processpostuser != null" >
+                ProcessPostUser,
+            </if>
+            <if test="goodsdate != null" >
+                GoodsDate,
+            </if>
+            <if test="cpFlag != null" >
+                CP_Flag,
+            </if>
+            <if test="buildboxflag != null" >
+                BuildBoxFlag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="purchaseId != null" >
+                #{purchaseId,jdbcType=VARCHAR},
+            </if>
+            <if test="supplyNo != null" >
+                #{supplyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="purchDate != null" >
+                #{purchDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modiDate != null" >
+                #{modiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="flag != null" >
+                #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="manualId != null" >
+                #{manualId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="operator != null" >
+                #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="posted != null" >
+                #{posted,jdbcType=INTEGER},
+            </if>
+            <if test="postuser != null" >
+                #{postuser,jdbcType=VARCHAR},
+            </if>
+            <if test="posteddate != null" >
+                #{posteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="inputDate != null" >
+                #{inputDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="kind != null" >
+                #{kind,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="mode != null" >
+                #{mode,jdbcType=VARCHAR},
+            </if>
+            <if test="currency != null" >
+                #{currency,jdbcType=VARCHAR},
+            </if>
+            <if test="jizhang != null" >
+                #{jizhang,jdbcType=INTEGER},
+            </if>
+            <if test="jizhangoperator != null" >
+                #{jizhangoperator,jdbcType=VARCHAR},
+            </if>
+            <if test="jizhangdate != null" >
+                #{jizhangdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="inputTime != null" >
+                #{inputTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="masterplanid != null" >
+                #{masterplanid,jdbcType=CHAR},
+            </if>
+            <if test="wareoutplanflag != null" >
+                #{wareoutplanflag,jdbcType=INTEGER},
+            </if>
+            <if test="year != null" >
+                #{year,jdbcType=VARCHAR},
+            </if>
+            <if test="waverange != null" >
+                #{waverange,jdbcType=VARCHAR},
+            </if>
+            <if test="isagentpurchase != null" >
+                #{isagentpurchase,jdbcType=INTEGER},
+            </if>
+            <if test="agentcustomerno != null" >
+                #{agentcustomerno,jdbcType=VARCHAR},
+            </if>
+            <if test="pricetype != null" >
+                #{pricetype,jdbcType=VARCHAR},
+            </if>
+            <if test="msendFlag != null" >
+                #{msendFlag,jdbcType=INTEGER},
+            </if>
+            <if test="postedpurchaseprocess != null" >
+                #{postedpurchaseprocess,jdbcType=INTEGER},
+            </if>
+            <if test="processposted != null" >
+                #{processposted,jdbcType=INTEGER},
+            </if>
+            <if test="processposteddate != null" >
+                #{processposteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="processpostuser != null" >
+                #{processpostuser,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsdate != null" >
+                #{goodsdate,jdbcType=INTEGER},
+            </if>
+            <if test="cpFlag != null" >
+                #{cpFlag,jdbcType=INTEGER},
+            </if>
+            <if test="buildboxflag != null" >
+                #{buildboxflag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Purchase" >
+        update purchase
+        <set >
+            <if test="supplyNo != null" >
+                Supply_No = #{supplyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="purchDate != null" >
+                Purch_Date = #{purchDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modiDate != null" >
+                Modi_Date = #{modiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="flag != null" >
+                Flag = #{flag,jdbcType=INTEGER},
+            </if>
+            <if test="manualId != null" >
+                Manual_ID = #{manualId,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null" >
+                Remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="operator != null" >
+                Operator = #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="posted != null" >
+                Posted = #{posted,jdbcType=INTEGER},
+            </if>
+            <if test="postuser != null" >
+                PostUser = #{postuser,jdbcType=VARCHAR},
+            </if>
+            <if test="posteddate != null" >
+                PostedDate = #{posteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="inputDate != null" >
+                Input_Date = #{inputDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="kind != null" >
+                Kind = #{kind,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null" >
+                Company_ID = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="mode != null" >
+                Mode = #{mode,jdbcType=VARCHAR},
+            </if>
+            <if test="currency != null" >
+                Currency = #{currency,jdbcType=VARCHAR},
+            </if>
+            <if test="jizhang != null" >
+                JiZhang = #{jizhang,jdbcType=INTEGER},
+            </if>
+            <if test="jizhangoperator != null" >
+                JiZhangOperator = #{jizhangoperator,jdbcType=VARCHAR},
+            </if>
+            <if test="jizhangdate != null" >
+                JiZhangDate = #{jizhangdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="inputTime != null" >
+                Input_Time = #{inputTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="masterplanid != null" >
+                MasterPlanID = #{masterplanid,jdbcType=CHAR},
+            </if>
+            <if test="wareoutplanflag != null" >
+                WareOutPlanFlag = #{wareoutplanflag,jdbcType=INTEGER},
+            </if>
+            <if test="year != null" >
+                Year = #{year,jdbcType=VARCHAR},
+            </if>
+            <if test="waverange != null" >
+                WaveRange = #{waverange,jdbcType=VARCHAR},
+            </if>
+            <if test="isagentpurchase != null" >
+                IsAgentPurchase = #{isagentpurchase,jdbcType=INTEGER},
+            </if>
+            <if test="agentcustomerno != null" >
+                AgentCustomerNo = #{agentcustomerno,jdbcType=VARCHAR},
+            </if>
+            <if test="pricetype != null" >
+                PriceType = #{pricetype,jdbcType=VARCHAR},
+            </if>
+            <if test="msendFlag != null" >
+                MSend_Flag = #{msendFlag,jdbcType=INTEGER},
+            </if>
+            <if test="postedpurchaseprocess != null" >
+                PostedPurchaseProcess = #{postedpurchaseprocess,jdbcType=INTEGER},
+            </if>
+            <if test="processposted != null" >
+                ProcessPosted = #{processposted,jdbcType=INTEGER},
+            </if>
+            <if test="processposteddate != null" >
+                ProcessPostedDate = #{processposteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="processpostuser != null" >
+                ProcessPostUser = #{processpostuser,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsdate != null" >
+                GoodsDate = #{goodsdate,jdbcType=INTEGER},
+            </if>
+            <if test="cpFlag != null" >
+                CP_Flag = #{cpFlag,jdbcType=INTEGER},
+            </if>
+            <if test="buildboxflag != null" >
+                BuildBoxFlag = #{buildboxflag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where Purchase_ID = #{purchaseId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Purchase" >
+        update purchase
+        set Supply_No = #{supplyNo,jdbcType=VARCHAR},
+            Purch_Date = #{purchDate,jdbcType=TIMESTAMP},
+            Modi_Date = #{modiDate,jdbcType=TIMESTAMP},
+            Flag = #{flag,jdbcType=INTEGER},
+            Manual_ID = #{manualId,jdbcType=VARCHAR},
+            Remark = #{remark,jdbcType=LONGVARCHAR},
+            Operator = #{operator,jdbcType=VARCHAR},
+            Posted = #{posted,jdbcType=INTEGER},
+            PostUser = #{postuser,jdbcType=VARCHAR},
+            PostedDate = #{posteddate,jdbcType=TIMESTAMP},
+            Input_Date = #{inputDate,jdbcType=TIMESTAMP},
+            Kind = #{kind,jdbcType=VARCHAR},
+            Company_ID = #{companyId,jdbcType=VARCHAR},
+            Mode = #{mode,jdbcType=VARCHAR},
+            Currency = #{currency,jdbcType=VARCHAR},
+            JiZhang = #{jizhang,jdbcType=INTEGER},
+            JiZhangOperator = #{jizhangoperator,jdbcType=VARCHAR},
+            JiZhangDate = #{jizhangdate,jdbcType=TIMESTAMP},
+            Input_Time = #{inputTime,jdbcType=TIMESTAMP},
+            MasterPlanID = #{masterplanid,jdbcType=CHAR},
+            WareOutPlanFlag = #{wareoutplanflag,jdbcType=INTEGER},
+            Year = #{year,jdbcType=VARCHAR},
+            WaveRange = #{waverange,jdbcType=VARCHAR},
+            IsAgentPurchase = #{isagentpurchase,jdbcType=INTEGER},
+            AgentCustomerNo = #{agentcustomerno,jdbcType=VARCHAR},
+            PriceType = #{pricetype,jdbcType=VARCHAR},
+            MSend_Flag = #{msendFlag,jdbcType=INTEGER},
+            PostedPurchaseProcess = #{postedpurchaseprocess,jdbcType=INTEGER},
+            ProcessPosted = #{processposted,jdbcType=INTEGER},
+            ProcessPostedDate = #{processposteddate,jdbcType=TIMESTAMP},
+            ProcessPostUser = #{processpostuser,jdbcType=VARCHAR},
+            GoodsDate = #{goodsdate,jdbcType=INTEGER},
+            CP_Flag = #{cpFlag,jdbcType=INTEGER},
+            BuildBoxFlag = #{buildboxflag,jdbcType=INTEGER}
+        where Purchase_ID = #{purchaseId,jdbcType=VARCHAR}
+    </update>
+    <!--审核采购订单-->
+    <update id="checkPurchaseOrder" parameterType="com.xjt.dto.PurchaseReqDto">
+         update purchase
+        set  Posted = #{posted,jdbcType=INTEGER},
+            PostUser = #{postuser,jdbcType=VARCHAR},
+            PostedDate = #{posteddate,jdbcType=TIMESTAMP}
+            where Purchase_ID = #{purchaseId,jdbcType=VARCHAR} and Posted = 0
+    </update>
+    <!--更改记账状态-->
+    <update id="PurchaseOrderCharge" parameterType="com.xjt.dto.PurchaseReqDto">
+          update purchase
+        set  JiZhang = #{jizhang,jdbcType=INTEGER},
+            JiZhangOperator = #{jizhangoperator,jdbcType=VARCHAR},
+            JiZhangDate = #{jizhangdate,jdbcType=TIMESTAMP}
+            where Purchase_ID = #{purchaseId,jdbcType=VARCHAR}
+    </update>
+    <update id="deletePurchaseOrder" parameterType="java.lang.String">
+        update purchase
+         set delete_flag = 0
+          where Purchase_ID = #{purchaseId,jdbcType=VARCHAR} and delete_flag = 1
+    </update>
+</mapper>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.BoxdetailDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Boxdetail" >
+        <id column="AID" property="aid" jdbcType="INTEGER" />
+        <result column="BoxNo" property="boxno" jdbcType="VARCHAR" />
+        <result column="Goods_No" property="goodsNo" jdbcType="VARCHAR" />
+        <result column="ColorID" property="colorid" jdbcType="VARCHAR" />
+        <result column="Dioptre" property="dioptre" jdbcType="DECIMAL" />
+        <result column="Astigmia" property="astigmia" jdbcType="DECIMAL" />
+        <result column="Quantity" property="quantity" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        AID, BoxNo, Goods_No, ColorID, Dioptre, Astigmia, Quantity
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from boxdetail
+        where AID = #{aid,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from boxdetail
+        where AID = #{aid,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Boxdetail" >
+        insert into boxdetail (AID, BoxNo, Goods_No, 
+            ColorID, Dioptre, Astigmia, 
+            Quantity)
+        values (#{aid,jdbcType=INTEGER}, #{boxno,jdbcType=VARCHAR}, #{goodsNo,jdbcType=VARCHAR}, 
+            #{colorid,jdbcType=VARCHAR}, #{dioptre,jdbcType=DECIMAL}, #{astigmia,jdbcType=DECIMAL}, 
+            #{quantity,jdbcType=DECIMAL})
+    </insert>
+    <insert id="insertBoxDetailBatch" parameterType="java.util.List">
+         insert into boxdetail (AID, BoxNo, Goods_No,
+            ColorID, Dioptre, Astigmia,
+            Quantity)
+        values
+        <foreach collection="boxdetails" item="e" separator=",">
+            (#{e.aid,jdbcType=INTEGER}, #{e.boxno,jdbcType=VARCHAR}, #{e.goodsNo,jdbcType=VARCHAR},
+            #{e.colorid,jdbcType=VARCHAR}, #{e.dioptre,jdbcType=DECIMAL}, #{e.astigmia,jdbcType=DECIMAL},
+            #{e.quantity,jdbcType=DECIMAL})
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Boxdetail" >
+        insert into boxdetail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="aid != null" >
+                AID,
+            </if>
+            <if test="boxno != null" >
+                BoxNo,
+            </if>
+            <if test="goodsNo != null" >
+                Goods_No,
+            </if>
+            <if test="colorid != null" >
+                ColorID,
+            </if>
+            <if test="dioptre != null" >
+                Dioptre,
+            </if>
+            <if test="astigmia != null" >
+                Astigmia,
+            </if>
+            <if test="quantity != null" >
+                Quantity,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="aid != null" >
+                #{aid,jdbcType=INTEGER},
+            </if>
+            <if test="boxno != null" >
+                #{boxno,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsNo != null" >
+                #{goodsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="colorid != null" >
+                #{colorid,jdbcType=VARCHAR},
+            </if>
+            <if test="dioptre != null" >
+                #{dioptre,jdbcType=DECIMAL},
+            </if>
+            <if test="astigmia != null" >
+                #{astigmia,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null" >
+                #{quantity,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Boxdetail" >
+        update boxdetail
+        <set >
+            <if test="boxno != null" >
+                BoxNo = #{boxno,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsNo != null" >
+                Goods_No = #{goodsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="colorid != null" >
+                ColorID = #{colorid,jdbcType=VARCHAR},
+            </if>
+            <if test="dioptre != null" >
+                Dioptre = #{dioptre,jdbcType=DECIMAL},
+            </if>
+            <if test="astigmia != null" >
+                Astigmia = #{astigmia,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null" >
+                Quantity = #{quantity,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where AID = #{aid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Boxdetail" >
+        update boxdetail
+        set BoxNo = #{boxno,jdbcType=VARCHAR},
+            Goods_No = #{goodsNo,jdbcType=VARCHAR},
+            ColorID = #{colorid,jdbcType=VARCHAR},
+            Dioptre = #{dioptre,jdbcType=DECIMAL},
+            Astigmia = #{astigmia,jdbcType=DECIMAL},
+            Quantity = #{quantity,jdbcType=DECIMAL}
+        where AID = #{aid,jdbcType=INTEGER}
+    </update>
+</mapper>

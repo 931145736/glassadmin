@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.AssetreceiveDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Assetreceive" >
+        <id column="receive_id" property="receiveId" jdbcType="VARCHAR" />
+
+        <result column="receive_person" property="receivePerson" jdbcType="VARCHAR" />
+
+        <result column="receive_date" property="receiveDate" jdbcType="TIMESTAMP" />
+        <result column="is_audit" property="isAudit" jdbcType="INTEGER" />
+        <result column="audit_person" property="auditPerson" jdbcType="VARCHAR" />
+        <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        receive_id,  receive_person,  receive_date, is_audit,
+        audit_person, audit_time, remark
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from assetreceive
+        where receive_id = #{receiveId,jdbcType=VARCHAR}
+    </select>
+    <select id="queryReceiveList" parameterType="com.xjt.dto.AssetreceiveReqDto">
+        select  <include refid="Base_Column_List" />
+        from assetreceive
+        <where>
+            <if test="auditPerson != null">
+                and audit_person = auditPerson
+            </if>
+
+        </where>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from assetreceive
+        where receive_id = #{receiveId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Assetreceive" >
+        insert into assetreceive (receive_id, receive_person,
+           receive_date, is_audit,
+            audit_person, audit_time, remark
+            )
+        values (#{receiveId,jdbcType=VARCHAR},  #{receivePerson,jdbcType=VARCHAR},  #{receiveDate,jdbcType=TIMESTAMP}, #{isAudit,jdbcType=INTEGER},
+            #{auditPerson,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+            )
+    </insert>
+    <insert id="insertAssetReceive" parameterType="java.util.List">
+           insert into assetreceive (receive_id,receive_person,receive_date, is_audit,
+            audit_person, audit_time, remark
+            )
+        values
+        <foreach collection="reqDtos" item="e" separator=",">
+            (#{e.receiveId,jdbcType=VARCHAR}, #{e.receivePerson,jdbcType=VARCHAR}, #{e.receiveDate,jdbcType=TIMESTAMP}, #{e.isAudit,jdbcType=INTEGER},
+            #{e.auditPerson,jdbcType=VARCHAR}, #{e.auditTime,jdbcType=TIMESTAMP}, #{e.remark,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Assetreceive" >
+        insert into assetreceive
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="receiveId != null" >
+                receive_id,
+            </if>
+
+            <if test="receivePerson != null" >
+                receive_person,
+            </if>
+
+            <if test="receiveDate != null" >
+                receive_date,
+            </if>
+            <if test="isAudit != null" >
+                is_audit,
+            </if>
+            <if test="auditPerson != null" >
+                audit_person,
+            </if>
+            <if test="auditTime != null" >
+                audit_time,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="receiveId != null" >
+                #{receiveId,jdbcType=VARCHAR},
+            </if>
+
+            <if test="receivePerson != null" >
+                #{receivePerson,jdbcType=VARCHAR},
+            </if>
+
+            <if test="receiveDate != null" >
+                #{receiveDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isAudit != null" >
+                #{isAudit,jdbcType=INTEGER},
+            </if>
+            <if test="auditPerson != null" >
+                #{auditPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Assetreceive" >
+        update assetreceive
+        <set >
+
+            <if test="receivePerson != null" >
+                receive_person = #{receivePerson,jdbcType=VARCHAR},
+            </if>
+
+            <if test="receiveDate != null" >
+                receive_date = #{receiveDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isAudit != null" >
+                is_audit = #{isAudit,jdbcType=INTEGER},
+            </if>
+            <if test="auditPerson != null" >
+                audit_person = #{auditPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where receive_id = #{receiveId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Assetreceive" >
+        update assetreceive
+        set
+            receive_person = #{receivePerson,jdbcType=VARCHAR},
+
+            receive_date = #{receiveDate,jdbcType=TIMESTAMP},
+            is_audit = #{isAudit,jdbcType=INTEGER},
+            audit_person = #{auditPerson,jdbcType=VARCHAR},
+            audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            remark = #{remark,jdbcType=VARCHAR}
+        where receive_id = #{receiveId,jdbcType=VARCHAR}
+    </update>
+</mapper>

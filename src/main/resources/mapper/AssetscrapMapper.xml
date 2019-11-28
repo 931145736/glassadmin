@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.AssetscrapDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Assetscrap" >
+        <id column="scrap_id" property="scrapId" jdbcType="VARCHAR" />
+        <result column="scrap_asset" property="scrapAsset" jdbcType="VARCHAR" />
+        <result column="scrap_type" property="scrapType" jdbcType="INTEGER" />
+        <result column="scrap_person" property="scrapPerson" jdbcType="VARCHAR" />
+        <result column="scrap_count" property="scrapCount" jdbcType="INTEGER" />
+        <result column="scrap_date" property="scrapDate" jdbcType="TIMESTAMP" />
+        <result column="is_audit" property="isAudit" jdbcType="INTEGER" />
+        <result column="audit_person" property="auditPerson" jdbcType="VARCHAR" />
+        <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        scrap_id, scrap_asset, scrap_type, scrap_person, scrap_count, scrap_date, is_audit, 
+        audit_person, audit_time, remark
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from assetscrap
+        where scrap_id = #{scrapId,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from assetscrap
+        where scrap_id = #{scrapId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Assetscrap" >
+        insert into assetscrap (scrap_id, scrap_asset, scrap_type, 
+            scrap_person, scrap_count, scrap_date, 
+            is_audit, audit_person, audit_time, 
+            remark)
+        values (#{scrapId,jdbcType=VARCHAR}, #{scrapAsset,jdbcType=VARCHAR}, #{scrapType,jdbcType=INTEGER}, 
+            #{scrapPerson,jdbcType=VARCHAR}, #{scrapCount,jdbcType=INTEGER}, #{scrapDate,jdbcType=TIMESTAMP}, 
+            #{isAudit,jdbcType=INTEGER}, #{auditPerson,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, 
+            #{remark,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Assetscrap" >
+        insert into assetscrap
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="scrapId != null" >
+                scrap_id,
+            </if>
+            <if test="scrapAsset != null" >
+                scrap_asset,
+            </if>
+            <if test="scrapType != null" >
+                scrap_type,
+            </if>
+            <if test="scrapPerson != null" >
+                scrap_person,
+            </if>
+            <if test="scrapCount != null" >
+                scrap_count,
+            </if>
+            <if test="scrapDate != null" >
+                scrap_date,
+            </if>
+            <if test="isAudit != null" >
+                is_audit,
+            </if>
+            <if test="auditPerson != null" >
+                audit_person,
+            </if>
+            <if test="auditTime != null" >
+                audit_time,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="scrapId != null" >
+                #{scrapId,jdbcType=VARCHAR},
+            </if>
+            <if test="scrapAsset != null" >
+                #{scrapAsset,jdbcType=VARCHAR},
+            </if>
+            <if test="scrapType != null" >
+                #{scrapType,jdbcType=INTEGER},
+            </if>
+            <if test="scrapPerson != null" >
+                #{scrapPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="scrapCount != null" >
+                #{scrapCount,jdbcType=INTEGER},
+            </if>
+            <if test="scrapDate != null" >
+                #{scrapDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isAudit != null" >
+                #{isAudit,jdbcType=INTEGER},
+            </if>
+            <if test="auditPerson != null" >
+                #{auditPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Assetscrap" >
+        update assetscrap
+        <set >
+            <if test="scrapAsset != null" >
+                scrap_asset = #{scrapAsset,jdbcType=VARCHAR},
+            </if>
+            <if test="scrapType != null" >
+                scrap_type = #{scrapType,jdbcType=INTEGER},
+            </if>
+            <if test="scrapPerson != null" >
+                scrap_person = #{scrapPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="scrapCount != null" >
+                scrap_count = #{scrapCount,jdbcType=INTEGER},
+            </if>
+            <if test="scrapDate != null" >
+                scrap_date = #{scrapDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isAudit != null" >
+                is_audit = #{isAudit,jdbcType=INTEGER},
+            </if>
+            <if test="auditPerson != null" >
+                audit_person = #{auditPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where scrap_id = #{scrapId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Assetscrap" >
+        update assetscrap
+        set scrap_asset = #{scrapAsset,jdbcType=VARCHAR},
+            scrap_type = #{scrapType,jdbcType=INTEGER},
+            scrap_person = #{scrapPerson,jdbcType=VARCHAR},
+            scrap_count = #{scrapCount,jdbcType=INTEGER},
+            scrap_date = #{scrapDate,jdbcType=TIMESTAMP},
+            is_audit = #{isAudit,jdbcType=INTEGER},
+            audit_person = #{auditPerson,jdbcType=VARCHAR},
+            audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            remark = #{remark,jdbcType=VARCHAR}
+        where scrap_id = #{scrapId,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.SupplyaddressDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Supplyaddress" >
+        <id column="Supply_No" property="supplyNo" jdbcType="VARCHAR" />
+        <id column="AddressID" property="addressid" jdbcType="VARCHAR" />
+        <result column="Address" property="address" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        Supply_No, AddressID, Address
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjt.entity.Supplyaddress" >
+        select 
+        <include refid="Base_Column_List" />
+        from supplyaddress
+        where Supply_No = #{supplyNo,jdbcType=VARCHAR}
+          and AddressID = #{addressid,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.xjt.entity.Supplyaddress" >
+        delete from supplyaddress
+        where Supply_No = #{supplyNo,jdbcType=VARCHAR}
+          and AddressID = #{addressid,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Supplyaddress" >
+        insert into supplyaddress (Supply_No, AddressID, Address
+            )
+        values (#{supplyNo,jdbcType=VARCHAR}, #{addressid,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Supplyaddress" >
+        insert into supplyaddress
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="supplyNo != null" >
+                Supply_No,
+            </if>
+            <if test="addressid != null" >
+                AddressID,
+            </if>
+            <if test="address != null" >
+                Address,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="supplyNo != null" >
+                #{supplyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="addressid != null" >
+                #{addressid,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Supplyaddress" >
+        update supplyaddress
+        <set >
+            <if test="address != null" >
+                Address = #{address,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where Supply_No = #{supplyNo,jdbcType=VARCHAR}
+          and AddressID = #{addressid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Supplyaddress" >
+        update supplyaddress
+        set Address = #{address,jdbcType=VARCHAR}
+        where Supply_No = #{supplyNo,jdbcType=VARCHAR}
+          and AddressID = #{addressid,jdbcType=VARCHAR}
+    </update>
+</mapper>

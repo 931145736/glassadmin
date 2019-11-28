@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.AssetreturndetailDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Assetreturndetail" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="asset_return_id" property="assetReturnId" jdbcType="VARCHAR" />
+        <result column="asset_return_materials" property="assetReturnMaterials" jdbcType="VARCHAR" />
+        <result column="asset_return_count" property="assetReturnCount" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, asset_return_id, asset_return_materials, asset_return_count, delete_flag
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from assetreturndetail
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="queryReturnAsset" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select  asset_return_id, asset_return_materials, asset_return_count
+        from assetreturndetail
+        where asset_return_id = #{returnId}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from assetreturndetail
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Assetreturndetail" >
+        insert into assetreturndetail (id, asset_return_id, asset_return_materials, 
+            asset_return_count, delete_flag)
+        values (#{id,jdbcType=INTEGER}, #{assetReturnId,jdbcType=VARCHAR}, #{assetReturnMaterials,jdbcType=VARCHAR}, 
+            #{assetReturnCount,jdbcType=INTEGER}, #{deleteFlag,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertReturnDetails" parameterType="java.util.List">
+        insert into assetreturndetail (asset_return_id, asset_return_materials,
+            asset_return_count, delete_flag)
+        values
+        <foreach collection="details" item="e" separator=",">
+            (#{e.assetReturnId,jdbcType=VARCHAR}, #{e.assetReturnMaterials,jdbcType=VARCHAR},
+            #{e.assetReturnCount,jdbcType=INTEGER}, 1)
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Assetreturndetail" >
+        insert into assetreturndetail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="assetReturnId != null" >
+                asset_return_id,
+            </if>
+            <if test="assetReturnMaterials != null" >
+                asset_return_materials,
+            </if>
+            <if test="assetReturnCount != null" >
+                asset_return_count,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="assetReturnId != null" >
+                #{assetReturnId,jdbcType=VARCHAR},
+            </if>
+            <if test="assetReturnMaterials != null" >
+                #{assetReturnMaterials,jdbcType=VARCHAR},
+            </if>
+            <if test="assetReturnCount != null" >
+                #{assetReturnCount,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Assetreturndetail" >
+        update assetreturndetail
+        <set >
+            <if test="assetReturnId != null" >
+                asset_return_id = #{assetReturnId,jdbcType=VARCHAR},
+            </if>
+            <if test="assetReturnMaterials != null" >
+                asset_return_materials = #{assetReturnMaterials,jdbcType=VARCHAR},
+            </if>
+            <if test="assetReturnCount != null" >
+                asset_return_count = #{assetReturnCount,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Assetreturndetail" >
+        update assetreturndetail
+        set asset_return_id = #{assetReturnId,jdbcType=VARCHAR},
+            asset_return_materials = #{assetReturnMaterials,jdbcType=VARCHAR},
+            asset_return_count = #{assetReturnCount,jdbcType=INTEGER},
+            delete_flag = #{deleteFlag,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

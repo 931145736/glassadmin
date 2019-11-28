@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="033ec49a-7f8a-4a18-b79c-31a6a8a1e9d0" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="FxmlFile" />
+        <option value="AnnotationType" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>org.nustaq.serialization.FSTObjectInput</find>
+      <find>FileHistory</find>
+      <find>escapeXml10</find>
+      <find>JsonArray</find>
+      <find>JsonObject</find>
+      <find>FileServiceImpl</find>
+      <find>IFileService</find>
+      <find>queryActionByGroupId</find>
+      <find>queryUserInfoFromGroup</find>
+      <find>updateDeleteFlag</find>
+      <find>insert</find>
+      <find>updateDeleteFlagBatch</find>
+      <find>set</find>
+      <find>queryFilesInfo</find>
+      <find>queryGoodsList</find>
+      <find>queryMasterPermission</find>
+      <find>queryActioncolumnList</find>
+      <find>queryActionsByCloumn</find>
+      <find>queryActionsByUser</find>
+      <find>queryAllDatas</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="development" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/annotation/QueryList.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/dto/DatapermissionReqDto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/entity/Datapermission.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/dao/master/DatapermissionDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/service/GoodsService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/dao/master/GoodsDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/controlle/GoodsController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/config/QueryAopConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/DatapermissionMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/aop/QueryAopConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/config/WebMvcConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/entity/Goods.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/GoodsMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/dao/master/GoodspriceDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/dao/master/GoodsscaleDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/GoodspriceMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/GoodscolorMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/dto/GoodsReqDto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/entity/Goodsscale.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/GoodsscaleMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/entity/ResponseEntity.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/controlle/UserLoginController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/service/impl/GoodsServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/business/GoodsBusinessService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/entity/testAction.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/business/impl/GoodsBusinessServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/entity/Dictcolor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/dao/master/DictcolorDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/dto/ActionReqDto.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/annotation/ActionPower.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/dao/master/ActiongroupDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/ActiongroupMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/service/ActioncolumnService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/service/impl/ActioncolumnServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/ActioncolumnMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/dao/master/ActioncolumnDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/dao/master/ActionDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/service/ActionService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/handler/UserLoginHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/ActionMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/entity/Action.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/service/impl/ActionServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/controlle/ActionController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/service/DictcolorService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/DictcolorMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/service/impl/DictcolorServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/controlle/DictcolorController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/aop/ActionAop.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/xjt/controlle/ActioncolumnController.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <flattenPackages ProjectPane="false" />
+      <hideEmptyPackages ProjectPane="false" />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+              <item name="annotation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+              <item name="aop" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+              <item name="controlle" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+              <item name="master" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+              <item name="dto" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+              <item name="handler" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xjt" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="xjtProject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xjtProject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="FileServiceImpl&#9;PSI&#9;JAVA://com.xjt.fileupload.service.impl.FileServiceImpl" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.xjt.utils" />
+      <recent name="com.xjt.dao.other" />
+      <recent name="com.xjt.entity" />
+      <recent name="com.xjt.enums" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\glassesAdmin\xjtProject\src\main\java\com\xjt\entity" />
+      <recent name="D:\glassesAdmin\xjtProject\src\main\resources\mapper" />
+      <recent name="D:\glassesAdmin\xjtProject\src\main\java\com\xjt\dao\master" />
+      <recent name="D:\glassesAdmin\xjtProject\src\main\java\com\xjt\config" />
+      <recent name="D:\projects\xjtProject\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.App">
+    <configuration name="ActionServiceImpl" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xjt.service.impl.ActionServiceImpl" />
+      <module name="04-springboot-springmvc-mybatis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xjt.service.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="App" type="Application" factoryName="Application" singleton="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xjt.App" />
+      <module name="04-springboot-springmvc-mybatis" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xjt.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="Dictcategory2Controller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xjt.controlle.Dictcategory2Controller" />
+      <module name="04-springboot-springmvc-mybatis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xjt.controlle.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration name="testAction" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xjt.entity.testAction" />
+      <module name="04-springboot-springmvc-mybatis" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xjt.entity.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="Application.Dictcategory2Controller" />
+      <item itemvalue="Application.ActionServiceImpl" />
+      <item itemvalue="Application.testAction" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.testAction" />
+        <item itemvalue="Application.Dictcategory2Controller" />
+        <item itemvalue="Application.ActionServiceImpl" />
+        <item itemvalue="Application.Dictcategory2Controller" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="033ec49a-7f8a-4a18-b79c-31a6a8a1e9d0" name="Default" comment="" />
+      <created>1570590538384</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1570590538384</updated>
+      <workItem from="1570590541572" duration="3209000" />
+      <workItem from="1570597724890" duration="8660000" />
+      <workItem from="1570613156694" duration="2449000" />
+      <workItem from="1570666489588" duration="23352000" />
+      <workItem from="1570753127576" duration="8120000" />
+      <workItem from="1570839184297" duration="5297000" />
+      <workItem from="1571012676482" duration="1950000" />
+      <workItem from="1571014640972" duration="6719000" />
+      <workItem from="1571099738329" duration="8491000" />
+      <workItem from="1571185657668" duration="6592000" />
+      <workItem from="1571271829899" duration="25887000" />
+      <workItem from="1571357839534" duration="28640000" />
+      <workItem from="1571617224843" duration="3532000" />
+      <workItem from="1571707074503" duration="6184000" />
+      <workItem from="1571790664320" duration="130000" />
+      <workItem from="1571792945475" duration="1300000" />
+      <workItem from="1571798012524" duration="6043000" />
+      <workItem from="1571877058382" duration="28132000" />
+      <workItem from="1571963616784" duration="29163000" />
+      <workItem from="1572222540986" duration="26566000" />
+      <workItem from="1572308338605" duration="28100000" />
+      <workItem from="1572394755603" duration="18952000" />
+      <workItem from="1572423833960" duration="976000" />
+      <workItem from="1572481285263" duration="16915000" />
+      <workItem from="1572567443438" duration="21508000" />
+      <workItem from="1572827164797" duration="3336000" />
+      <workItem from="1572833882339" duration="18000" />
+    </task>
+    <task id="LOCAL-00001" summary="功能权限接口提交">
+      <created>1571974598864</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1571974598865</updated>
+    </task>
+    <task id="LOCAL-00002" summary="添加在线文档">
+      <created>1571975671299</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1571975671299</updated>
+    </task>
+    <task id="LOCAL-00003" summary="swagger在线文档">
+      <created>1571997093401</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1571997093401</updated>
+    </task>
+    <task id="LOCAL-00004" summary="10.31 添加数据权限验证">
+      <created>1572517027178</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1572517027178</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="320221000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32943678" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.14787234" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="7" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Web" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.4425532" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" id="Bean Validation" order="3" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Java Enterprise" order="7" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32870865" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="功能权限接口提交" />
+    <MESSAGE value="添加在线文档" />
+    <MESSAGE value="swagger在线文档" />
+    <MESSAGE value="10.31 添加数据权限验证" />
+    <option name="LAST_COMMIT_MESSAGE" value="10.31 添加数据权限验证" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/xjt/utils/FileUtil.java</url>
+          <line>122</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="21" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/dao/master/GoodsscaleDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/GoodspriceMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/GoodscolorMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/entity/Goodsprice.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/GoodsscaleMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/entity/Goodsscale.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/dto/GoodsReqDto.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/entity/ResponseEntity.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/utils/RedisUtil.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/controlle/UserLoginController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/entity/GoodscolorKey.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/service/impl/GoodsServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/entity/testAction.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/business/GoodsBusinessService.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/business/impl/GoodsBusinessServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/dto/ActioncolumnReqDto.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/dto/ActionReqDto.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/business/impl/ActionBusinessServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/annotation/QueryList.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/aop/QueryAopConfig.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/annotation/ActionPower.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/dao/master/ActiongroupDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/service/ActioncolumnService.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/service/impl/ActioncolumnServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/dao/master/ActioncolumnDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/App.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/ActioncolumnMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/service/ActionService.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/ActiongroupMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/handler/UserLoginHandler.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/ActionMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/entity/Action.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/dao/master/ActionDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/service/impl/ActionServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/controlle/ActionController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/entity/Dictcolor.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/business/impl/CommonBusinessServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/service/DictcolorService.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/dao/master/DictcolorDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/DictcolorMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/service/impl/DictcolorServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/service/impl/CommonServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/dao/master/CommonDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/CommonMapper.xml" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/controlle/CommonController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/controlle/DictcolorController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/controlle/ActioncolumnController.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/aop/ActionAop.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/config/WebMvcConfig.java" />
+    <entry file="jar://$USER_HOME$/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.8.10/jackson-databind-2.8.10.jar!/com/fasterxml/jackson/databind/ObjectMapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-450">
+          <caret line="115" column="13" selection-start-line="115" selection-start-column="13" selection-end-line="115" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/xjt/config/RedisTemplateConfiguration.java" />
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>04-springboot-springmvc-mybatis</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>sqljdbc42</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

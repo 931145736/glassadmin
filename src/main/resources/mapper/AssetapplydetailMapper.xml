@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.AssetapplydetailDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Assetapplydetail" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="asset_apply_id" property="assetApplyId" jdbcType="VARCHAR" />
+        <result column="asset_apply_materials" property="assetApplyMaterials" jdbcType="VARCHAR" />
+        <result column="asset_apply_count" property="assetApplyCount" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, asset_apply_id, asset_apply_materials, asset_apply_count
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from assetapplydetail
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="queryDetails" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from assetapplydetail
+        where asset_apply_id = #{applyId}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from assetapplydetail
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Assetapplydetail" >
+        insert into assetapplydetail (id, asset_apply_id, asset_apply_materials, 
+            asset_apply_count)
+        values (#{id,jdbcType=INTEGER}, #{assetApplyId,jdbcType=VARCHAR}, #{assetApplyMaterials,jdbcType=VARCHAR}, 
+            #{assetApplyCount,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertMaterialsBatch" parameterType="java.util.List">
+         insert into assetapplydetail (id, asset_apply_id, asset_apply_materials,
+            asset_apply_count)
+        values
+        <foreach collection="details" separator="," item="e">
+            (#{e.id,jdbcType=INTEGER}, #{e.assetApplyId,jdbcType=VARCHAR}, #{e.assetApplyMaterials,jdbcType=VARCHAR},
+            #{e.assetApplyCount,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Assetapplydetail" >
+        insert into assetapplydetail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="assetApplyId != null" >
+                asset_apply_id,
+            </if>
+            <if test="assetApplyMaterials != null" >
+                asset_apply_materials,
+            </if>
+            <if test="assetApplyCount != null" >
+                asset_apply_count,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="assetApplyId != null" >
+                #{assetApplyId,jdbcType=VARCHAR},
+            </if>
+            <if test="assetApplyMaterials != null" >
+                #{assetApplyMaterials,jdbcType=VARCHAR},
+            </if>
+            <if test="assetApplyCount != null" >
+                #{assetApplyCount,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Assetapplydetail" >
+        update assetapplydetail
+        <set >
+            <if test="assetApplyId != null" >
+                asset_apply_id = #{assetApplyId,jdbcType=VARCHAR},
+            </if>
+            <if test="assetApplyMaterials != null" >
+                asset_apply_materials = #{assetApplyMaterials,jdbcType=VARCHAR},
+            </if>
+            <if test="assetApplyCount != null" >
+                asset_apply_count = #{assetApplyCount,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Assetapplydetail" >
+        update assetapplydetail
+        set asset_apply_id = #{assetApplyId,jdbcType=VARCHAR},
+            asset_apply_materials = #{assetApplyMaterials,jdbcType=VARCHAR},
+            asset_apply_count = #{assetApplyCount,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

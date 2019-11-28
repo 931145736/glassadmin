@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.ModuleshowschemefieldsDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Moduleshowschemefields" >
+        <id column="SchemeID" property="schemeid" jdbcType="VARCHAR" />
+        <id column="FieldID" property="fieldid" jdbcType="VARCHAR" />
+        <result column="OrderIndex" property="orderindex" jdbcType="SMALLINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        SchemeID, FieldID, OrderIndex
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjt.entity.Moduleshowschemefields" >
+        select 
+        <include refid="Base_Column_List" />
+        from moduleshowschemefields
+        where SchemeID = #{schemeid,jdbcType=VARCHAR}
+          and FieldID = #{fieldid,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.xjt.entity.Moduleshowschemefields" >
+        delete from moduleshowschemefields
+        where SchemeID = #{schemeid,jdbcType=VARCHAR}
+          and FieldID = #{fieldid,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Moduleshowschemefields" >
+        insert into moduleshowschemefields (SchemeID, FieldID, OrderIndex
+            )
+        values (#{schemeid,jdbcType=VARCHAR}, #{fieldid,jdbcType=VARCHAR}, #{orderindex,jdbcType=SMALLINT}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Moduleshowschemefields" >
+        insert into moduleshowschemefields
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="schemeid != null" >
+                SchemeID,
+            </if>
+            <if test="fieldid != null" >
+                FieldID,
+            </if>
+            <if test="orderindex != null" >
+                OrderIndex,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="schemeid != null" >
+                #{schemeid,jdbcType=VARCHAR},
+            </if>
+            <if test="fieldid != null" >
+                #{fieldid,jdbcType=VARCHAR},
+            </if>
+            <if test="orderindex != null" >
+                #{orderindex,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Moduleshowschemefields" >
+        update moduleshowschemefields
+        <set >
+            <if test="orderindex != null" >
+                OrderIndex = #{orderindex,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where SchemeID = #{schemeid,jdbcType=VARCHAR}
+          and FieldID = #{fieldid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Moduleshowschemefields" >
+        update moduleshowschemefields
+        set OrderIndex = #{orderindex,jdbcType=SMALLINT}
+        where SchemeID = #{schemeid,jdbcType=VARCHAR}
+          and FieldID = #{fieldid,jdbcType=VARCHAR}
+    </update>
+</mapper>

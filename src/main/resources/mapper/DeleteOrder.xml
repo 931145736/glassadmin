@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.DeleteOrderDao" >
+
+    <update id="deleteOrder" statementType="CALLABLE" parameterType="com.xjt.entity.DeleteOrderEntity">
+        {call deleteOrder (#{orderId,mode = IN},#{orderMaster,mode = IN},#{orderGoods,mode = IN},
+        #{orderDetail,mode = IN},#{columnMaster,mode = IN},#{columnGoods,mode = IN},#{resultValue,mode = OUT,jdbcType = INTEGER})}
+    </update>
+
+
+</mapper>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.AssetpurchaseDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Assetpurchase" >
+        <id column="purchase_id" property="purchaseId" jdbcType="VARCHAR" />
+        <result column="purchase_person" property="purchasePerson" jdbcType="VARCHAR" />
+        <result column="purchase_date" property="purchaseDate" jdbcType="TIMESTAMP" />
+        <result column="is_audit" property="isAudit" jdbcType="INTEGER" />
+        <result column="audit_person" property="auditPerson" jdbcType="VARCHAR" />
+        <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        purchase_id, purchase_person, purchase_date, is_audit, audit_person, audit_time, remark
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from assetpurchase
+        where purchase_id = #{purchaseId,jdbcType=VARCHAR}
+    </select>
+    <select id="queryAssetPurchaseList" parameterType="com.xjt.dto.AssetpurchaseReqDto" resultMap="BaseResultMap">
+        select    <include refid="Base_Column_List" />
+        from assetpurchase
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from assetpurchase
+        where purchase_id = #{purchaseId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Assetpurchase" >
+        insert into assetpurchase (purchase_id,purchase_person,
+            purchase_date, is_audit, audit_person, 
+            audit_time, remark)
+        values (#{purchaseId,jdbcType=VARCHAR}, #{purchasePerson,jdbcType=VARCHAR},
+            #{purchaseDate,jdbcType=TIMESTAMP}, #{isAudit,jdbcType=INTEGER}, #{auditPerson,jdbcType=VARCHAR}, 
+            #{auditTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Assetpurchase" >
+        insert into assetpurchase
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="purchaseId != null" >
+                purchase_id,
+            </if>
+
+            <if test="purchasePerson != null" >
+                purchase_person,
+            </if>
+            <if test="purchaseDate != null" >
+                purchase_date,
+            </if>
+            <if test="isAudit != null" >
+                is_audit,
+            </if>
+            <if test="auditPerson != null" >
+                audit_person,
+            </if>
+            <if test="auditTime != null" >
+                audit_time,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="purchaseId != null" >
+                #{purchaseId,jdbcType=VARCHAR},
+            </if>
+
+            <if test="purchasePerson != null" >
+                #{purchasePerson,jdbcType=VARCHAR},
+            </if>
+            <if test="purchaseDate != null" >
+                #{purchaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isAudit != null" >
+                #{isAudit,jdbcType=INTEGER},
+            </if>
+            <if test="auditPerson != null" >
+                #{auditPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Assetpurchase" >
+        update assetpurchase
+        <set >
+
+            <if test="purchasePerson != null" >
+                purchase_person = #{purchasePerson,jdbcType=VARCHAR},
+            </if>
+            <if test="purchaseDate != null" >
+                purchase_date = #{purchaseDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isAudit != null" >
+                is_audit = #{isAudit,jdbcType=INTEGER},
+            </if>
+            <if test="auditPerson != null" >
+                audit_person = #{auditPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where purchase_id = #{purchaseId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Assetpurchase" >
+        update assetpurchase
+        set
+            purchase_person = #{purchasePerson,jdbcType=VARCHAR},
+            purchase_date = #{purchaseDate,jdbcType=TIMESTAMP},
+            is_audit = #{isAudit,jdbcType=INTEGER},
+            audit_person = #{auditPerson,jdbcType=VARCHAR},
+            audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            remark = #{remark,jdbcType=VARCHAR}
+        where purchase_id = #{purchaseId,jdbcType=VARCHAR}
+    </update>
+</mapper>

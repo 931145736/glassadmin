@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.GoodsscaleDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Goodsscale" >
+        <id column="GoodsID" property="goodsid" jdbcType="VARCHAR" />
+        <id column="Dioptre" property="dioptre" jdbcType="DECIMAL" />
+        <id column="Astigmia" property="astigmia" jdbcType="DECIMAL" />
+        <result column="Thickness" property="thickness" jdbcType="DECIMAL" />
+        <result column="glassType" property="glasstype" jdbcType="VARCHAR" />
+        <result column="UnitPrice" property="unitprice" jdbcType="DECIMAL" />
+        <result column="AttachPrice" property="attachprice" jdbcType="DECIMAL" />
+        <result column="Price1" property="price1" jdbcType="DECIMAL" />
+        <result column="Price2" property="price2" jdbcType="DECIMAL" />
+        <result column="Price3" property="price3" jdbcType="DECIMAL" />
+        <result column="Price4" property="price4" jdbcType="DECIMAL" />
+        <result column="Price5" property="price5" jdbcType="DECIMAL" />
+        <result column="Price6" property="price6" jdbcType="DECIMAL" />
+        <result column="Price7" property="price7" jdbcType="DECIMAL" />
+        <result column="Price8" property="price8" jdbcType="DECIMAL" />
+        <result column="Price9" property="price9" jdbcType="DECIMAL" />
+        <result column="Price10" property="price10" jdbcType="DECIMAL" />
+        <result column="WholesalePrice" property="wholesaleprice" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        GoodsID, Dioptre, Astigmia, Thickness, glassType, UnitPrice, AttachPrice, Price1, 
+        Price2, Price3, Price4, Price5, Price6, Price7, Price8, Price9, Price10, WholesalePrice
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjt.entity.Goodsscale" >
+        select 
+        <include refid="Base_Column_List" />
+        from goodsscale
+        where GoodsID = #{goodsid,jdbcType=VARCHAR}
+          and Dioptre = #{dioptre,jdbcType=DECIMAL}
+          and Astigmia = #{astigmia,jdbcType=DECIMAL}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.xjt.entity.Goodsscale" >
+        delete from goodsscale
+        where GoodsID = #{goodsid,jdbcType=VARCHAR}
+          and Dioptre = #{dioptre,jdbcType=DECIMAL}
+          and Astigmia = #{astigmia,jdbcType=DECIMAL}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Goodsscale" >
+        insert into goodsscale (GoodsID, Dioptre, Astigmia, 
+            Thickness, glassType, UnitPrice, 
+            AttachPrice, Price1, Price2, 
+            Price3, Price4, Price5, 
+            Price6, Price7, Price8, 
+            Price9, Price10, WholesalePrice
+            )
+        values (#{goodsid,jdbcType=VARCHAR}, #{dioptre,jdbcType=DECIMAL}, #{astigmia,jdbcType=DECIMAL}, 
+            #{thickness,jdbcType=DECIMAL}, #{glasstype,jdbcType=VARCHAR}, #{unitprice,jdbcType=DECIMAL}, 
+            #{attachprice,jdbcType=DECIMAL}, #{price1,jdbcType=DECIMAL}, #{price2,jdbcType=DECIMAL}, 
+            #{price3,jdbcType=DECIMAL}, #{price4,jdbcType=DECIMAL}, #{price5,jdbcType=DECIMAL}, 
+            #{price6,jdbcType=DECIMAL}, #{price7,jdbcType=DECIMAL}, #{price8,jdbcType=DECIMAL}, 
+            #{price9,jdbcType=DECIMAL}, #{price10,jdbcType=DECIMAL}, #{wholesaleprice,jdbcType=DECIMAL}
+            )
+    </insert>
+    <insert id="insertGoodDetail" parameterType="java.util.List">
+        insert into goodsscale (GoodsID, Dioptre, Astigmia,
+            Thickness, glassType, UnitPrice,
+            AttachPrice, Price1, Price2,
+            Price3, Price4, Price5,
+            Price6, Price7, Price8,
+            Price9, Price10, WholesalePrice
+            )
+        values
+        <foreach collection="goodsscales" separator="," item="e">
+            (#{e.goodsid,jdbcType=VARCHAR}, #{e.dioptre,jdbcType=DECIMAL}, #{e.astigmia,jdbcType=DECIMAL},
+            #{e.thickness,jdbcType=DECIMAL}, #{e.glasstype,jdbcType=VARCHAR}, #{e.unitprice,jdbcType=DECIMAL},
+            #{e.attachprice,jdbcType=DECIMAL}, #{e.price1,jdbcType=DECIMAL}, #{e.price2,jdbcType=DECIMAL},
+            #{e.price3,jdbcType=DECIMAL}, #{e.price4,jdbcType=DECIMAL}, #{e.price5,jdbcType=DECIMAL},
+            #{e.price6,jdbcType=DECIMAL}, #{e.price7,jdbcType=DECIMAL}, #{e.price8,jdbcType=DECIMAL},
+            #{e.price9,jdbcType=DECIMAL}, #{e.price10,jdbcType=DECIMAL}, #{e.wholesaleprice,jdbcType=DECIMAL}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Goodsscale" >
+        insert into goodsscale
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="goodsid != null" >
+                GoodsID,
+            </if>
+            <if test="dioptre != null" >
+                Dioptre,
+            </if>
+            <if test="astigmia != null" >
+                Astigmia,
+            </if>
+            <if test="thickness != null" >
+                Thickness,
+            </if>
+            <if test="glasstype != null" >
+                glassType,
+            </if>
+            <if test="unitprice != null" >
+                UnitPrice,
+            </if>
+            <if test="attachprice != null" >
+                AttachPrice,
+            </if>
+            <if test="price1 != null" >
+                Price1,
+            </if>
+            <if test="price2 != null" >
+                Price2,
+            </if>
+            <if test="price3 != null" >
+                Price3,
+            </if>
+            <if test="price4 != null" >
+                Price4,
+            </if>
+            <if test="price5 != null" >
+                Price5,
+            </if>
+            <if test="price6 != null" >
+                Price6,
+            </if>
+            <if test="price7 != null" >
+                Price7,
+            </if>
+            <if test="price8 != null" >
+                Price8,
+            </if>
+            <if test="price9 != null" >
+                Price9,
+            </if>
+            <if test="price10 != null" >
+                Price10,
+            </if>
+            <if test="wholesaleprice != null" >
+                WholesalePrice,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="goodsid != null" >
+                #{goodsid,jdbcType=VARCHAR},
+            </if>
+            <if test="dioptre != null" >
+                #{dioptre,jdbcType=DECIMAL},
+            </if>
+            <if test="astigmia != null" >
+                #{astigmia,jdbcType=DECIMAL},
+            </if>
+            <if test="thickness != null" >
+                #{thickness,jdbcType=DECIMAL},
+            </if>
+            <if test="glasstype != null" >
+                #{glasstype,jdbcType=VARCHAR},
+            </if>
+            <if test="unitprice != null" >
+                #{unitprice,jdbcType=DECIMAL},
+            </if>
+            <if test="attachprice != null" >
+                #{attachprice,jdbcType=DECIMAL},
+            </if>
+            <if test="price1 != null" >
+                #{price1,jdbcType=DECIMAL},
+            </if>
+            <if test="price2 != null" >
+                #{price2,jdbcType=DECIMAL},
+            </if>
+            <if test="price3 != null" >
+                #{price3,jdbcType=DECIMAL},
+            </if>
+            <if test="price4 != null" >
+                #{price4,jdbcType=DECIMAL},
+            </if>
+            <if test="price5 != null" >
+                #{price5,jdbcType=DECIMAL},
+            </if>
+            <if test="price6 != null" >
+                #{price6,jdbcType=DECIMAL},
+            </if>
+            <if test="price7 != null" >
+                #{price7,jdbcType=DECIMAL},
+            </if>
+            <if test="price8 != null" >
+                #{price8,jdbcType=DECIMAL},
+            </if>
+            <if test="price9 != null" >
+                #{price9,jdbcType=DECIMAL},
+            </if>
+            <if test="price10 != null" >
+                #{price10,jdbcType=DECIMAL},
+            </if>
+            <if test="wholesaleprice != null" >
+                #{wholesaleprice,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Goodsscale" >
+        update goodsscale
+        <set >
+            <if test="thickness != null" >
+                Thickness = #{thickness,jdbcType=DECIMAL},
+            </if>
+            <if test="glasstype != null" >
+                glassType = #{glasstype,jdbcType=VARCHAR},
+            </if>
+            <if test="unitprice != null" >
+                UnitPrice = #{unitprice,jdbcType=DECIMAL},
+            </if>
+            <if test="attachprice != null" >
+                AttachPrice = #{attachprice,jdbcType=DECIMAL},
+            </if>
+            <if test="price1 != null" >
+                Price1 = #{price1,jdbcType=DECIMAL},
+            </if>
+            <if test="price2 != null" >
+                Price2 = #{price2,jdbcType=DECIMAL},
+            </if>
+            <if test="price3 != null" >
+                Price3 = #{price3,jdbcType=DECIMAL},
+            </if>
+            <if test="price4 != null" >
+                Price4 = #{price4,jdbcType=DECIMAL},
+            </if>
+            <if test="price5 != null" >
+                Price5 = #{price5,jdbcType=DECIMAL},
+            </if>
+            <if test="price6 != null" >
+                Price6 = #{price6,jdbcType=DECIMAL},
+            </if>
+            <if test="price7 != null" >
+                Price7 = #{price7,jdbcType=DECIMAL},
+            </if>
+            <if test="price8 != null" >
+                Price8 = #{price8,jdbcType=DECIMAL},
+            </if>
+            <if test="price9 != null" >
+                Price9 = #{price9,jdbcType=DECIMAL},
+            </if>
+            <if test="price10 != null" >
+                Price10 = #{price10,jdbcType=DECIMAL},
+            </if>
+            <if test="wholesaleprice != null" >
+                WholesalePrice = #{wholesaleprice,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where GoodsID = #{goodsid,jdbcType=VARCHAR}
+          and Dioptre = #{dioptre,jdbcType=DECIMAL}
+          and Astigmia = #{astigmia,jdbcType=DECIMAL}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Goodsscale" >
+        update goodsscale
+        set Thickness = #{thickness,jdbcType=DECIMAL},
+            glassType = #{glasstype,jdbcType=VARCHAR},
+            UnitPrice = #{unitprice,jdbcType=DECIMAL},
+            AttachPrice = #{attachprice,jdbcType=DECIMAL},
+            Price1 = #{price1,jdbcType=DECIMAL},
+            Price2 = #{price2,jdbcType=DECIMAL},
+            Price3 = #{price3,jdbcType=DECIMAL},
+            Price4 = #{price4,jdbcType=DECIMAL},
+            Price5 = #{price5,jdbcType=DECIMAL},
+            Price6 = #{price6,jdbcType=DECIMAL},
+            Price7 = #{price7,jdbcType=DECIMAL},
+            Price8 = #{price8,jdbcType=DECIMAL},
+            Price9 = #{price9,jdbcType=DECIMAL},
+            Price10 = #{price10,jdbcType=DECIMAL},
+            WholesalePrice = #{wholesaleprice,jdbcType=DECIMAL}
+        where GoodsID = #{goodsid,jdbcType=VARCHAR}
+          and Dioptre = #{dioptre,jdbcType=DECIMAL}
+          and Astigmia = #{astigmia,jdbcType=DECIMAL}
+    </update>
+</mapper>

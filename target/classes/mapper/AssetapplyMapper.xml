@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.AssetapplyDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Assetapply" >
+        <id column="apply_id" property="applyId" jdbcType="VARCHAR" />
+        <result column="apply_type" property="applyType" jdbcType="INTEGER" />
+        <result column="apply_person" property="applyPerson" jdbcType="VARCHAR" />
+        <result column="apply_date" property="applyDate" jdbcType="TIMESTAMP" />
+        <result column="is_audit" property="isAudit" jdbcType="INTEGER" />
+        <result column="audit_person" property="auditPerson" jdbcType="VARCHAR" />
+        <result column="audit_time" property="auditTime" jdbcType="TIMESTAMP" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        apply_id, apply_type, apply_person, apply_date, is_audit,
+        audit_person, audit_time, remark
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from assetapply
+        where apply_id = #{applyId,jdbcType=VARCHAR}
+    </select>
+    <select id="assetApplyList" parameterType="com.xjt.dto.AssetapplyReqDto" resultMap="BaseResultMap">
+        select apply_id, apply_type, apply_person, apply_date, is_audit,
+        audit_person, audit_time, remark
+         from assetapply
+        <where>
+            <if test="applyType != null">
+                and apply_type = applyType
+            </if>
+            <if test="isAudit">
+                and is_aduit = isAudit
+            </if>
+        </where>
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from assetapply
+        where apply_id = #{applyId,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Assetapply" >
+        insert into assetapply (apply_id,
+            apply_type, apply_person, apply_date, 
+            is_audit, audit_person, audit_time, 
+            remark)
+        values (#{applyId,jdbcType=VARCHAR},#{applyType,jdbcType=INTEGER}, #{applyPerson,jdbcType=VARCHAR}, #{applyDate,jdbcType=TIMESTAMP},
+            #{isAudit,jdbcType=INTEGER}, #{auditPerson,jdbcType=VARCHAR}, #{auditTime,jdbcType=TIMESTAMP}, 
+            #{remark,jdbcType=VARCHAR})
+    </insert>
+
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Assetapply" >
+        insert into assetapply
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="applyId != null" >
+                apply_id,
+            </if>
+
+            <if test="applyType != null" >
+                apply_type,
+            </if>
+            <if test="applyPerson != null" >
+                apply_person,
+            </if>
+            <if test="applyDate != null" >
+                apply_date,
+            </if>
+            <if test="isAudit != null" >
+                is_audit,
+            </if>
+            <if test="auditPerson != null" >
+                audit_person,
+            </if>
+            <if test="auditTime != null" >
+                audit_time,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="applyId != null" >
+                #{applyId,jdbcType=VARCHAR},
+            </if>
+
+            <if test="applyType != null" >
+                #{applyType,jdbcType=INTEGER},
+            </if>
+            <if test="applyPerson != null" >
+                #{applyPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="applyDate != null" >
+                #{applyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isAudit != null" >
+                #{isAudit,jdbcType=INTEGER},
+            </if>
+            <if test="auditPerson != null" >
+                #{auditPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Assetapply" >
+        update assetapply
+        <set >
+
+            <if test="applyType != null" >
+                apply_type = #{applyType,jdbcType=INTEGER},
+            </if>
+            <if test="applyPerson != null" >
+                apply_person = #{applyPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="applyDate != null" >
+                apply_date = #{applyDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isAudit != null" >
+                is_audit = #{isAudit,jdbcType=INTEGER},
+            </if>
+            <if test="auditPerson != null" >
+                audit_person = #{auditPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="auditTime != null" >
+                audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where apply_id = #{applyId,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Assetapply" >
+        update assetapply
+        set  apply_type = #{applyType,jdbcType=INTEGER},
+            apply_person = #{applyPerson,jdbcType=VARCHAR},
+            apply_date = #{applyDate,jdbcType=TIMESTAMP},
+            is_audit = #{isAudit,jdbcType=INTEGER},
+            audit_person = #{auditPerson,jdbcType=VARCHAR},
+            audit_time = #{auditTime,jdbcType=TIMESTAMP},
+            remark = #{remark,jdbcType=VARCHAR}
+        where apply_id = #{applyId,jdbcType=VARCHAR}
+    </update>
+    <select id="queryApplyDetail" parameterType="java.lang.String" resultType="com.xjt.entity.Assetapply">
+        SELECT t1.asset_apply_id applyId ,t2.asset_name assetName,t2.asset_version assetVersion,t1.asset_apply_count assetApplyCount
+        FROM assetapplydetail t1
+        INNER JOIN assetinfo t2 ON t1.asset_apply_materials = t2.asset_id
+        WHERE t1.asset_apply_id = #{applyId}
+    </select>
+    <update id="checkApply" parameterType="com.xjt.dto.AssetapplyReqDto">
+        update assetapply
+        set  is_audit = #{isAudit,jdbcType=INTEGER},
+            audit_person = #{auditPerson,jdbcType=VARCHAR},
+            audit_time = #{auditTime,jdbcType=TIMESTAMP}
+             where apply_id = #{applyId,jdbcType=VARCHAR} and  is_audit =0
+    </update>
+</mapper>

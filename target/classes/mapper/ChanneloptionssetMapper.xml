@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.ChanneloptionssetDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Channeloptionsset" >
+        <id column="PrimaryID" property="primaryid" jdbcType="VARCHAR" />
+        <result column="OptionType" property="optiontype" jdbcType="VARCHAR" />
+        <result column="ParentID" property="parentid" jdbcType="INTEGER" />
+        <result column="Depth" property="depth" jdbcType="SMALLINT" />
+        <result column="cName" property="cname" jdbcType="VARCHAR" />
+        <result column="Caption" property="caption" jdbcType="VARCHAR" />
+        <result column="cData" property="cdata" jdbcType="VARCHAR" />
+        <result column="ControlType" property="controltype" jdbcType="VARCHAR" />
+        <result column="Tag" property="tag" jdbcType="VARCHAR" />
+        <result column="Description" property="description" jdbcType="VARCHAR" />
+        <result column="DataType" property="datatype" jdbcType="VARCHAR" />
+        <result column="ConditionExpression" property="conditionexpression" jdbcType="VARCHAR" />
+        <result column="ConditionMessage" property="conditionmessage" jdbcType="VARCHAR" />
+        <result column="IniKeyName" property="inikeyname" jdbcType="VARCHAR" />
+        <result column="IniKeyGroup" property="inikeygroup" jdbcType="VARCHAR" />
+        <result column="IniKeyFile" property="inikeyfile" jdbcType="VARCHAR" />
+        <result column="IsVisible" property="isvisible" jdbcType="INTEGER" />
+        <result column="SoftExplain" property="softexplain" jdbcType="VARBINARY" />
+        <result column="ID" property="id" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        PrimaryID, OptionType, ParentID, Depth, cName, Caption, cData, ControlType, Tag, 
+        Description, DataType, ConditionExpression, ConditionMessage, IniKeyName, IniKeyGroup, 
+        IniKeyFile, IsVisible, SoftExplain, ID
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from channeloptionsset
+        where PrimaryID = #{primaryid,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from channeloptionsset
+        where PrimaryID = #{primaryid,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Channeloptionsset" >
+        insert into channeloptionsset (PrimaryID, OptionType, ParentID, 
+            Depth, cName, Caption, 
+            cData, ControlType, Tag, 
+            Description, DataType, ConditionExpression, 
+            ConditionMessage, IniKeyName, IniKeyGroup, 
+            IniKeyFile, IsVisible, SoftExplain, 
+            ID)
+        values (#{primaryid,jdbcType=VARCHAR}, #{optiontype,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
+            #{depth,jdbcType=SMALLINT}, #{cname,jdbcType=VARCHAR}, #{caption,jdbcType=VARCHAR}, 
+            #{cdata,jdbcType=VARCHAR}, #{controltype,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, 
+            #{description,jdbcType=VARCHAR}, #{datatype,jdbcType=VARCHAR}, #{conditionexpression,jdbcType=VARCHAR}, 
+            #{conditionmessage,jdbcType=VARCHAR}, #{inikeyname,jdbcType=VARCHAR}, #{inikeygroup,jdbcType=VARCHAR}, 
+            #{inikeyfile,jdbcType=VARCHAR}, #{isvisible,jdbcType=INTEGER}, #{softexplain,jdbcType=VARBINARY},
+            #{id,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Channeloptionsset" >
+        insert into channeloptionsset
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="primaryid != null" >
+                PrimaryID,
+            </if>
+            <if test="optiontype != null" >
+                OptionType,
+            </if>
+            <if test="parentid != null" >
+                ParentID,
+            </if>
+            <if test="depth != null" >
+                Depth,
+            </if>
+            <if test="cname != null" >
+                cName,
+            </if>
+            <if test="caption != null" >
+                Caption,
+            </if>
+            <if test="cdata != null" >
+                cData,
+            </if>
+            <if test="controltype != null" >
+                ControlType,
+            </if>
+            <if test="tag != null" >
+                Tag,
+            </if>
+            <if test="description != null" >
+                Description,
+            </if>
+            <if test="datatype != null" >
+                DataType,
+            </if>
+            <if test="conditionexpression != null" >
+                ConditionExpression,
+            </if>
+            <if test="conditionmessage != null" >
+                ConditionMessage,
+            </if>
+            <if test="inikeyname != null" >
+                IniKeyName,
+            </if>
+            <if test="inikeygroup != null" >
+                IniKeyGroup,
+            </if>
+            <if test="inikeyfile != null" >
+                IniKeyFile,
+            </if>
+            <if test="isvisible != null" >
+                IsVisible,
+            </if>
+            <if test="softexplain != null" >
+                SoftExplain,
+            </if>
+            <if test="id != null" >
+                ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="primaryid != null" >
+                #{primaryid,jdbcType=VARCHAR},
+            </if>
+            <if test="optiontype != null" >
+                #{optiontype,jdbcType=VARCHAR},
+            </if>
+            <if test="parentid != null" >
+                #{parentid,jdbcType=INTEGER},
+            </if>
+            <if test="depth != null" >
+                #{depth,jdbcType=SMALLINT},
+            </if>
+            <if test="cname != null" >
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="caption != null" >
+                #{caption,jdbcType=VARCHAR},
+            </if>
+            <if test="cdata != null" >
+                #{cdata,jdbcType=VARCHAR},
+            </if>
+            <if test="controltype != null" >
+                #{controltype,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null" >
+                #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="datatype != null" >
+                #{datatype,jdbcType=VARCHAR},
+            </if>
+            <if test="conditionexpression != null" >
+                #{conditionexpression,jdbcType=VARCHAR},
+            </if>
+            <if test="conditionmessage != null" >
+                #{conditionmessage,jdbcType=VARCHAR},
+            </if>
+            <if test="inikeyname != null" >
+                #{inikeyname,jdbcType=VARCHAR},
+            </if>
+            <if test="inikeygroup != null" >
+                #{inikeygroup,jdbcType=VARCHAR},
+            </if>
+            <if test="inikeyfile != null" >
+                #{inikeyfile,jdbcType=VARCHAR},
+            </if>
+            <if test="isvisible != null" >
+                #{isvisible,jdbcType=INTEGER},
+            </if>
+            <if test="softexplain != null" >
+                #{softexplain,jdbcType=VARBINARY},
+            </if>
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Channeloptionsset" >
+        update channeloptionsset
+        <set >
+            <if test="optiontype != null" >
+                OptionType = #{optiontype,jdbcType=VARCHAR},
+            </if>
+            <if test="parentid != null" >
+                ParentID = #{parentid,jdbcType=INTEGER},
+            </if>
+            <if test="depth != null" >
+                Depth = #{depth,jdbcType=SMALLINT},
+            </if>
+            <if test="cname != null" >
+                cName = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="caption != null" >
+                Caption = #{caption,jdbcType=VARCHAR},
+            </if>
+            <if test="cdata != null" >
+                cData = #{cdata,jdbcType=VARCHAR},
+            </if>
+            <if test="controltype != null" >
+                ControlType = #{controltype,jdbcType=VARCHAR},
+            </if>
+            <if test="tag != null" >
+                Tag = #{tag,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                Description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="datatype != null" >
+                DataType = #{datatype,jdbcType=VARCHAR},
+            </if>
+            <if test="conditionexpression != null" >
+                ConditionExpression = #{conditionexpression,jdbcType=VARCHAR},
+            </if>
+            <if test="conditionmessage != null" >
+                ConditionMessage = #{conditionmessage,jdbcType=VARCHAR},
+            </if>
+            <if test="inikeyname != null" >
+                IniKeyName = #{inikeyname,jdbcType=VARCHAR},
+            </if>
+            <if test="inikeygroup != null" >
+                IniKeyGroup = #{inikeygroup,jdbcType=VARCHAR},
+            </if>
+            <if test="inikeyfile != null" >
+                IniKeyFile = #{inikeyfile,jdbcType=VARCHAR},
+            </if>
+            <if test="isvisible != null" >
+                IsVisible = #{isvisible,jdbcType=INTEGER},
+            </if>
+            <if test="softexplain != null" >
+                SoftExplain = #{softexplain,jdbcType=VARBINARY},
+            </if>
+            <if test="id != null" >
+                ID = #{id,jdbcType=INTEGER},
+            </if>
+        </set>
+        where PrimaryID = #{primaryid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Channeloptionsset" >
+        update channeloptionsset
+        set OptionType = #{optiontype,jdbcType=VARCHAR},
+            ParentID = #{parentid,jdbcType=INTEGER},
+            Depth = #{depth,jdbcType=SMALLINT},
+            cName = #{cname,jdbcType=VARCHAR},
+            Caption = #{caption,jdbcType=VARCHAR},
+            cData = #{cdata,jdbcType=VARCHAR},
+            ControlType = #{controltype,jdbcType=VARCHAR},
+            Tag = #{tag,jdbcType=VARCHAR},
+            Description = #{description,jdbcType=VARCHAR},
+            DataType = #{datatype,jdbcType=VARCHAR},
+            ConditionExpression = #{conditionexpression,jdbcType=VARCHAR},
+            ConditionMessage = #{conditionmessage,jdbcType=VARCHAR},
+            IniKeyName = #{inikeyname,jdbcType=VARCHAR},
+            IniKeyGroup = #{inikeygroup,jdbcType=VARCHAR},
+            IniKeyFile = #{inikeyfile,jdbcType=VARCHAR},
+            IsVisible = #{isvisible,jdbcType=INTEGER},
+            SoftExplain = #{softexplain,jdbcType=VARBINARY},
+            ID = #{id,jdbcType=INTEGER}
+        where PrimaryID = #{primaryid,jdbcType=VARCHAR}
+    </update>
+</mapper>

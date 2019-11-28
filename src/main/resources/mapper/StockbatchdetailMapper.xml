@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.StockbatchdetailDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Stockbatchdetail" >
+        <id column="AID" property="aid" jdbcType="INTEGER" />
+        <result column="StockCode" property="stockcode" jdbcType="VARCHAR" />
+        <result column="ColorID" property="colorid" jdbcType="VARCHAR" />
+        <result column="Dioptre" property="dioptre" jdbcType="DECIMAL" />
+        <result column="Astigmia" property="astigmia" jdbcType="DECIMAL" />
+        <result column="Quantity" property="quantity" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        AID, StockCode, ColorID, Dioptre, Astigmia, Quantity
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from stockbatchdetail
+        where AID = #{aid,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from stockbatchdetail
+        where AID = #{aid,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Stockbatchdetail" >
+        insert into stockbatchdetail (AID, StockCode, ColorID, 
+            Dioptre, Astigmia, Quantity
+            )
+        values (#{aid,jdbcType=INTEGER}, #{stockcode,jdbcType=VARCHAR}, #{colorid,jdbcType=VARCHAR}, 
+            #{dioptre,jdbcType=DECIMAL}, #{astigmia,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}
+            )
+    </insert>
+    <insert id="insertStockDetailBatch" parameterType="java.util.List">
+         insert into stockbatchdetail (AID, StockCode, ColorID,
+            Dioptre, Astigmia, Quantity
+            )
+        values
+         <foreach collection="stockbatchdetails" separator="," item="e">
+             (#{e.aid,jdbcType=INTEGER}, #{e.stockcode,jdbcType=VARCHAR}, #{e.colorid,jdbcType=VARCHAR},
+             #{e.dioptre,jdbcType=DECIMAL}, #{e.astigmia,jdbcType=DECIMAL}, #{e.quantity,jdbcType=INTEGER}
+             )
+         </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Stockbatchdetail" >
+        insert into stockbatchdetail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="aid != null" >
+                AID,
+            </if>
+            <if test="stockcode != null" >
+                StockCode,
+            </if>
+            <if test="colorid != null" >
+                ColorID,
+            </if>
+            <if test="dioptre != null" >
+                Dioptre,
+            </if>
+            <if test="astigmia != null" >
+                Astigmia,
+            </if>
+            <if test="quantity != null" >
+                Quantity,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="aid != null" >
+                #{aid,jdbcType=INTEGER},
+            </if>
+            <if test="stockcode != null" >
+                #{stockcode,jdbcType=VARCHAR},
+            </if>
+            <if test="colorid != null" >
+                #{colorid,jdbcType=VARCHAR},
+            </if>
+            <if test="dioptre != null" >
+                #{dioptre,jdbcType=DECIMAL},
+            </if>
+            <if test="astigmia != null" >
+                #{astigmia,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null" >
+                #{quantity,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Stockbatchdetail" >
+        update stockbatchdetail
+        <set >
+            <if test="stockcode != null" >
+                StockCode = #{stockcode,jdbcType=VARCHAR},
+            </if>
+            <if test="colorid != null" >
+                ColorID = #{colorid,jdbcType=VARCHAR},
+            </if>
+            <if test="dioptre != null" >
+                Dioptre = #{dioptre,jdbcType=DECIMAL},
+            </if>
+            <if test="astigmia != null" >
+                Astigmia = #{astigmia,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null" >
+                Quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+        </set>
+        where AID = #{aid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Stockbatchdetail" >
+        update stockbatchdetail
+        set StockCode = #{stockcode,jdbcType=VARCHAR},
+            ColorID = #{colorid,jdbcType=VARCHAR},
+            Dioptre = #{dioptre,jdbcType=DECIMAL},
+            Astigmia = #{astigmia,jdbcType=DECIMAL},
+            Quantity = #{quantity,jdbcType=INTEGER}
+        where AID = #{aid,jdbcType=INTEGER}
+    </update>
+</mapper>

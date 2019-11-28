@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.OptionscombolistDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Optionscombolist" >
+        <id column="cName" property="cname" jdbcType="VARCHAR" />
+        <id column="ListIndex" property="listindex" jdbcType="INTEGER" />
+        <result column="ListCaption" property="listcaption" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        cName, ListIndex, ListCaption
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjt.entity.Optionscombolist" >
+        select 
+        <include refid="Base_Column_List" />
+        from optionscombolist
+        where cName = #{cname,jdbcType=VARCHAR}
+          and ListIndex = #{listindex,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.xjt.entity.Optionscombolist" >
+        delete from optionscombolist
+        where cName = #{cname,jdbcType=VARCHAR}
+          and ListIndex = #{listindex,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Optionscombolist" >
+        insert into optionscombolist (cName, ListIndex, ListCaption
+            )
+        values (#{cname,jdbcType=VARCHAR}, #{listindex,jdbcType=INTEGER}, #{listcaption,jdbcType=VARCHAR}
+            )
+    </insert>
+    <insert id="insertListBatch" parameterType="java.util.List">
+        insert into optionscombolist (cName, ListIndex, ListCaption
+            )
+        values
+         <foreach collection="optionscombolists" item="e" separator=",">
+             (#{e.cname,jdbcType=VARCHAR}, #{e.listindex,jdbcType=INTEGER}, #{e.listcaption,jdbcType=VARCHAR}
+             )
+         </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Optionscombolist" >
+        insert into optionscombolist
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="cname != null" >
+                cName,
+            </if>
+            <if test="listindex != null" >
+                ListIndex,
+            </if>
+            <if test="listcaption != null" >
+                ListCaption,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="cname != null" >
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="listindex != null" >
+                #{listindex,jdbcType=INTEGER},
+            </if>
+            <if test="listcaption != null" >
+                #{listcaption,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Optionscombolist" >
+        update optionscombolist
+        <set >
+            <if test="listcaption != null" >
+                ListCaption = #{listcaption,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where cName = #{cname,jdbcType=VARCHAR}
+          and ListIndex = #{listindex,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Optionscombolist" >
+        update optionscombolist
+        set ListCaption = #{listcaption,jdbcType=VARCHAR}
+        where cName = #{cname,jdbcType=VARCHAR}
+          and ListIndex = #{listindex,jdbcType=INTEGER}
+    </update>
+</mapper>

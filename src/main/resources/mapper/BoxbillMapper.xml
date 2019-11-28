@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.BoxbillDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Boxbill" >
+        <id column="BoxNo" property="boxno" jdbcType="VARCHAR" />
+        <id column="AccBillType" property="accbilltype" jdbcType="VARCHAR" />
+        <id column="AccBillNo" property="accbillno" jdbcType="VARCHAR" />
+        <result column="Input_Date" property="inputDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        BoxNo, AccBillType, AccBillNo, Input_Date
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjt.entity.Boxbill" >
+        select 
+        <include refid="Base_Column_List" />
+        from boxbill
+        where BoxNo = #{boxno,jdbcType=VARCHAR}
+          and AccBillType = #{accbilltype,jdbcType=VARCHAR}
+          and AccBillNo = #{accbillno,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.xjt.entity.Boxbill" >
+        delete from boxbill
+        where BoxNo = #{boxno,jdbcType=VARCHAR}
+          and AccBillType = #{accbilltype,jdbcType=VARCHAR}
+          and AccBillNo = #{accbillno,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Boxbill" >
+        insert into boxbill (BoxNo, AccBillType, AccBillNo, 
+            Input_Date)
+        values (#{boxno,jdbcType=VARCHAR}, #{accbilltype,jdbcType=VARCHAR}, #{accbillno,jdbcType=VARCHAR}, 
+            #{inputDate,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Boxbill" >
+        insert into boxbill
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="boxno != null" >
+                BoxNo,
+            </if>
+            <if test="accbilltype != null" >
+                AccBillType,
+            </if>
+            <if test="accbillno != null" >
+                AccBillNo,
+            </if>
+            <if test="inputDate != null" >
+                Input_Date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="boxno != null" >
+                #{boxno,jdbcType=VARCHAR},
+            </if>
+            <if test="accbilltype != null" >
+                #{accbilltype,jdbcType=VARCHAR},
+            </if>
+            <if test="accbillno != null" >
+                #{accbillno,jdbcType=VARCHAR},
+            </if>
+            <if test="inputDate != null" >
+                #{inputDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Boxbill" >
+        update boxbill
+        <set >
+            <if test="inputDate != null" >
+                Input_Date = #{inputDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where BoxNo = #{boxno,jdbcType=VARCHAR}
+          and AccBillType = #{accbilltype,jdbcType=VARCHAR}
+          and AccBillNo = #{accbillno,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Boxbill" >
+        update boxbill
+        set Input_Date = #{inputDate,jdbcType=TIMESTAMP}
+        where BoxNo = #{boxno,jdbcType=VARCHAR}
+          and AccBillType = #{accbilltype,jdbcType=VARCHAR}
+          and AccBillNo = #{accbillno,jdbcType=VARCHAR}
+    </update>
+</mapper>

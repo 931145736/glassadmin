@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.UimoduleDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Uimodule" >
+        <id column="ID" property="id" jdbcType="VARCHAR" />
+        <result column="ParentID" property="parentid" jdbcType="VARCHAR" />
+        <result column="Path" property="path" jdbcType="VARCHAR" />
+        <result column="Depth" property="depth" jdbcType="INTEGER" />
+        <result column="ModuleID" property="moduleid" jdbcType="VARCHAR" />
+        <result column="ModuleName" property="modulename" jdbcType="VARCHAR" />
+        <result column="Icon" property="icon" jdbcType="VARCHAR" />
+        <result column="IsVisible" property="isvisible" jdbcType="BIT" />
+        <result column="IsModuel" property="ismoduel" jdbcType="BIT" />
+        <result column="ToolTip" property="tooltip" jdbcType="VARCHAR" />
+        <result column="FileName" property="filename" jdbcType="VARCHAR" />
+        <result column="FullFileName" property="fullfilename" jdbcType="VARCHAR" />
+        <result column="Parameter" property="parameter" jdbcType="VARCHAR" />
+        <result column="ImageKey" property="imagekey" jdbcType="VARCHAR" />
+        <result column="Column_1" property="column1" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ID, ParentID,Path, Depth, ModuleID, ModuleName, Icon, IsVisible, IsModuel, ToolTip, FileName,
+        FullFileName, Parameter, ImageKey, Column_1
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from uimodule
+        where ID = #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="queryOneList" parameterType="com.xjt.dto.UimoduleReqDto" resultMap="BaseResultMap">
+        select  ID, ModuleName,Path
+          from uimodule
+            where ParentID is null
+          <if test="ids != null and ids.size()>0">
+             and  ID in
+              <foreach collection="ids" item="id" separator="," close=")" open="(" index="index">
+                  #{id}
+              </foreach>
+          </if>
+
+
+
+    </select>
+    <select id="queryChildrenList" parameterType="com.xjt.dto.UimoduleReqDto" resultMap="BaseResultMap">
+         select  ID,ParentID, ModuleName,Path
+          from uimodule
+            where ParentID in
+          <foreach collection="parentIds" item="parentid" separator="," open="(" index="index" close=")">
+              #{parentid}
+          </foreach>
+        <if test="ids != null and ids.size()>0">
+            and  ID in
+            <foreach collection="ids" item="id" separator="," close=")" open="(" index="index">
+                #{id}
+            </foreach>
+        </if>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from uimodule
+        where ID = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Uimodule" >
+        insert into uimodule (ID, ParentID,Path, Depth,
+            ModuleID, ModuleName, Icon, 
+            IsVisible, IsModuel, ToolTip, 
+            FileName, FullFileName, Parameter, 
+            ImageKey, Column_1)
+        values (#{id,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR},#{path}, #{depth,jdbcType=INTEGER},
+            #{moduleid,jdbcType=VARCHAR}, #{modulename,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, 
+            #{isvisible,jdbcType=BIT}, #{ismoduel,jdbcType=BIT}, #{tooltip,jdbcType=VARCHAR}, 
+            #{filename,jdbcType=VARCHAR}, #{fullfilename,jdbcType=VARCHAR}, #{parameter,jdbcType=VARCHAR}, 
+            #{imagekey,jdbcType=VARCHAR}, #{column1,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Uimodule" >
+        insert into uimodule
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="parentid != null" >
+                ParentID,
+            </if>
+            <if test="path != null" >
+                Path,
+            </if>
+            <if test="depth != null" >
+                Depth,
+            </if>
+            <if test="moduleid != null" >
+                ModuleID,
+            </if>
+            <if test="modulename != null" >
+                ModuleName,
+            </if>
+            <if test="icon != null" >
+                Icon,
+            </if>
+            <if test="isvisible != null" >
+                IsVisible,
+            </if>
+            <if test="ismoduel != null" >
+                IsModuel,
+            </if>
+            <if test="tooltip != null" >
+                ToolTip,
+            </if>
+            <if test="filename != null" >
+                FileName,
+            </if>
+            <if test="fullfilename != null" >
+                FullFileName,
+            </if>
+            <if test="parameter != null" >
+                Parameter,
+            </if>
+            <if test="imagekey != null" >
+                ImageKey,
+            </if>
+            <if test="column1 != null" >
+                Column_1,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="parentid != null" >
+                #{parentid,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null" >
+                #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="depth != null" >
+                #{depth,jdbcType=INTEGER},
+            </if>
+            <if test="moduleid != null" >
+                #{moduleid,jdbcType=VARCHAR},
+            </if>
+            <if test="modulename != null" >
+                #{modulename,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null" >
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="isvisible != null" >
+                #{isvisible,jdbcType=BIT},
+            </if>
+            <if test="ismoduel != null" >
+                #{ismoduel,jdbcType=BIT},
+            </if>
+            <if test="tooltip != null" >
+                #{tooltip,jdbcType=VARCHAR},
+            </if>
+            <if test="filename != null" >
+                #{filename,jdbcType=VARCHAR},
+            </if>
+            <if test="fullfilename != null" >
+                #{fullfilename,jdbcType=VARCHAR},
+            </if>
+            <if test="parameter != null" >
+                #{parameter,jdbcType=VARCHAR},
+            </if>
+            <if test="imagekey != null" >
+                #{imagekey,jdbcType=VARCHAR},
+            </if>
+            <if test="column1 != null" >
+                #{column1,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Uimodule" >
+        update uimodule
+        <set >
+            <if test="parentid != null" >
+                ParentID = #{parentid,jdbcType=VARCHAR},
+            </if>
+            <if test="path != null" >
+                Path = #{path,jdbcType=VARCHAR},
+            </if>
+            <if test="depth != null" >
+                Depth = #{depth,jdbcType=INTEGER},
+            </if>
+            <if test="moduleid != null" >
+                ModuleID = #{moduleid,jdbcType=VARCHAR},
+            </if>
+            <if test="modulename != null" >
+                ModuleName = #{modulename,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null" >
+                Icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="isvisible != null" >
+                IsVisible = #{isvisible,jdbcType=BIT},
+            </if>
+            <if test="ismoduel != null" >
+                IsModuel = #{ismoduel,jdbcType=BIT},
+            </if>
+            <if test="tooltip != null" >
+                ToolTip = #{tooltip,jdbcType=VARCHAR},
+            </if>
+            <if test="filename != null" >
+                FileName = #{filename,jdbcType=VARCHAR},
+            </if>
+            <if test="fullfilename != null" >
+                FullFileName = #{fullfilename,jdbcType=VARCHAR},
+            </if>
+            <if test="parameter != null" >
+                Parameter = #{parameter,jdbcType=VARCHAR},
+            </if>
+            <if test="imagekey != null" >
+                ImageKey = #{imagekey,jdbcType=VARCHAR},
+            </if>
+            <if test="column1 != null" >
+                Column_1 = #{column1,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Uimodule" >
+        update uimodule
+        set ParentID = #{parentid,jdbcType=VARCHAR},
+           Path = #{path,jdbcType=VARCHAR},
+            Depth = #{depth,jdbcType=INTEGER},
+            ModuleID = #{moduleid,jdbcType=VARCHAR},
+            ModuleName = #{modulename,jdbcType=VARCHAR},
+            Icon = #{icon,jdbcType=VARCHAR},
+            IsVisible = #{isvisible,jdbcType=BIT},
+            IsModuel = #{ismoduel,jdbcType=BIT},
+            ToolTip = #{tooltip,jdbcType=VARCHAR},
+            FileName = #{filename,jdbcType=VARCHAR},
+            FullFileName = #{fullfilename,jdbcType=VARCHAR},
+            Parameter = #{parameter,jdbcType=VARCHAR},
+            ImageKey = #{imagekey,jdbcType=VARCHAR},
+            Column_1 = #{column1,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

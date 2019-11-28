@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.RetailpaymentDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Retailpayment" >
+        <id column="PaymentID" property="paymentid" jdbcType="VARCHAR" />
+        <id column="PaymentName" property="paymentname" jdbcType="VARCHAR" />
+        <id column="SetDefault" property="setdefault" jdbcType="INTEGER" />
+        <result column="ReturnChange" property="returnchange" jdbcType="INTEGER" />
+        <result column="ExchangeRate" property="exchangerate" jdbcType="DECIMAL" />
+        <result column="HandlingCharge" property="handlingcharge" jdbcType="DECIMAL" />
+        <result column="NoIntegral" property="nointegral" jdbcType="INTEGER" />
+        <result column="NotInCome" property="notincome" jdbcType="INTEGER" />
+        <result column="NoSPromo" property="nospromo" jdbcType="INTEGER" />
+        <result column="IsTokenCoil" property="istokencoil" jdbcType="INTEGER" />
+        <result column="IsNotCalIncome" property="isnotcalincome" jdbcType="INTEGER" />
+        <result column="IsAddValue" property="isaddvalue" jdbcType="INTEGER" />
+        <result column="IsIntegral" property="isintegral" jdbcType="INTEGER" />
+        <result column="IsRestoreDpPrice" property="isrestoredpprice" jdbcType="INTEGER" />
+        <result column="BankCard" property="bankcard" jdbcType="INTEGER" />
+        <result column="IsSubscriptionCF" property="issubscriptioncf" jdbcType="INTEGER" />
+        <result column="PaymentPlatformID" property="paymentplatformid" jdbcType="INTEGER" />
+        <result column="NotIncludeBalancePrice" property="notincludebalanceprice" jdbcType="INTEGER" />
+        <result column="SortID" property="sortid" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        PaymentID, PaymentName, SetDefault, ReturnChange, ExchangeRate, HandlingCharge, NoIntegral, 
+        NotInCome, NoSPromo, IsTokenCoil, IsNotCalIncome, IsAddValue, IsIntegral, IsRestoreDpPrice, 
+        BankCard, IsSubscriptionCF, PaymentPlatformID, NotIncludeBalancePrice, SortID
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjt.entity.Retailpayment" >
+        select 
+        <include refid="Base_Column_List" />
+        from retailpayment
+        where PaymentID = #{paymentid,jdbcType=VARCHAR}
+          and PaymentName = #{paymentname,jdbcType=VARCHAR}
+          and SetDefault = #{setdefault,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.xjt.entity.Retailpayment" >
+        delete from retailpayment
+        where PaymentID = #{paymentid,jdbcType=VARCHAR}
+          and PaymentName = #{paymentname,jdbcType=VARCHAR}
+          and SetDefault = #{setdefault,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Retailpayment" >
+        insert into retailpayment (PaymentID, PaymentName, SetDefault, 
+            ReturnChange, ExchangeRate, HandlingCharge, 
+            NoIntegral, NotInCome, NoSPromo, 
+            IsTokenCoil, IsNotCalIncome, IsAddValue, 
+            IsIntegral, IsRestoreDpPrice, BankCard, 
+            IsSubscriptionCF, PaymentPlatformID, NotIncludeBalancePrice, 
+            SortID)
+        values (#{paymentid,jdbcType=VARCHAR}, #{paymentname,jdbcType=VARCHAR}, #{setdefault,jdbcType=INTEGER},
+            #{returnchange,jdbcType=INTEGER}, #{exchangerate,jdbcType=DECIMAL}, #{handlingcharge,jdbcType=DECIMAL},
+            #{nointegral,jdbcType=INTEGER}, #{notincome,jdbcType=INTEGER}, #{nospromo,jdbcType=INTEGER},
+            #{istokencoil,jdbcType=INTEGER}, #{isnotcalincome,jdbcType=INTEGER}, #{isaddvalue,jdbcType=INTEGER},
+            #{isintegral,jdbcType=INTEGER}, #{isrestoredpprice,jdbcType=INTEGER}, #{bankcard,jdbcType=INTEGER},
+            #{issubscriptioncf,jdbcType=INTEGER}, #{paymentplatformid,jdbcType=INTEGER}, #{notincludebalanceprice,jdbcType=INTEGER},
+            #{sortid,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Retailpayment" >
+        insert into retailpayment
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="paymentid != null" >
+                PaymentID,
+            </if>
+            <if test="paymentname != null" >
+                PaymentName,
+            </if>
+            <if test="setdefault != null" >
+                SetDefault,
+            </if>
+            <if test="returnchange != null" >
+                ReturnChange,
+            </if>
+            <if test="exchangerate != null" >
+                ExchangeRate,
+            </if>
+            <if test="handlingcharge != null" >
+                HandlingCharge,
+            </if>
+            <if test="nointegral != null" >
+                NoIntegral,
+            </if>
+            <if test="notincome != null" >
+                NotInCome,
+            </if>
+            <if test="nospromo != null" >
+                NoSPromo,
+            </if>
+            <if test="istokencoil != null" >
+                IsTokenCoil,
+            </if>
+            <if test="isnotcalincome != null" >
+                IsNotCalIncome,
+            </if>
+            <if test="isaddvalue != null" >
+                IsAddValue,
+            </if>
+            <if test="isintegral != null" >
+                IsIntegral,
+            </if>
+            <if test="isrestoredpprice != null" >
+                IsRestoreDpPrice,
+            </if>
+            <if test="bankcard != null" >
+                BankCard,
+            </if>
+            <if test="issubscriptioncf != null" >
+                IsSubscriptionCF,
+            </if>
+            <if test="paymentplatformid != null" >
+                PaymentPlatformID,
+            </if>
+            <if test="notincludebalanceprice != null" >
+                NotIncludeBalancePrice,
+            </if>
+            <if test="sortid != null" >
+                SortID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="paymentid != null" >
+                #{paymentid,jdbcType=VARCHAR},
+            </if>
+            <if test="paymentname != null" >
+                #{paymentname,jdbcType=VARCHAR},
+            </if>
+            <if test="setdefault != null" >
+                #{setdefault,jdbcType=INTEGER},
+            </if>
+            <if test="returnchange != null" >
+                #{returnchange,jdbcType=INTEGER},
+            </if>
+            <if test="exchangerate != null" >
+                #{exchangerate,jdbcType=DECIMAL},
+            </if>
+            <if test="handlingcharge != null" >
+                #{handlingcharge,jdbcType=DECIMAL},
+            </if>
+            <if test="nointegral != null" >
+                #{nointegral,jdbcType=INTEGER},
+            </if>
+            <if test="notincome != null" >
+                #{notincome,jdbcType=INTEGER},
+            </if>
+            <if test="nospromo != null" >
+                #{nospromo,jdbcType=INTEGER},
+            </if>
+            <if test="istokencoil != null" >
+                #{istokencoil,jdbcType=INTEGER},
+            </if>
+            <if test="isnotcalincome != null" >
+                #{isnotcalincome,jdbcType=INTEGER},
+            </if>
+            <if test="isaddvalue != null" >
+                #{isaddvalue,jdbcType=INTEGER},
+            </if>
+            <if test="isintegral != null" >
+                #{isintegral,jdbcType=INTEGER},
+            </if>
+            <if test="isrestoredpprice != null" >
+                #{isrestoredpprice,jdbcType=INTEGER},
+            </if>
+            <if test="bankcard != null" >
+                #{bankcard,jdbcType=INTEGER},
+            </if>
+            <if test="issubscriptioncf != null" >
+                #{issubscriptioncf,jdbcType=INTEGER},
+            </if>
+            <if test="paymentplatformid != null" >
+                #{paymentplatformid,jdbcType=INTEGER},
+            </if>
+            <if test="notincludebalanceprice != null" >
+                #{notincludebalanceprice,jdbcType=INTEGER},
+            </if>
+            <if test="sortid != null" >
+                #{sortid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Retailpayment" >
+        update retailpayment
+        <set >
+            <if test="returnchange != null" >
+                ReturnChange = #{returnchange,jdbcType=INTEGER},
+            </if>
+            <if test="exchangerate != null" >
+                ExchangeRate = #{exchangerate,jdbcType=DECIMAL},
+            </if>
+            <if test="handlingcharge != null" >
+                HandlingCharge = #{handlingcharge,jdbcType=DECIMAL},
+            </if>
+            <if test="nointegral != null" >
+                NoIntegral = #{nointegral,jdbcType=INTEGER},
+            </if>
+            <if test="notincome != null" >
+                NotInCome = #{notincome,jdbcType=INTEGER},
+            </if>
+            <if test="nospromo != null" >
+                NoSPromo = #{nospromo,jdbcType=INTEGER},
+            </if>
+            <if test="istokencoil != null" >
+                IsTokenCoil = #{istokencoil,jdbcType=INTEGER},
+            </if>
+            <if test="isnotcalincome != null" >
+                IsNotCalIncome = #{isnotcalincome,jdbcType=INTEGER},
+            </if>
+            <if test="isaddvalue != null" >
+                IsAddValue = #{isaddvalue,jdbcType=INTEGER},
+            </if>
+            <if test="isintegral != null" >
+                IsIntegral = #{isintegral,jdbcType=INTEGER},
+            </if>
+            <if test="isrestoredpprice != null" >
+                IsRestoreDpPrice = #{isrestoredpprice,jdbcType=INTEGER},
+            </if>
+            <if test="bankcard != null" >
+                BankCard = #{bankcard,jdbcType=INTEGER},
+            </if>
+            <if test="issubscriptioncf != null" >
+                IsSubscriptionCF = #{issubscriptioncf,jdbcType=INTEGER},
+            </if>
+            <if test="paymentplatformid != null" >
+                PaymentPlatformID = #{paymentplatformid,jdbcType=INTEGER},
+            </if>
+            <if test="notincludebalanceprice != null" >
+                NotIncludeBalancePrice = #{notincludebalanceprice,jdbcType=INTEGER},
+            </if>
+            <if test="sortid != null" >
+                SortID = #{sortid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where PaymentID = #{paymentid,jdbcType=VARCHAR}
+          and PaymentName = #{paymentname,jdbcType=VARCHAR}
+          and SetDefault = #{setdefault,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Retailpayment" >
+        update retailpayment
+        set ReturnChange = #{returnchange,jdbcType=INTEGER},
+            ExchangeRate = #{exchangerate,jdbcType=DECIMAL},
+            HandlingCharge = #{handlingcharge,jdbcType=DECIMAL},
+            NoIntegral = #{nointegral,jdbcType=INTEGER},
+            NotInCome = #{notincome,jdbcType=INTEGER},
+            NoSPromo = #{nospromo,jdbcType=INTEGER},
+            IsTokenCoil = #{istokencoil,jdbcType=INTEGER},
+            IsNotCalIncome = #{isnotcalincome,jdbcType=INTEGER},
+            IsAddValue = #{isaddvalue,jdbcType=INTEGER},
+            IsIntegral = #{isintegral,jdbcType=INTEGER},
+            IsRestoreDpPrice = #{isrestoredpprice,jdbcType=INTEGER},
+            BankCard = #{bankcard,jdbcType=INTEGER},
+            IsSubscriptionCF = #{issubscriptioncf,jdbcType=INTEGER},
+            PaymentPlatformID = #{paymentplatformid,jdbcType=INTEGER},
+            NotIncludeBalancePrice = #{notincludebalanceprice,jdbcType=INTEGER},
+            SortID = #{sortid,jdbcType=INTEGER}
+        where PaymentID = #{paymentid,jdbcType=VARCHAR}
+          and PaymentName = #{paymentname,jdbcType=VARCHAR}
+          and SetDefault = #{setdefault,jdbcType=INTEGER}
+    </update>
+</mapper>

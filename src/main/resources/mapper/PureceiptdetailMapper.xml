@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.PureceiptdetailDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Pureceiptdetail" >
+        <id column="AutoID" property="autoid" jdbcType="INTEGER" />
+        <result column="PureceiptGoodsID" property="pureceiptgoodsid" jdbcType="CHAR" />
+        <result column="ColorID" property="colorid" jdbcType="VARCHAR" />
+        <result column="Dioptre" property="dioptre" jdbcType="DECIMAL" />
+        <result column="Astigmia" property="astigmia" jdbcType="DECIMAL" />
+        <result column="Quantity" property="quantity" jdbcType="INTEGER" />
+        <result column="UnitPrice" property="unitprice" jdbcType="DECIMAL" />
+        <result column="BalancePrice" property="balanceprice" jdbcType="DECIMAL" />
+        <result column="Discount" property="discount" jdbcType="DECIMAL" />
+        <result column="NotTaxPrice" property="nottaxprice" jdbcType="DECIMAL" />
+        <result column="TaxRate" property="taxrate" jdbcType="DECIMAL" />
+        <result column="CostPrice" property="costprice" jdbcType="DECIMAL" />
+        <result column="CompanyCostPrice" property="companycostprice" jdbcType="DECIMAL" />
+        <result column="LoadOutPrice" property="loadoutprice" jdbcType="DECIMAL" />
+        <result column="LoadOutDiscount" property="loadoutdiscount" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        AutoID, PureceiptGoodsID, ColorID, Dioptre, Astigmia, Quantity, UnitPrice, BalancePrice, 
+        Discount, NotTaxPrice, TaxRate, CostPrice, CompanyCostPrice, LoadOutPrice, LoadOutDiscount
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from pureceiptdetail
+        where AutoID = #{autoid,jdbcType=INTEGER}
+    </select>
+
+    <!--查看货品到货信息-->
+    <select id="queryGoodsInfo" parameterType="java.lang.String" resultMap="BaseResultMap" resultType="com.xjt.entity.Pureceiptdetail">
+    SELECT t1.Warehouse_No warehouseNo,t2.Goods_No goodsNo,t2.Quantity AS countQuantity,t2.BatchNumber batchnumber,t3.ColorID,t3.Astigmia,t3.Dioptre,t3.Quantity
+    FROM pureceipt t1
+    INNER JOIN pureceiptgoods t2
+    ON t1.PureceiptID = t2.PureceiptID
+    INNER JOIN pureceiptdetail t3 ON t2.PureceiptGoodsID = t3.PureceiptGoodsID
+     WHERE t1.PureceiptID = #{pureceiptId}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from pureceiptdetail
+        where AutoID = #{autoid,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Pureceiptdetail" >
+        insert into pureceiptdetail (AutoID, PureceiptGoodsID, ColorID, 
+            Dioptre, Astigmia, Quantity, 
+            UnitPrice, BalancePrice, Discount, 
+            NotTaxPrice, TaxRate, CostPrice, 
+            CompanyCostPrice, LoadOutPrice, LoadOutDiscount
+            )
+        values (#{autoid,jdbcType=INTEGER}, #{pureceiptgoodsid,jdbcType=CHAR}, #{colorid,jdbcType=VARCHAR}, 
+            #{dioptre,jdbcType=DECIMAL}, #{astigmia,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}, 
+            #{unitprice,jdbcType=DECIMAL}, #{balanceprice,jdbcType=DECIMAL}, #{discount,jdbcType=DECIMAL}, 
+            #{nottaxprice,jdbcType=DECIMAL}, #{taxrate,jdbcType=DECIMAL}, #{costprice,jdbcType=DECIMAL}, 
+            #{companycostprice,jdbcType=DECIMAL}, #{loadoutprice,jdbcType=DECIMAL}, #{loadoutdiscount,jdbcType=DECIMAL}
+            )
+    </insert>
+    <insert id="insertPureceiptDetailsBatch" parameterType="java.util.List">
+          insert into pureceiptdetail (AutoID, PureceiptGoodsID, ColorID,
+            Dioptre, Astigmia, Quantity,
+            UnitPrice, BalancePrice, Discount,
+            NotTaxPrice, TaxRate, CostPrice,
+            CompanyCostPrice, LoadOutPrice, LoadOutDiscount
+            )
+        values
+        <foreach collection="pureceiptdetails" separator="," item="e">
+            (#{e.autoid,jdbcType=INTEGER}, #{e.pureceiptgoodsid,jdbcType=CHAR}, #{e.colorid,jdbcType=VARCHAR},
+            #{e.dioptre,jdbcType=DECIMAL}, #{e.astigmia,jdbcType=DECIMAL}, #{e.quantity,jdbcType=INTEGER},
+            #{e.unitprice,jdbcType=DECIMAL}, #{e.balanceprice,jdbcType=DECIMAL}, #{e.discount,jdbcType=DECIMAL},
+            #{e.nottaxprice,jdbcType=DECIMAL}, #{e.taxrate,jdbcType=DECIMAL}, #{e.costprice,jdbcType=DECIMAL},
+            #{e.companycostprice,jdbcType=DECIMAL}, #{e.loadoutprice,jdbcType=DECIMAL}, #{e.loadoutdiscount,jdbcType=DECIMAL}
+            )
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Pureceiptdetail" >
+        insert into pureceiptdetail
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="autoid != null" >
+                AutoID,
+            </if>
+            <if test="pureceiptgoodsid != null" >
+                PureceiptGoodsID,
+            </if>
+            <if test="colorid != null" >
+                ColorID,
+            </if>
+            <if test="dioptre != null" >
+                Dioptre,
+            </if>
+            <if test="astigmia != null" >
+                Astigmia,
+            </if>
+            <if test="quantity != null" >
+                Quantity,
+            </if>
+            <if test="unitprice != null" >
+                UnitPrice,
+            </if>
+            <if test="balanceprice != null" >
+                BalancePrice,
+            </if>
+            <if test="discount != null" >
+                Discount,
+            </if>
+            <if test="nottaxprice != null" >
+                NotTaxPrice,
+            </if>
+            <if test="taxrate != null" >
+                TaxRate,
+            </if>
+            <if test="costprice != null" >
+                CostPrice,
+            </if>
+            <if test="companycostprice != null" >
+                CompanyCostPrice,
+            </if>
+            <if test="loadoutprice != null" >
+                LoadOutPrice,
+            </if>
+            <if test="loadoutdiscount != null" >
+                LoadOutDiscount,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="autoid != null" >
+                #{autoid,jdbcType=INTEGER},
+            </if>
+            <if test="pureceiptgoodsid != null" >
+                #{pureceiptgoodsid,jdbcType=CHAR},
+            </if>
+            <if test="colorid != null" >
+                #{colorid,jdbcType=VARCHAR},
+            </if>
+            <if test="dioptre != null" >
+                #{dioptre,jdbcType=DECIMAL},
+            </if>
+            <if test="astigmia != null" >
+                #{astigmia,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null" >
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="unitprice != null" >
+                #{unitprice,jdbcType=DECIMAL},
+            </if>
+            <if test="balanceprice != null" >
+                #{balanceprice,jdbcType=DECIMAL},
+            </if>
+            <if test="discount != null" >
+                #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="nottaxprice != null" >
+                #{nottaxprice,jdbcType=DECIMAL},
+            </if>
+            <if test="taxrate != null" >
+                #{taxrate,jdbcType=DECIMAL},
+            </if>
+            <if test="costprice != null" >
+                #{costprice,jdbcType=DECIMAL},
+            </if>
+            <if test="companycostprice != null" >
+                #{companycostprice,jdbcType=DECIMAL},
+            </if>
+            <if test="loadoutprice != null" >
+                #{loadoutprice,jdbcType=DECIMAL},
+            </if>
+            <if test="loadoutdiscount != null" >
+                #{loadoutdiscount,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Pureceiptdetail" >
+        update pureceiptdetail
+        <set >
+            <if test="pureceiptgoodsid != null" >
+                PureceiptGoodsID = #{pureceiptgoodsid,jdbcType=CHAR},
+            </if>
+            <if test="colorid != null" >
+                ColorID = #{colorid,jdbcType=VARCHAR},
+            </if>
+            <if test="dioptre != null" >
+                Dioptre = #{dioptre,jdbcType=DECIMAL},
+            </if>
+            <if test="astigmia != null" >
+                Astigmia = #{astigmia,jdbcType=DECIMAL},
+            </if>
+            <if test="quantity != null" >
+                Quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="unitprice != null" >
+                UnitPrice = #{unitprice,jdbcType=DECIMAL},
+            </if>
+            <if test="balanceprice != null" >
+                BalancePrice = #{balanceprice,jdbcType=DECIMAL},
+            </if>
+            <if test="discount != null" >
+                Discount = #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="nottaxprice != null" >
+                NotTaxPrice = #{nottaxprice,jdbcType=DECIMAL},
+            </if>
+            <if test="taxrate != null" >
+                TaxRate = #{taxrate,jdbcType=DECIMAL},
+            </if>
+            <if test="costprice != null" >
+                CostPrice = #{costprice,jdbcType=DECIMAL},
+            </if>
+            <if test="companycostprice != null" >
+                CompanyCostPrice = #{companycostprice,jdbcType=DECIMAL},
+            </if>
+            <if test="loadoutprice != null" >
+                LoadOutPrice = #{loadoutprice,jdbcType=DECIMAL},
+            </if>
+            <if test="loadoutdiscount != null" >
+                LoadOutDiscount = #{loadoutdiscount,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where AutoID = #{autoid,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Pureceiptdetail" >
+        update pureceiptdetail
+        set PureceiptGoodsID = #{pureceiptgoodsid,jdbcType=CHAR},
+            ColorID = #{colorid,jdbcType=VARCHAR},
+            Dioptre = #{dioptre,jdbcType=DECIMAL},
+            Astigmia = #{astigmia,jdbcType=DECIMAL},
+            Quantity = #{quantity,jdbcType=INTEGER},
+            UnitPrice = #{unitprice,jdbcType=DECIMAL},
+            BalancePrice = #{balanceprice,jdbcType=DECIMAL},
+            Discount = #{discount,jdbcType=DECIMAL},
+            NotTaxPrice = #{nottaxprice,jdbcType=DECIMAL},
+            TaxRate = #{taxrate,jdbcType=DECIMAL},
+            CostPrice = #{costprice,jdbcType=DECIMAL},
+            CompanyCostPrice = #{companycostprice,jdbcType=DECIMAL},
+            LoadOutPrice = #{loadoutprice,jdbcType=DECIMAL},
+            LoadOutDiscount = #{loadoutdiscount,jdbcType=DECIMAL}
+        where AutoID = #{autoid,jdbcType=INTEGER}
+    </update>
+</mapper>

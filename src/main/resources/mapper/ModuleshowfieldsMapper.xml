@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.ModuleshowfieldsDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Moduleshowfields" >
+        <id column="ModuleID" property="moduleid" jdbcType="VARCHAR" />
+        <id column="FieldID" property="fieldid" jdbcType="VARCHAR" />
+        <id column="FieldName" property="fieldname" jdbcType="VARCHAR" />
+        <result column="OrderIndex" property="orderindex" jdbcType="SMALLINT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        ModuleID, FieldID, FieldName, OrderIndex
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjt.entity.Moduleshowfields" >
+        select 
+        <include refid="Base_Column_List" />
+        from moduleshowfields
+        where ModuleID = #{moduleid,jdbcType=VARCHAR}
+          and FieldID = #{fieldid,jdbcType=VARCHAR}
+          and FieldName = #{fieldname,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryModuleFieldsList" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select  <include refid="Base_Column_List" />
+         from moduleshowfields
+          where  ModuleID = #{moduleId,jdbcType=VARCHAR}
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.xjt.entity.Moduleshowfields" >
+        delete from moduleshowfields
+        where ModuleID = #{moduleid,jdbcType=VARCHAR}
+          and FieldID = #{fieldid,jdbcType=VARCHAR}
+          and FieldName = #{fieldname,jdbcType=VARCHAR}
+    </delete>
+
+    <delete id="deleteFieldsByModule" parameterType="com.xjt.dto.ModuleshowfieldsReqDto">
+        delete from moduleshowfields
+        where ModuleID = #{moduleid,jdbcType=VARCHAR}
+         and FieldID in
+         <foreach collection="fieldids" item="fieldid" index="index" separator="," open="(" close=")">
+             #{fieldid}
+         </foreach>
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Moduleshowfields" >
+        insert into moduleshowfields (ModuleID, FieldID, FieldName, 
+            OrderIndex)
+        values (#{moduleid,jdbcType=VARCHAR}, #{fieldid,jdbcType=VARCHAR}, #{fieldname,jdbcType=VARCHAR}, 
+            #{orderindex,jdbcType=SMALLINT})
+    </insert>
+
+    <insert id="insertModuleBatch" parameterType="java.util.List">
+         insert into moduleshowfields (ModuleID, FieldID, FieldName,
+            OrderIndex)
+        values
+            <foreach collection="moduleshowfields" item="e" separator=",">
+                (#{e.moduleid,jdbcType=VARCHAR}, #{e.fieldid,jdbcType=VARCHAR}, #{e.fieldname,jdbcType=VARCHAR},
+                #{e.orderindex,jdbcType=SMALLINT})
+            </foreach>
+
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Moduleshowfields" >
+        insert into moduleshowfields
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="moduleid != null" >
+                ModuleID,
+            </if>
+            <if test="fieldid != null" >
+                FieldID,
+            </if>
+            <if test="fieldname != null" >
+                FieldName,
+            </if>
+            <if test="orderindex != null" >
+                OrderIndex,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="moduleid != null" >
+                #{moduleid,jdbcType=VARCHAR},
+            </if>
+            <if test="fieldid != null" >
+                #{fieldid,jdbcType=VARCHAR},
+            </if>
+            <if test="fieldname != null" >
+                #{fieldname,jdbcType=VARCHAR},
+            </if>
+            <if test="orderindex != null" >
+                #{orderindex,jdbcType=SMALLINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Moduleshowfields" >
+        update moduleshowfields
+        <set >
+            <if test="orderindex != null" >
+                OrderIndex = #{orderindex,jdbcType=SMALLINT},
+            </if>
+        </set>
+        where ModuleID = #{moduleid,jdbcType=VARCHAR}
+          and FieldID = #{fieldid,jdbcType=VARCHAR}
+          and FieldName = #{fieldname,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Moduleshowfields" >
+        update moduleshowfields
+        set OrderIndex = #{orderindex,jdbcType=SMALLINT}
+        where ModuleID = #{moduleid,jdbcType=VARCHAR}
+          and FieldID = #{fieldid,jdbcType=VARCHAR}
+          and FieldName = #{fieldname,jdbcType=VARCHAR}
+    </update>
+</mapper>

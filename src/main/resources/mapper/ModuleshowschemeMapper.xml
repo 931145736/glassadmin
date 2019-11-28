@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.ModuleshowschemeDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Moduleshowscheme" >
+        <id column="SchemeID" property="schemeid" jdbcType="VARCHAR" />
+        <result column="SchemeName" property="schemename" jdbcType="VARCHAR" />
+        <result column="ModuleID" property="moduleid" jdbcType="VARCHAR" />
+        <result column="OrderIndex" property="orderindex" jdbcType="SMALLINT" />
+        <result column="IsSystem" property="issystem" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        SchemeID, SchemeName, ModuleID, OrderIndex, IsSystem
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from moduleshowscheme
+        where SchemeID = #{schemeid,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from moduleshowscheme
+        where SchemeID = #{schemeid,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Moduleshowscheme" >
+        insert into moduleshowscheme (SchemeID, SchemeName, ModuleID, 
+            OrderIndex, IsSystem)
+        values (#{schemeid,jdbcType=VARCHAR}, #{schemename,jdbcType=VARCHAR}, #{moduleid,jdbcType=VARCHAR}, 
+            #{orderindex,jdbcType=SMALLINT}, #{issystem,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Moduleshowscheme" >
+        insert into moduleshowscheme
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="schemeid != null" >
+                SchemeID,
+            </if>
+            <if test="schemename != null" >
+                SchemeName,
+            </if>
+            <if test="moduleid != null" >
+                ModuleID,
+            </if>
+            <if test="orderindex != null" >
+                OrderIndex,
+            </if>
+            <if test="issystem != null" >
+                IsSystem,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="schemeid != null" >
+                #{schemeid,jdbcType=VARCHAR},
+            </if>
+            <if test="schemename != null" >
+                #{schemename,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleid != null" >
+                #{moduleid,jdbcType=VARCHAR},
+            </if>
+            <if test="orderindex != null" >
+                #{orderindex,jdbcType=SMALLINT},
+            </if>
+            <if test="issystem != null" >
+                #{issystem,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Moduleshowscheme" >
+        update moduleshowscheme
+        <set >
+            <if test="schemename != null" >
+                SchemeName = #{schemename,jdbcType=VARCHAR},
+            </if>
+            <if test="moduleid != null" >
+                ModuleID = #{moduleid,jdbcType=VARCHAR},
+            </if>
+            <if test="orderindex != null" >
+                OrderIndex = #{orderindex,jdbcType=SMALLINT},
+            </if>
+            <if test="issystem != null" >
+                IsSystem = #{issystem,jdbcType=INTEGER},
+            </if>
+        </set>
+        where SchemeID = #{schemeid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Moduleshowscheme" >
+        update moduleshowscheme
+        set SchemeName = #{schemename,jdbcType=VARCHAR},
+            ModuleID = #{moduleid,jdbcType=VARCHAR},
+            OrderIndex = #{orderindex,jdbcType=SMALLINT},
+            IsSystem = #{issystem,jdbcType=INTEGER}
+        where SchemeID = #{schemeid,jdbcType=VARCHAR}
+    </update>
+</mapper>

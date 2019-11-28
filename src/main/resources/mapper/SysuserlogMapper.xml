@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.SysuserlogDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Sysuserlog" >
+        <id column="log_id" property="logId" jdbcType="INTEGER" />
+        <result column="log_user_name" property="logUserName" jdbcType="VARCHAR" />
+        <result column="log_user" property="logUser" jdbcType="VARCHAR" />
+        <result column="log_operatiion" property="logOperatiion" jdbcType="VARCHAR" />
+        <result column="log_method" property="logMethod" jdbcType="VARCHAR" />
+        <result column="log_params" property="logParams" jdbcType="VARCHAR" />
+        <result column="log_url" property="logUrl" jdbcType="VARCHAR" />
+        <result column="log_user_ip" property="logUserIp" jdbcType="VARCHAR" />
+        <result column="log_date" property="logDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        log_id,log_user_name, log_user, log_operatiion, log_method, log_params,log_url, log_user_ip, log_date
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from sysuserlog
+        where log_id = #{logId,jdbcType=INTEGER}
+    </select>
+    <select id="queryUserLogList" resultMap="BaseResultMap" parameterType="com.xjt.dto.SysuserlogReqDto">
+        select  <include refid="Base_Column_List" />
+        from sysuserlog
+        where delete_flag = 1
+        <if test="logUser != null">
+            and log_user like concat ('%',#{logUser},'%')
+        </if>
+        <if test="startTime != null and startTime != '' and endTime != null and endTime != ''" >
+            and log_date between #{startTime} and #{endTime}
+        </if>
+        order by log_date desc
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from sysuserlog
+        where log_id = #{logId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Sysuserlog" >
+        insert into sysuserlog (log_id,log_user_name, log_user, log_operatiion,
+            log_method, log_params,log_url, log_user_ip,
+            log_date,delete_flag)
+        values (#{logId,jdbcType=INTEGER},#{logUserName}, #{logUser,jdbcType=VARCHAR}, #{logOperatiion,jdbcType=VARCHAR},
+            #{logMethod,jdbcType=VARCHAR}, #{logParams,jdbcType=VARCHAR},#{logUrl,jdbcType=VARCHAR}, #{logUserIp,jdbcType=VARCHAR},
+            #{logDate,jdbcType=TIMESTAMP},1)
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Sysuserlog" >
+        insert into sysuserlog
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="logId != null" >
+                log_id,
+            </if>
+            <if test="logUserName != null" >
+                log_user_name,
+            </if>
+            <if test="logUser != null" >
+                log_user,
+            </if>
+            <if test="logOperatiion != null" >
+                log_operatiion,
+            </if>
+            <if test="logMethod != null" >
+                log_method,
+            </if>
+            <if test="logParams != null" >
+                log_params,
+            </if>
+            <if test="logUrl != null" >
+                log_url,
+            </if>
+            <if test="logUserIp != null" >
+                log_user_ip,
+            </if>
+            <if test="logDate != null" >
+                log_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="logId != null" >
+                #{logId,jdbcType=INTEGER},
+            </if>
+            <if test="logUserName != null" >
+                #{logUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="logUser != null" >
+                #{logUser,jdbcType=VARCHAR},
+            </if>
+            <if test="logOperatiion != null" >
+                #{logOperatiion,jdbcType=VARCHAR},
+            </if>
+            <if test="logMethod != null" >
+                #{logMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="logParams != null" >
+                #{logParams,jdbcType=VARCHAR},
+            </if>
+            <if test="logUrl != null" >
+                #{logUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="logUserIp != null" >
+                #{logUserIp,jdbcType=VARCHAR},
+            </if>
+            <if test="logDate != null" >
+                #{logDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Sysuserlog" >
+        update sysuserlog
+        <set >
+            <if test="logUserName != null" >
+                log_user_name = #{logUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="logUser != null" >
+                log_user = #{logUser,jdbcType=VARCHAR},
+            </if>
+            <if test="logOperatiion != null" >
+                log_operatiion = #{logOperatiion,jdbcType=VARCHAR},
+            </if>
+            <if test="logMethod != null" >
+                log_method = #{logMethod,jdbcType=VARCHAR},
+            </if>
+            <if test="logParams != null" >
+                log_params = #{logParams,jdbcType=VARCHAR},
+            </if>
+            <if test="logUrl != null" >
+                log_url = #{logUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="logUserIp != null" >
+                log_user_ip = #{logUserIp,jdbcType=VARCHAR},
+            </if>
+            <if test="logDate != null" >
+                log_date = #{logDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where log_id = #{logId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Sysuserlog" >
+        update sysuserlog
+        set
+           log_user_name = #{logUserName,jdbcType=VARCHAR},log_user = #{logUser,jdbcType=VARCHAR},
+            log_operatiion = #{logOperatiion,jdbcType=VARCHAR},
+            log_method = #{logMethod,jdbcType=VARCHAR},
+            log_params = #{logParams,jdbcType=VARCHAR},
+             log_url = #{logUrl,jdbcType=VARCHAR},
+            log_user_ip = #{logUserIp,jdbcType=VARCHAR},
+            log_date = #{logDate,jdbcType=TIMESTAMP}
+        where log_id = #{logId,jdbcType=INTEGER}
+    </update>
+    <update id="deleteSysUserLog" parameterType="java.lang.Integer">
+          update sysuserlog
+        set delete_flag = 0
+         where  log_id = #{logId,jdbcType=INTEGER} and delete_flag = 1
+    </update>
+</mapper>

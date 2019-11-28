@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.PureceiptgoodsDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Pureceiptgoods" >
+        <id column="PureceiptGoodsID" property="pureceiptgoodsid" jdbcType="CHAR" />
+        <result column="PureceiptID" property="pureceiptid" jdbcType="CHAR" />
+        <result column="Goods_No" property="goodsNo" jdbcType="VARCHAR" />
+        <result column="Grade" property="grade" jdbcType="VARCHAR" />
+        <result column="Quantity" property="quantity" jdbcType="INTEGER" />
+        <result column="BatchNumber" property="batchnumber" jdbcType="VARCHAR" />
+        <result column="ManuDate" property="manudate" jdbcType="TIMESTAMP" />
+        <result column="ExpiryDate" property="expirydate" jdbcType="INTEGER" />
+        <result column="SterilizeNumber" property="sterilizenumber" jdbcType="VARCHAR" />
+        <result column="SterilizeDate" property="sterilizedate" jdbcType="TIMESTAMP" />
+        <result column="Appearance" property="appearance" jdbcType="CHAR" />
+        <result column="MarketGoods_No" property="marketgoodsNo" jdbcType="VARCHAR" />
+        <result column="cExplain" property="cexplain" jdbcType="VARCHAR" />
+        <result column="MaterialPrice" property="materialprice" jdbcType="DECIMAL" />
+        <result column="CurrencyPrice" property="currencyprice" jdbcType="DECIMAL" />
+        <result column="LowerBalancePrice" property="lowerbalanceprice" jdbcType="DECIMAL" />
+        <result column="FoldOnFold" property="foldonfold" jdbcType="DECIMAL" />
+        <result column="BuisNotTax" property="buisnottax" jdbcType="DECIMAL" />
+        <result column="RealBalance" property="realbalance" jdbcType="DECIMAL" />
+        <result column="RealBalanceNotTax" property="realbalancenottax" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        PureceiptGoodsID, PureceiptID, Goods_No, Grade, Quantity, BatchNumber, ManuDate,
+        ExpiryDate, SterilizeNumber, SterilizeDate, Appearance, MarketGoods_No, cExplain,
+        MaterialPrice, CurrencyPrice, LowerBalancePrice, FoldOnFold, BuisNotTax, RealBalance,
+        RealBalanceNotTax
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from pureceiptgoods
+        where PureceiptGoodsID = #{pureceiptgoodsid,jdbcType=CHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from pureceiptgoods
+        where PureceiptGoodsID = #{pureceiptgoodsid,jdbcType=CHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Pureceiptgoods" >
+        insert into pureceiptgoods (PureceiptGoodsID, PureceiptID, Goods_No,
+            Grade, Quantity, BatchNumber,
+            ManuDate, ExpiryDate, SterilizeNumber,
+            SterilizeDate, Appearance, MarketGoods_No,
+            cExplain, MaterialPrice, CurrencyPrice,
+            LowerBalancePrice, FoldOnFold, BuisNotTax,
+            RealBalance, RealBalanceNotTax)
+        values (#{pureceiptgoodsid,jdbcType=CHAR}, #{pureceiptid,jdbcType=CHAR}, #{goodsNo,jdbcType=VARCHAR},
+            #{grade,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, #{batchnumber,jdbcType=VARCHAR},
+            #{manudate,jdbcType=TIMESTAMP}, #{expirydate,jdbcType=INTEGER}, #{sterilizenumber,jdbcType=VARCHAR},
+            #{sterilizedate,jdbcType=TIMESTAMP}, #{appearance,jdbcType=CHAR}, #{marketgoodsNo,jdbcType=VARCHAR},
+            #{cexplain,jdbcType=VARCHAR}, #{materialprice,jdbcType=DECIMAL}, #{currencyprice,jdbcType=DECIMAL},
+            #{lowerbalanceprice,jdbcType=DECIMAL}, #{foldonfold,jdbcType=DECIMAL}, #{buisnottax,jdbcType=DECIMAL},
+            #{realbalance,jdbcType=DECIMAL}, #{realbalancenottax,jdbcType=DECIMAL})
+    </insert>
+    <insert id="insertPureceiptGoodsBatch" parameterType="java.util.List">
+        insert into pureceiptgoods (PureceiptGoodsID, PureceiptID, Goods_No,
+        Grade, Quantity, BatchNumber,
+        ManuDate, ExpiryDate, SterilizeNumber,
+        SterilizeDate, Appearance, MarketGoods_No,
+        cExplain, MaterialPrice, CurrencyPrice,
+        LowerBalancePrice, FoldOnFold, BuisNotTax,
+        RealBalance, RealBalanceNotTax)
+        values
+        <foreach collection="pureceiptgoods" item="e" separator=",">
+            (#{e.pureceiptgoodsid,jdbcType=CHAR}, #{e.pureceiptid,jdbcType=CHAR}, #{e.goodsNo,jdbcType=VARCHAR},
+            #{e.grade,jdbcType=VARCHAR}, #{e.quantity,jdbcType=INTEGER}, #{e.batchnumber,jdbcType=VARCHAR},
+            #{e.manudate,jdbcType=TIMESTAMP}, #{e.expirydate,jdbcType=INTEGER}, #{e.sterilizenumber,jdbcType=VARCHAR},
+            #{e.sterilizedate,jdbcType=TIMESTAMP}, #{e.appearance,jdbcType=CHAR}, #{e.marketgoodsNo,jdbcType=VARCHAR},
+            #{e.cexplain,jdbcType=VARCHAR}, #{e.materialprice,jdbcType=DECIMAL}, #{e.currencyprice,jdbcType=DECIMAL},
+            #{e.lowerbalanceprice,jdbcType=DECIMAL}, #{e.foldonfold,jdbcType=DECIMAL}, #{e.buisnottax,jdbcType=DECIMAL},
+            #{e.realbalance,jdbcType=DECIMAL}, #{e.realbalancenottax,jdbcType=DECIMAL})
+        </foreach>
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Pureceiptgoods" >
+        insert into pureceiptgoods
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="pureceiptgoodsid != null" >
+                PureceiptGoodsID,
+            </if>
+            <if test="pureceiptid != null" >
+                PureceiptID,
+            </if>
+            <if test="goodsNo != null" >
+                Goods_No,
+            </if>
+            <if test="grade != null" >
+                Grade,
+            </if>
+            <if test="quantity != null" >
+                Quantity,
+            </if>
+            <if test="batchnumber != null" >
+                BatchNumber,
+            </if>
+            <if test="manudate != null" >
+                ManuDate,
+            </if>
+            <if test="expirydate != null" >
+                ExpiryDate,
+            </if>
+            <if test="sterilizenumber != null" >
+                SterilizeNumber,
+            </if>
+            <if test="sterilizedate != null" >
+                SterilizeDate,
+            </if>
+            <if test="appearance != null" >
+                Appearance,
+            </if>
+            <if test="marketgoodsNo != null" >
+                MarketGoods_No,
+            </if>
+            <if test="cexplain != null" >
+                cExplain,
+            </if>
+            <if test="materialprice != null" >
+                MaterialPrice,
+            </if>
+            <if test="currencyprice != null" >
+                CurrencyPrice,
+            </if>
+            <if test="lowerbalanceprice != null" >
+                LowerBalancePrice,
+            </if>
+            <if test="foldonfold != null" >
+                FoldOnFold,
+            </if>
+            <if test="buisnottax != null" >
+                BuisNotTax,
+            </if>
+            <if test="realbalance != null" >
+                RealBalance,
+            </if>
+            <if test="realbalancenottax != null" >
+                RealBalanceNotTax,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="pureceiptgoodsid != null" >
+                #{pureceiptgoodsid,jdbcType=CHAR},
+            </if>
+            <if test="pureceiptid != null" >
+                #{pureceiptid,jdbcType=CHAR},
+            </if>
+            <if test="goodsNo != null" >
+                #{goodsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null" >
+                #{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null" >
+                #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="batchnumber != null" >
+                #{batchnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="manudate != null" >
+                #{manudate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expirydate != null" >
+                #{expirydate,jdbcType=INTEGER},
+            </if>
+            <if test="sterilizenumber != null" >
+                #{sterilizenumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sterilizedate != null" >
+                #{sterilizedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appearance != null" >
+                #{appearance,jdbcType=CHAR},
+            </if>
+            <if test="marketgoodsNo != null" >
+                #{marketgoodsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="cexplain != null" >
+                #{cexplain,jdbcType=VARCHAR},
+            </if>
+            <if test="materialprice != null" >
+                #{materialprice,jdbcType=DECIMAL},
+            </if>
+            <if test="currencyprice != null" >
+                #{currencyprice,jdbcType=DECIMAL},
+            </if>
+            <if test="lowerbalanceprice != null" >
+                #{lowerbalanceprice,jdbcType=DECIMAL},
+            </if>
+            <if test="foldonfold != null" >
+                #{foldonfold,jdbcType=DECIMAL},
+            </if>
+            <if test="buisnottax != null" >
+                #{buisnottax,jdbcType=DECIMAL},
+            </if>
+            <if test="realbalance != null" >
+                #{realbalance,jdbcType=DECIMAL},
+            </if>
+            <if test="realbalancenottax != null" >
+                #{realbalancenottax,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Pureceiptgoods" >
+        update pureceiptgoods
+        <set >
+            <if test="pureceiptid != null" >
+                PureceiptID = #{pureceiptid,jdbcType=CHAR},
+            </if>
+            <if test="goodsNo != null" >
+                Goods_No = #{goodsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="grade != null" >
+                Grade = #{grade,jdbcType=VARCHAR},
+            </if>
+            <if test="quantity != null" >
+                Quantity = #{quantity,jdbcType=INTEGER},
+            </if>
+            <if test="batchnumber != null" >
+                BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+            </if>
+            <if test="manudate != null" >
+                ManuDate = #{manudate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expirydate != null" >
+                ExpiryDate = #{expirydate,jdbcType=INTEGER},
+            </if>
+            <if test="sterilizenumber != null" >
+                SterilizeNumber = #{sterilizenumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sterilizedate != null" >
+                SterilizeDate = #{sterilizedate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appearance != null" >
+                Appearance = #{appearance,jdbcType=CHAR},
+            </if>
+            <if test="marketgoodsNo != null" >
+                MarketGoods_No = #{marketgoodsNo,jdbcType=VARCHAR},
+            </if>
+            <if test="cexplain != null" >
+                cExplain = #{cexplain,jdbcType=VARCHAR},
+            </if>
+            <if test="materialprice != null" >
+                MaterialPrice = #{materialprice,jdbcType=DECIMAL},
+            </if>
+            <if test="currencyprice != null" >
+                CurrencyPrice = #{currencyprice,jdbcType=DECIMAL},
+            </if>
+            <if test="lowerbalanceprice != null" >
+                LowerBalancePrice = #{lowerbalanceprice,jdbcType=DECIMAL},
+            </if>
+            <if test="foldonfold != null" >
+                FoldOnFold = #{foldonfold,jdbcType=DECIMAL},
+            </if>
+            <if test="buisnottax != null" >
+                BuisNotTax = #{buisnottax,jdbcType=DECIMAL},
+            </if>
+            <if test="realbalance != null" >
+                RealBalance = #{realbalance,jdbcType=DECIMAL},
+            </if>
+            <if test="realbalancenottax != null" >
+                RealBalanceNotTax = #{realbalancenottax,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where PureceiptGoodsID = #{pureceiptgoodsid,jdbcType=CHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Pureceiptgoods" >
+        update pureceiptgoods
+        set PureceiptID = #{pureceiptid,jdbcType=CHAR},
+            Goods_No = #{goodsNo,jdbcType=VARCHAR},
+            Grade = #{grade,jdbcType=VARCHAR},
+            Quantity = #{quantity,jdbcType=INTEGER},
+            BatchNumber = #{batchnumber,jdbcType=VARCHAR},
+            ManuDate = #{manudate,jdbcType=TIMESTAMP},
+            ExpiryDate = #{expirydate,jdbcType=INTEGER},
+            SterilizeNumber = #{sterilizenumber,jdbcType=VARCHAR},
+            SterilizeDate = #{sterilizedate,jdbcType=TIMESTAMP},
+            Appearance = #{appearance,jdbcType=CHAR},
+            MarketGoods_No = #{marketgoodsNo,jdbcType=VARCHAR},
+            cExplain = #{cexplain,jdbcType=VARCHAR},
+            MaterialPrice = #{materialprice,jdbcType=DECIMAL},
+            CurrencyPrice = #{currencyprice,jdbcType=DECIMAL},
+            LowerBalancePrice = #{lowerbalanceprice,jdbcType=DECIMAL},
+            FoldOnFold = #{foldonfold,jdbcType=DECIMAL},
+            BuisNotTax = #{buisnottax,jdbcType=DECIMAL},
+            RealBalance = #{realbalance,jdbcType=DECIMAL},
+            RealBalanceNotTax = #{realbalancenottax,jdbcType=DECIMAL}
+        where PureceiptGoodsID = #{pureceiptgoodsid,jdbcType=CHAR}
+    </update>
+
+</mapper>

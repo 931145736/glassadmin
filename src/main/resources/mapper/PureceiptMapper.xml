@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.PureceiptDao">
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Pureceipt">
+        <id column="PureceiptID" property="pureceiptid" jdbcType="VARCHAR"/>
+        <result column="Warehouse_No" property="warehouseNo" jdbcType="VARCHAR"/>
+        <result column="Receipt_Date" property="receiptDate" jdbcType="TIMESTAMP"/>
+        <result column="Modi_Date" property="modiDate" jdbcType="TIMESTAMP"/>
+        <result column="Operator" property="operator" jdbcType="VARCHAR"/>
+        <result column="Remark" property="remark" jdbcType="LONGVARCHAR"/>
+        <result column="ArrivalID" property="arrivalid" jdbcType="CHAR"/>
+        <result column="Type" property="type" jdbcType="SMALLINT"/>
+        <result column="Customer_ID" property="customerId" jdbcType="VARCHAR"/>
+        <result column="FmWarehouse_No" property="fmwarehouseNo" jdbcType="VARCHAR"/>
+        <result column="DeliveryID" property="deliveryid" jdbcType="VARCHAR"/>
+        <result column="RenotitceID" property="renotitceid" jdbcType="VARCHAR"/>
+        <result column="DealereturnID" property="dealereturnid" jdbcType="VARCHAR"/>
+        <result column="Posted" property="posted" jdbcType="INTEGER"/>
+        <result column="PostedDate" property="posteddate" jdbcType="TIMESTAMP"/>
+        <result column="PostUser" property="postuser" jdbcType="VARCHAR"/>
+        <result column="ReturnType" property="returntype" jdbcType="VARCHAR"/>
+        <result column="Supply_No" property="supplyNo" jdbcType="VARCHAR"/>
+        <result column="Purchase_ID" property="purchaseId" jdbcType="VARCHAR"/>
+        <result column="Manual_ID" property="manualId" jdbcType="VARCHAR"/>
+        <result column="Input_Date" property="inputDate" jdbcType="TIMESTAMP"/>
+        <result column="Mode" property="mode" jdbcType="VARCHAR"/>
+        <result column="Waster" property="waster" jdbcType="INTEGER"/>
+        <result column="ReturnMode" property="returnmode" jdbcType="VARCHAR"/>
+        <result column="JiZhang" property="jizhang" jdbcType="INTEGER"/>
+        <result column="PriceType" property="pricetype" jdbcType="VARCHAR"/>
+        <result column="AddressID" property="addressid" jdbcType="VARCHAR"/>
+        <result column="ReceiptMode" property="receiptmode" jdbcType="VARCHAR"/>
+        <result column="GoodsType" property="goodstype" jdbcType="VARCHAR"/>
+        <result column="Company_ID" property="companyId" jdbcType="VARCHAR"/>
+        <result column="Currency" property="currency" jdbcType="VARCHAR"/>
+        <result column="ShopReturnCheckID" property="shopreturncheckid" jdbcType="VARCHAR"/>
+        <result column="JiZhangOperator" property="jizhangoperator" jdbcType="VARCHAR"/>
+        <result column="JiZhangDate" property="jizhangdate" jdbcType="TIMESTAMP"/>
+        <result column="ReceiptsUserNo" property="receiptsuserno" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        PureceiptID, Warehouse_No, Receipt_Date, Modi_Date, Operator, Remark, ArrivalID, 
+        Type, Customer_ID, FmWarehouse_No, DeliveryID, RenotitceID, DealereturnID, Posted, 
+        PostedDate, PostUser, ReturnType, Supply_No, Purchase_ID, Manual_ID, Input_Date, 
+        Mode, Waster, ReturnMode, JiZhang, PriceType, AddressID, ReceiptMode, GoodsType, 
+        Company_ID, Currency, ShopReturnCheckID, JiZhangOperator, JiZhangDate, ReceiptsUserNo
+    </sql>
+
+    <select id="selectByPrimaryKey"  parameterType="java.lang.String" resultType="com.xjt.entity.OrderEntity">
+        SELECT t1.PureceiptID orderId,t6.Supply_Na supplyName,t2.Goods_No goodsNo,t5.GoodsName goodsName,t7.Warehouse_Na warehouseName,t3.Astigmia astigmia,t3.Dioptre dioptre,t3.Discount discount,t3.UnitPrice price,t3.Quantity quantity,t4.ColorName colorName,t2.BatchNumber batchNumber,
+ t2.ManuDate productDate,t2.ExpiryDate validityDaies
+        FROM pureceipt t1
+        LEFT JOIN pureceiptgoods t2 ON t1.PureceiptID = t2.PureceiptID
+        LEFT JOIN pureceiptdetail t3 ON t2.PureceiptGoodsID = t3.PureceiptGoodsID
+        LEFT JOIN warehouse t7 ON t1.Warehouse_No = t7.Warehouse_No
+        LEFT JOIN dictcolor t4 ON t3.ColorID = t4.ColorID
+        INNER JOIN goods t5 ON t2.Goods_No = t5.GoodsNo
+        INNER JOIN supply t6 ON t1.Supply_No = t6.Supply_No
+        WHERE t1.PureceiptID = #{pureceiptid}
+    </select>
+    <select id="queryPureceiptOrderList" parameterType="com.xjt.entity.OrderEntity"
+            resultType="com.xjt.entity.OrderEntity">
+            SELECT t1.PureceiptID orderId,t3.Supply_Na supplyName,t1.Input_Date inputDate,t1.Manual_ID manualId,t1.Type orderType, t1.Receipt_Date orderDate,SUM(t5.Quantity)  quantity,SUM(t5.UnitPrice*t5.Quantity*t5.Discount) amount ,t1.Posted,t1.PostedDate ,t4.name postUser
+            FROM pureceipt t1
+            INNER JOIN pureceiptgoods t2 ON t1.PureceiptID = t2.PureceiptID
+            inner join pureceiptdetail t5 on t2.PureceiptGoodsID = t5.PureceiptGoodsID
+            INNER JOIN supply t3 ON t1.Supply_No = t3.Supply_No
+            LEFT JOIN `master` t4 ON t1.PostUser = t4.id
+            WHERE t1.delete_flag = 1
+        <if test="supplyName != null and supplyName != ''">
+            and t3.Supply_Na like concat ('%',#{supplyName},'%')
+        </if>
+        <if test="manualId != null and manualId != ''">
+            and t1.Manual_ID like concat ('%',#{manualId},'%')
+        </if>
+        <if test="posted != null">
+            and t1.Posted  = #{posted}
+        </if>
+        <if test="orderType != null">
+            and t1.Type  = #{orderType}
+        </if>
+        <if test="startTime != null and startTime != '' and endTime != null and endTime != ''" >
+            and t1.Input_Date between #{startTime} and #{endTime}
+        </if>
+            GROUP BY t1.PureceiptID
+
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from pureceipt
+        where PureceiptID = #{pureceiptid,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Pureceipt">
+        insert into pureceipt (PureceiptID, Warehouse_No, Receipt_Date, 
+            Modi_Date, Operator, Remark, 
+            ArrivalID, Type, Customer_ID, 
+            FmWarehouse_No, DeliveryID, RenotitceID, 
+            DealereturnID, Posted, PostedDate, 
+            PostUser, ReturnType, Supply_No, 
+            Purchase_ID, Manual_ID, Input_Date, 
+            Mode, Waster, ReturnMode, 
+            JiZhang, PriceType, AddressID, 
+            ReceiptMode, GoodsType, Company_ID, 
+            Currency, ShopReturnCheckID, JiZhangOperator, 
+            JiZhangDate, ReceiptsUserNo)
+        values (#{pureceiptid,jdbcType=VARCHAR}, #{warehouseNo,jdbcType=VARCHAR}, #{receiptDate,jdbcType=TIMESTAMP}, 
+            #{modiDate,jdbcType=TIMESTAMP}, #{operator,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR}, 
+            #{arrivalid,jdbcType=CHAR}, #{type,jdbcType=SMALLINT}, #{customerId,jdbcType=VARCHAR}, 
+            #{fmwarehouseNo,jdbcType=VARCHAR}, #{deliveryid,jdbcType=VARCHAR}, #{renotitceid,jdbcType=VARCHAR}, 
+            #{dealereturnid,jdbcType=VARCHAR}, #{posted,jdbcType=INTEGER}, #{posteddate,jdbcType=TIMESTAMP}, 
+            #{postuser,jdbcType=VARCHAR}, #{returntype,jdbcType=VARCHAR}, #{supplyNo,jdbcType=VARCHAR}, 
+            #{purchaseId,jdbcType=VARCHAR}, #{manualId,jdbcType=VARCHAR}, #{inputDate,jdbcType=TIMESTAMP}, 
+            #{mode,jdbcType=VARCHAR}, #{waster,jdbcType=INTEGER}, #{returnmode,jdbcType=VARCHAR}, 
+            #{jizhang,jdbcType=INTEGER}, #{pricetype,jdbcType=VARCHAR}, #{addressid,jdbcType=VARCHAR}, 
+            #{receiptmode,jdbcType=VARCHAR}, #{goodstype,jdbcType=VARCHAR}, #{companyId,jdbcType=VARCHAR}, 
+            #{currency,jdbcType=VARCHAR}, #{shopreturncheckid,jdbcType=VARCHAR}, #{jizhangoperator,jdbcType=VARCHAR}, 
+            #{jizhangdate,jdbcType=TIMESTAMP}, #{receiptsuserno,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Pureceipt">
+        insert into pureceipt
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pureceiptid != null">
+                PureceiptID,
+            </if>
+            <if test="warehouseNo != null">
+                Warehouse_No,
+            </if>
+            <if test="receiptDate != null">
+                Receipt_Date,
+            </if>
+            <if test="modiDate != null">
+                Modi_Date,
+            </if>
+            <if test="operator != null">
+                Operator,
+            </if>
+            <if test="remark != null">
+                Remark,
+            </if>
+            <if test="arrivalid != null">
+                ArrivalID,
+            </if>
+            <if test="type != null">
+                Type,
+            </if>
+            <if test="customerId != null">
+                Customer_ID,
+            </if>
+            <if test="fmwarehouseNo != null">
+                FmWarehouse_No,
+            </if>
+            <if test="deliveryid != null">
+                DeliveryID,
+            </if>
+            <if test="renotitceid != null">
+                RenotitceID,
+            </if>
+            <if test="dealereturnid != null">
+                DealereturnID,
+            </if>
+            <if test="posted != null">
+                Posted,
+            </if>
+            <if test="posteddate != null">
+                PostedDate,
+            </if>
+            <if test="postuser != null">
+                PostUser,
+            </if>
+            <if test="returntype != null">
+                ReturnType,
+            </if>
+            <if test="supplyNo != null">
+                Supply_No,
+            </if>
+            <if test="purchaseId != null">
+                Purchase_ID,
+            </if>
+            <if test="manualId != null">
+                Manual_ID,
+            </if>
+            <if test="inputDate != null">
+                Input_Date,
+            </if>
+            <if test="mode != null">
+                Mode,
+            </if>
+            <if test="waster != null">
+                Waster,
+            </if>
+            <if test="returnmode != null">
+                ReturnMode,
+            </if>
+            <if test="jizhang != null">
+                JiZhang,
+            </if>
+            <if test="pricetype != null">
+                PriceType,
+            </if>
+            <if test="addressid != null">
+                AddressID,
+            </if>
+            <if test="receiptmode != null">
+                ReceiptMode,
+            </if>
+            <if test="goodstype != null">
+                GoodsType,
+            </if>
+            <if test="companyId != null">
+                Company_ID,
+            </if>
+            <if test="currency != null">
+                Currency,
+            </if>
+            <if test="shopreturncheckid != null">
+                ShopReturnCheckID,
+            </if>
+            <if test="jizhangoperator != null">
+                JiZhangOperator,
+            </if>
+            <if test="jizhangdate != null">
+                JiZhangDate,
+            </if>
+            <if test="receiptsuserno != null">
+                ReceiptsUserNo,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pureceiptid != null">
+                #{pureceiptid,jdbcType=VARCHAR},
+            </if>
+            <if test="warehouseNo != null">
+                #{warehouseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="receiptDate != null">
+                #{receiptDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modiDate != null">
+                #{modiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operator != null">
+                #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="arrivalid != null">
+                #{arrivalid,jdbcType=CHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="customerId != null">
+                #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="fmwarehouseNo != null">
+                #{fmwarehouseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="deliveryid != null">
+                #{deliveryid,jdbcType=VARCHAR},
+            </if>
+            <if test="renotitceid != null">
+                #{renotitceid,jdbcType=VARCHAR},
+            </if>
+            <if test="dealereturnid != null">
+                #{dealereturnid,jdbcType=VARCHAR},
+            </if>
+            <if test="posted != null">
+                #{posted,jdbcType=INTEGER},
+            </if>
+            <if test="posteddate != null">
+                #{posteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="postuser != null">
+                #{postuser,jdbcType=VARCHAR},
+            </if>
+            <if test="returntype != null">
+                #{returntype,jdbcType=VARCHAR},
+            </if>
+            <if test="supplyNo != null">
+                #{supplyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="purchaseId != null">
+                #{purchaseId,jdbcType=VARCHAR},
+            </if>
+            <if test="manualId != null">
+                #{manualId,jdbcType=VARCHAR},
+            </if>
+            <if test="inputDate != null">
+                #{inputDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mode != null">
+                #{mode,jdbcType=VARCHAR},
+            </if>
+            <if test="waster != null">
+                #{waster,jdbcType=INTEGER},
+            </if>
+            <if test="returnmode != null">
+                #{returnmode,jdbcType=VARCHAR},
+            </if>
+            <if test="jizhang != null">
+                #{jizhang,jdbcType=INTEGER},
+            </if>
+            <if test="pricetype != null">
+                #{pricetype,jdbcType=VARCHAR},
+            </if>
+            <if test="addressid != null">
+                #{addressid,jdbcType=VARCHAR},
+            </if>
+            <if test="receiptmode != null">
+                #{receiptmode,jdbcType=VARCHAR},
+            </if>
+            <if test="goodstype != null">
+                #{goodstype,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="currency != null">
+                #{currency,jdbcType=VARCHAR},
+            </if>
+            <if test="shopreturncheckid != null">
+                #{shopreturncheckid,jdbcType=VARCHAR},
+            </if>
+            <if test="jizhangoperator != null">
+                #{jizhangoperator,jdbcType=VARCHAR},
+            </if>
+            <if test="jizhangdate != null">
+                #{jizhangdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiptsuserno != null">
+                #{receiptsuserno,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Pureceipt">
+        update pureceipt
+        <set>
+            <if test="warehouseNo != null">
+                Warehouse_No = #{warehouseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="receiptDate != null">
+                Receipt_Date = #{receiptDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modiDate != null">
+                Modi_Date = #{modiDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="operator != null">
+                Operator = #{operator,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                Remark = #{remark,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="arrivalid != null">
+                ArrivalID = #{arrivalid,jdbcType=CHAR},
+            </if>
+            <if test="type != null">
+                Type = #{type,jdbcType=SMALLINT},
+            </if>
+            <if test="customerId != null">
+                Customer_ID = #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="fmwarehouseNo != null">
+                FmWarehouse_No = #{fmwarehouseNo,jdbcType=VARCHAR},
+            </if>
+            <if test="deliveryid != null">
+                DeliveryID = #{deliveryid,jdbcType=VARCHAR},
+            </if>
+            <if test="renotitceid != null">
+                RenotitceID = #{renotitceid,jdbcType=VARCHAR},
+            </if>
+            <if test="dealereturnid != null">
+                DealereturnID = #{dealereturnid,jdbcType=VARCHAR},
+            </if>
+            <if test="posted != null">
+                Posted = #{posted,jdbcType=INTEGER},
+            </if>
+            <if test="posteddate != null">
+                PostedDate = #{posteddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="postuser != null">
+                PostUser = #{postuser,jdbcType=VARCHAR},
+            </if>
+            <if test="returntype != null">
+                ReturnType = #{returntype,jdbcType=VARCHAR},
+            </if>
+            <if test="supplyNo != null">
+                Supply_No = #{supplyNo,jdbcType=VARCHAR},
+            </if>
+            <if test="purchaseId != null">
+                Purchase_ID = #{purchaseId,jdbcType=VARCHAR},
+            </if>
+            <if test="manualId != null">
+                Manual_ID = #{manualId,jdbcType=VARCHAR},
+            </if>
+            <if test="inputDate != null">
+                Input_Date = #{inputDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mode != null">
+                Mode = #{mode,jdbcType=VARCHAR},
+            </if>
+            <if test="waster != null">
+                Waster = #{waster,jdbcType=INTEGER},
+            </if>
+            <if test="returnmode != null">
+                ReturnMode = #{returnmode,jdbcType=VARCHAR},
+            </if>
+            <if test="jizhang != null">
+                JiZhang = #{jizhang,jdbcType=INTEGER},
+            </if>
+            <if test="pricetype != null">
+                PriceType = #{pricetype,jdbcType=VARCHAR},
+            </if>
+            <if test="addressid != null">
+                AddressID = #{addressid,jdbcType=VARCHAR},
+            </if>
+            <if test="receiptmode != null">
+                ReceiptMode = #{receiptmode,jdbcType=VARCHAR},
+            </if>
+            <if test="goodstype != null">
+                GoodsType = #{goodstype,jdbcType=VARCHAR},
+            </if>
+            <if test="companyId != null">
+                Company_ID = #{companyId,jdbcType=VARCHAR},
+            </if>
+            <if test="currency != null">
+                Currency = #{currency,jdbcType=VARCHAR},
+            </if>
+            <if test="shopreturncheckid != null">
+                ShopReturnCheckID = #{shopreturncheckid,jdbcType=VARCHAR},
+            </if>
+            <if test="jizhangoperator != null">
+                JiZhangOperator = #{jizhangoperator,jdbcType=VARCHAR},
+            </if>
+            <if test="jizhangdate != null">
+                JiZhangDate = #{jizhangdate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="receiptsuserno != null">
+                ReceiptsUserNo = #{receiptsuserno,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where PureceiptID = #{pureceiptid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Pureceipt">
+        update pureceipt
+        set Warehouse_No = #{warehouseNo,jdbcType=VARCHAR},
+            Receipt_Date = #{receiptDate,jdbcType=TIMESTAMP},
+            Modi_Date = #{modiDate,jdbcType=TIMESTAMP},
+            Operator = #{operator,jdbcType=VARCHAR},
+            Remark = #{remark,jdbcType=LONGVARCHAR},
+            ArrivalID = #{arrivalid,jdbcType=CHAR},
+            Type = #{type,jdbcType=SMALLINT},
+            Customer_ID = #{customerId,jdbcType=VARCHAR},
+            FmWarehouse_No = #{fmwarehouseNo,jdbcType=VARCHAR},
+            DeliveryID = #{deliveryid,jdbcType=VARCHAR},
+            RenotitceID = #{renotitceid,jdbcType=VARCHAR},
+            DealereturnID = #{dealereturnid,jdbcType=VARCHAR},
+            Posted = #{posted,jdbcType=INTEGER},
+            PostedDate = #{posteddate,jdbcType=TIMESTAMP},
+            PostUser = #{postuser,jdbcType=VARCHAR},
+            ReturnType = #{returntype,jdbcType=VARCHAR},
+            Supply_No = #{supplyNo,jdbcType=VARCHAR},
+            Purchase_ID = #{purchaseId,jdbcType=VARCHAR},
+            Manual_ID = #{manualId,jdbcType=VARCHAR},
+            Input_Date = #{inputDate,jdbcType=TIMESTAMP},
+            Mode = #{mode,jdbcType=VARCHAR},
+            Waster = #{waster,jdbcType=INTEGER},
+            ReturnMode = #{returnmode,jdbcType=VARCHAR},
+            JiZhang = #{jizhang,jdbcType=INTEGER},
+            PriceType = #{pricetype,jdbcType=VARCHAR},
+            AddressID = #{addressid,jdbcType=VARCHAR},
+            ReceiptMode = #{receiptmode,jdbcType=VARCHAR},
+            GoodsType = #{goodstype,jdbcType=VARCHAR},
+            Company_ID = #{companyId,jdbcType=VARCHAR},
+            Currency = #{currency,jdbcType=VARCHAR},
+            ShopReturnCheckID = #{shopreturncheckid,jdbcType=VARCHAR},
+            JiZhangOperator = #{jizhangoperator,jdbcType=VARCHAR},
+            JiZhangDate = #{jizhangdate,jdbcType=TIMESTAMP},
+            ReceiptsUserNo = #{receiptsuserno,jdbcType=VARCHAR}
+        where PureceiptID = #{pureceiptid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateStatus" parameterType="com.xjt.entity.Pureceipt">
+        update pureceipt
+        set  Posted = #{posted,jdbcType=INTEGER},
+            PostedDate = #{posteddate,jdbcType=TIMESTAMP},
+            PostUser = #{postuser,jdbcType=VARCHAR}
+        where PureceiptID = #{pureceiptid,jdbcType=VARCHAR} and  Posted = 0
+    </update>
+</mapper>
