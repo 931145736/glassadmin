@@ -1,5 +1,6 @@
 package com.xjt.controlle;
 
+import com.xjt.annotation.SecurityParameter;
 import com.xjt.annotation.UserLog;
 import com.xjt.dto.BaseResDto;
 import com.xjt.dto.WarehouseReqDto;
@@ -9,10 +10,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Api(tags ="仓库相关接口" )
@@ -22,6 +20,7 @@ public class WarehouseController {
     private WarehouseService warehouseService;
 
     @UserLog("增加仓库")
+    @SecurityParameter(outEncode = false)
     @PostMapping("/insertWareHouse")
     @ApiOperation("增加仓库接口")
     @ApiImplicitParams({
@@ -31,26 +30,29 @@ public class WarehouseController {
             @ApiImplicitParam(name = "keyman",value = "负责人",required = true),
             @ApiImplicitParam(name = "tag",value ="是否虚拟仓库 true or false",required = true)
     })
-    public BaseResDto insertWareHouse(WarehouseReqDto reqDto){
+    public BaseResDto insertWareHouse(@RequestBody WarehouseReqDto reqDto){
         return warehouseService.insertWareHouse(reqDto);
     }
 
     @UserLog("查看仓库列表")
-    @GetMapping("/queryWarehouseList")
+    @SecurityParameter(outEncode = false)
+    @PostMapping("/queryWarehouseList")
     @ApiOperation("查看仓库列表 可以分页查看")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "分页参数 第几页"),
             @ApiImplicitParam(name = "pageSize",value = "分页参数 每页数据量")
     })
-    public BaseResDto queryWarehouseList(WarehouseReqDto reqDto){
+    public BaseResDto queryWarehouseList(@RequestBody WarehouseReqDto reqDto){
+        reqDto.setPageSize(20);
         return warehouseService.queryWarehouseList(reqDto);
     }
 
     @UserLog("查看仓库信息")
-    @GetMapping("/queryWareInfo")
+   @SecurityParameter(outEncode = false)
+    @PostMapping("/queryWareInfo")
     @ApiOperation("查看仓库详细信息")
     @ApiImplicitParam(name = "warehouseNo",value = "仓库编号",required = true)
-    public BaseResDto queryWareInfo(WarehouseReqDto reqDto){
+    public BaseResDto queryWareInfo( WarehouseReqDto reqDto){
         return warehouseService.queryHouseInfo(reqDto);
     }
 }

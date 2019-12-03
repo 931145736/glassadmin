@@ -66,20 +66,21 @@ public class SupplyServiceImpl implements SupplyService {
     @Override
     public BaseResDto querySupplyList(SupplyReqDto reqDto) {
         BaseResDto baseResDto = new BaseResDto();
+        Integer pageNo = reqDto.getPageNo();
+        if(pageNo==null){
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            baseResDto.setResultMessage("pageNo is null");
+            return baseResDto;
+        }
+        Integer pageSize = 20;
         try{
 
-            Integer pageNo = reqDto.getPageNo();
-            Integer pageSize = reqDto.getPageSize();
-            if(pageNo!=null&&pageSize!=null){
                 PageHelper.startPage(pageNo,pageSize);
                 List<Supply> supplies = supplyDao.querySupplyDataList();
                 PageInfo<Supply> pageInfo = new PageInfo<>(supplies);
                 baseResDto.setData(pageInfo);
 
-            }else{
-                List<Supply> supplies = supplyDao.querySupplyDataList();
-                baseResDto.setData(supplies);
-            }
+
 
             }catch (Exception e){
             baseResDto.setResultMessage("查看供货商列表异常");

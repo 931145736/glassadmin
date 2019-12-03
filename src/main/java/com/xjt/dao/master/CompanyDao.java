@@ -2,6 +2,7 @@ package com.xjt.dao.master;
 
 import com.xjt.entity.Company;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -29,4 +30,6 @@ public interface CompanyDao {
      * @return
      */
     List<Company> queryCompanyList();
+
+    List<Company> queryCompanyListByIds(@Param("ids") List<String> ids);
 }

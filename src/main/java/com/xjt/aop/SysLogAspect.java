@@ -1,7 +1,5 @@
 package com.xjt.aop;
 
-import com.alibaba.fastjson.JSONObject;
-import com.sun.org.apache.regexp.internal.RE;
 import com.xjt.annotation.UserLog;
 import com.xjt.dao.master.SysuserlogDao;
 import com.xjt.entity.Master;
@@ -14,20 +12,14 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
-import java.net.URI;
 import java.util.Date;
 
 /**

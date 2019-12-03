@@ -10,4 +10,6 @@ public interface SupplyService {
     BaseResDto querySupplyList(SupplyReqDto reqDto);
 
     BaseResDto querySupplyInfo(SupplyReqDto reqDto);
+
+
 }

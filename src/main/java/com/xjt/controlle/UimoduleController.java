@@ -52,4 +52,9 @@ public class UimoduleController {
         reqDto.setIds(ids);
         return uimoduleService.queryChildrenMenu(reqDto);
     }
+
+    @PostMapping("/insertUimodule")
+    public BaseResDto insertUimodule(UimoduleReqDto reqDto){
+        return uimoduleService.insertUimodule(reqDto);
+    }
 }

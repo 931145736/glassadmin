@@ -2,6 +2,7 @@ package com.xjt.dao.master;
 
 import com.xjt.dto.CommonReqDto;
 import com.xjt.entity.CommonData;
+import com.xjt.entity.SelectListPojo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -34,4 +35,14 @@ public interface CommonDao {
      * @return
      */
     List<CommonData> queryAllDatas(CommonReqDto reqDto);
+
+    /**
+    *@Description 查看下拉参数列表
+    * * @param null
+    *@Return
+    *@Author Administrator
+    *@Date 2019/12/2
+    *@Time
+    */
+    List<SelectListPojo> selectOptionList(CommonReqDto reqDto);
 }

@@ -19,6 +19,10 @@ public class CommonReqDto extends BaseReqDto {
     @ApiModelProperty("对应数据库字段名")
     private String colName;
 
+    private String colId;
+
+
+
     /**
      * 字段值集合
      */
@@ -29,6 +33,8 @@ public class CommonReqDto extends BaseReqDto {
      */
     @ApiModelProperty("单个字段值")
     private String value;
+
+    private Integer requestType;
 
 
     public String getTableName() {
@@ -47,6 +53,14 @@ public class CommonReqDto extends BaseReqDto {
         this.colName = colName;
     }
 
+    public String getColId() {
+        return colId;
+    }
+
+    public void setColId(String colId) {
+        this.colId = colId;
+    }
+
     public List<String> getValues() {
         return values;
     }
@@ -61,5 +75,13 @@ public class CommonReqDto extends BaseReqDto {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public Integer getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(Integer requestType) {
+        this.requestType = requestType;
     }
 }

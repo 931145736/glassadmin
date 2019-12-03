@@ -1,16 +1,19 @@
 package com.xjt.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xjt.business.CommonBusinessService;
 import com.xjt.dao.master.CommonDao;
 import com.xjt.dao.other.CommonSqlDao;
 import com.xjt.dto.BaseResDto;
 import com.xjt.dto.CommonReqDto;
 import com.xjt.entity.CommonData;
+import com.xjt.entity.SelectListPojo;
 import com.xjt.enums.ResultCode;
 import com.xjt.service.CommonService;
 import com.xjt.utils.STRUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -117,5 +120,45 @@ public class CommonServiceImpl implements CommonService {
             logger.error("查看数据异常",e);
         }
         return baseResDto;
+    }
+
+    /**
+    *@Description 查看下拉参数
+    * * @param reqDto
+    *@Return com.xjt.dto.BaseResDto
+    *@Author Administrator
+    *@Date 2019/12/2
+    *@Time
+    */
+
+    @Override
+    public BaseResDto SelectOptionList(CommonReqDto reqDto) {
+        BaseResDto baseResDto = new BaseResDto();
+        Integer requestType = reqDto.getRequestType();
+        if(requestType==null){
+            baseResDto.setResultMessage("exception");
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            return baseResDto;
+        }
+        try{
+            reqDto = addParams(requestType,reqDto);
+            List<SelectListPojo> selectListPojos = commonDao.selectOptionList(reqDto);
+            logger.info("数据库对象"+JSONObject.toJSONString(selectListPojos));
+            baseResDto.setData(selectListPojos);
+
+
+        }catch (Exception e){
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            baseResDto.setResultMessage("查看下拉参数异常");
+            logger.error("查看下拉参数异常",e);
+        }
+        return baseResDto;
+    }
+    @Value("${selectOptionList}")
+    private String selectOptionList;
+    private CommonReqDto addParams(Integer requestType,CommonReqDto reqDto){
+        JSONObject object = JSONObject.parseObject(selectOptionList);
+        reqDto = JSONObject.parseObject(JSONObject.toJSONString(object.get(requestType)),CommonReqDto.class);
+        return reqDto;
     }
 }

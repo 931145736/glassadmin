@@ -1,6 +1,7 @@
 package com.xjt.entity;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 仓库信息表
@@ -43,7 +44,7 @@ public class Warehouse {
     /**
      * 是否虚拟仓库
      */
-    private Boolean tag;
+    private Integer tag;
 
     /**
      * 邮件
@@ -63,12 +64,12 @@ public class Warehouse {
     /**
      * 允许负库存
      */
-    private Boolean allowminusstock;
+    private Integer allowminusstock;
 
     /**
      * 是否停用
      */
-    private Boolean shutout;
+    private Integer shutout;
 
     private String item;
 
@@ -114,27 +115,33 @@ public class Warehouse {
     /**
      * 是否计算成本
      */
-    private Boolean iscalccost;
+    private Integer iscalccost;
 
     /**
      * 是否定制化
      */
-    private Boolean iscustomize;
+    private Integer iscustomize;
 
     /**
      * 供应商
      */
     private String supplyNo;
 
+    private List<Supply> supplies;
+
     /**
      * 机构编号（GUID）
      */
     private String id;
+    private List<Rightorganization> rightorganizations;
 
     /**
      * 公司编号
      */
     private String companyId;
+    private List<Company> companies;
+
+    private String supplyName;
 
     public String getWarehouseNo() {
         return warehouseNo;
@@ -184,11 +191,11 @@ public class Warehouse {
         this.keyman = keyman == null ? null : keyman.trim();
     }
 
-    public Boolean getTag() {
+    public Integer getTag() {
         return tag;
     }
 
-    public void setTag(Boolean tag) {
+    public void setTag(Integer tag) {
         this.tag = tag;
     }
 
@@ -216,19 +223,19 @@ public class Warehouse {
         this.fax = fax == null ? null : fax.trim();
     }
 
-    public Boolean getAllowminusstock() {
+    public Integer getAllowminusstock() {
         return allowminusstock;
     }
 
-    public void setAllowminusstock(Boolean allowminusstock) {
+    public void setAllowminusstock(Integer allowminusstock) {
         this.allowminusstock = allowminusstock;
     }
 
-    public Boolean getShutout() {
+    public Integer getShutout() {
         return shutout;
     }
 
-    public void setShutout(Boolean shutout) {
+    public void setShutout(Integer shutout) {
         this.shutout = shutout;
     }
 
@@ -336,19 +343,19 @@ public class Warehouse {
         this.freightcorp = freightcorp == null ? null : freightcorp.trim();
     }
 
-    public Boolean getIscalccost() {
+    public Integer getIscalccost() {
         return iscalccost;
     }
 
-    public void setIscalccost(Boolean iscalccost) {
+    public void setIscalccost(Integer iscalccost) {
         this.iscalccost = iscalccost;
     }
 
-    public Boolean getIscustomize() {
+    public Integer getIscustomize() {
         return iscustomize;
     }
 
-    public void setIscustomize(Boolean iscustomize) {
+    public void setIscustomize(Integer iscustomize) {
         this.iscustomize = iscustomize;
     }
 
@@ -374,5 +381,37 @@ public class Warehouse {
 
     public void setCompanyId(String companyId) {
         this.companyId = companyId == null ? null : companyId.trim();
+    }
+
+    public String getSupplyName() {
+        return supplyName;
+    }
+
+    public void setSupplyName(String supplyName) {
+        this.supplyName = supplyName;
+    }
+
+    public List<Supply> getSupplies() {
+        return supplies;
+    }
+
+    public void setSupplies(List<Supply> supplies) {
+        this.supplies = supplies;
+    }
+
+    public List<Rightorganization> getRightorganizations() {
+        return rightorganizations;
+    }
+
+    public void setRightorganizations(List<Rightorganization> rightorganizations) {
+        this.rightorganizations = rightorganizations;
+    }
+
+    public List<Company> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<Company> companies) {
+        this.companies = companies;
     }
 }

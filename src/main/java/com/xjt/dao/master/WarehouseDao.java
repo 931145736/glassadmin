@@ -1,5 +1,6 @@
 package com.xjt.dao.master;
 
+import com.xjt.dto.WarehouseReqDto;
 import com.xjt.entity.Warehouse;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -46,6 +47,6 @@ public interface WarehouseDao {
      * 查看仓库列表
      * @return
      */
-    List<Warehouse> queryWarehouseList();
+    List<Warehouse> queryWarehouseList(WarehouseReqDto reqDto);
 
 }

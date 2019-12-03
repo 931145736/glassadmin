@@ -36,7 +36,7 @@ public class CompanyController {
 
 
     @UserLog("查看公司列表")
-    @GetMapping("/queryCompanyList")
+    @PostMapping("/queryCompanyList")
     @ApiOperation("查看公司列表 ")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "分页参数 第几页",required = true),
@@ -47,7 +47,7 @@ public class CompanyController {
     }
 
     @UserLog("查看公司信息")
-    @GetMapping("/queryCompanyInfo")
+    @PostMapping("/queryCompanyInfo")
     @ApiOperation("查看公司信息")
     @ApiImplicitParam(name = "companyId",value = "公司编号",required = true)
     public BaseResDto queryCompanyInfo(CompanyReqDto reqDto){

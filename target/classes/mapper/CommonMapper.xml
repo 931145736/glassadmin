@@ -30,4 +30,8 @@
               </if>
           </where>
     </select>
+    <select id="selectOptionList" parameterType="com.xjt.dto.CommonReqDto" resultType="com.xjt.entity.SelectListPojo">
+        select ${colId} as `value`, ${colName} as `label`
+         from ${tableName}
+    </select>
 </mapper>

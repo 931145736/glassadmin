@@ -56,6 +56,15 @@
         <!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
         <logger name="org.springframework" level="INFO"></logger>
         <logger name="org.mybatis" level="INFO"></logger>
+        <logger name="org.mongodb.driver.cluster" level="INFO"/>
+        <logger name="org.mongodb.driver.connection" level="INFO"/>
+        <logger name="org.mongodb.driver.protocol.insert" level="INFO"/>
+        <logger name="org.mongodb.driver.protocol.delete" level="INFO"/>
+        <logger name="org.mongodb.driver.protocol.query" level="INFO"/>
+        <logger name="org.mongodb.driver.protocol.getmore" level="INFO"/>
+        <logger name="org.mongodb.driver.protocol.command" level="INFO"/>
+        <logger name="org.mongodb.driver.protocol.uri" level="INFO"/>
+        <logger name="org.mongodb.driver.protocol.management" level="INFO"/>
         <root level="all">
             <appender-ref ref="Console"/>
             <appender-ref ref="console_err_appender" />

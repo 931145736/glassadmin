@@ -11,10 +11,12 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Api(tags = "供货商相关接口")
+@RequestMapping("/supply")
 public class SupplyController {
 
     @Autowired
@@ -33,8 +35,9 @@ public class SupplyController {
     public BaseResDto insertSupply(SupplyReqDto reqDto){
         return supplyService.insertSupply(reqDto);
     }
+
     @UserLog("供货商列表")
-    @GetMapping("/querySupplyList")
+    @PostMapping("/querySupplyList")
     @ApiOperation("供货商列表 可以分页查看")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo",value = "分页参数 第几页"),
@@ -44,7 +47,7 @@ public class SupplyController {
         return supplyService.querySupplyList(reqDto);
     }
     @UserLog("查看供货商详情")
-    @GetMapping("/querySupplyInfo")
+    @PostMapping("/querySupplyInfo")
     @ApiOperation("查看供货商详情")
     @ApiImplicitParam(name = "supplyNo",value = "供货商编号",required = true)
     public BaseResDto querySupplyInfo(SupplyReqDto reqDto){

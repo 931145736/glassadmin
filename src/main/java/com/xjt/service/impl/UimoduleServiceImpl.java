@@ -44,6 +44,8 @@ public class UimoduleServiceImpl implements UimoduleService {
         BaseResDto baseResDto = new BaseResDto();
 
         try{
+            Uimodule uimodule = new Uimodule();
+            uimoduleDao.insert(uimodule);
 
 
 
