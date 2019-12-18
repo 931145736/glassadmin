@@ -72,7 +72,7 @@ public class SupplyServiceImpl implements SupplyService {
             baseResDto.setResultMessage("pageNo is null");
             return baseResDto;
         }
-        Integer pageSize = 20;
+        Integer pageSize = reqDto.getPageSize();
         try{
 
                 PageHelper.startPage(pageNo,pageSize);

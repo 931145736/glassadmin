@@ -74,7 +74,7 @@ public class PurchaseController {
 
     })
     public BaseResDto queryPurchaseOrderList(@RequestBody OrderEntity reqDto){
-        reqDto.setPageSize(20);
+
         return purchaseService.PurchaseOrderLisy(reqDto);
     }
 

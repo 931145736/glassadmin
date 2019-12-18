@@ -8,4 +8,6 @@ public interface CustomerService {
     BaseResDto insertCustomer(CustomerReqDto reqDto);
 
     BaseResDto queryCustomerInfo(CustomerReqDto reqDto);
+
+    BaseResDto queryCustomerList(CustomerReqDto reqDto);
 }

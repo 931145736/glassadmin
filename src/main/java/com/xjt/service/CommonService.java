@@ -20,4 +20,6 @@ public interface CommonService {
     *@Time
     */
     BaseResDto SelectOptionList(CommonReqDto reqDto);
+
+    BaseResDto openOrClosedTarget(CommonReqDto reqDto);
 }

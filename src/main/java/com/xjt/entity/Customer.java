@@ -191,7 +191,7 @@ public class Customer {
     /**
      * 应收户口
      */
-    private Boolean accountcustomerflag;
+    private Integer accountcustomerflag;
 
     /**
      * 零售价类型
@@ -206,7 +206,7 @@ public class Customer {
     /**
      * 结算价是否从货品档案取
      */
-    private Boolean balancepricegetfromgoods;
+    private Integer balancepricegetfromgoods;
 
     /**
      * 折扣
@@ -264,7 +264,7 @@ public class Customer {
     /**
      * 是否停用
      */
-    private Boolean shutout;
+    private Integer shutout;
 
     /**
      * 建立日期
@@ -279,7 +279,7 @@ public class Customer {
     /**
      * 允许负库存
      */
-    private Boolean allowminusstock;
+    private Integer allowminusstock;
 
     /**
      * 暂无
@@ -294,7 +294,7 @@ public class Customer {
     /**
      * 暂无
      */
-    private Boolean flag;
+    private Integer flag;
 
     /**
      * 暂无
@@ -314,17 +314,17 @@ public class Customer {
     /**
      * 暂无
      */
-    private Boolean overcrdt;
+    private Integer overcrdt;
 
     /**
      * 暂无
      */
-    private Boolean ischeckbalancemode;
+    private Integer ischeckbalancemode;
 
     /**
      * 暂无
      */
-    private Boolean printpossmallbill;
+    private Integer printpossmallbill;
 
     /**
      * 暂无
@@ -334,12 +334,12 @@ public class Customer {
     /**
      * 暂无
      */
-    private Boolean isautobuildbill;
+    private Integer isautobuildbill;
 
     /**
      * 暂无
      */
-    private Boolean companypriceflag;
+    private Integer companypriceflag;
 
     /**
      * 暂无
@@ -349,27 +349,27 @@ public class Customer {
     /**
      * 暂无
      */
-    private Boolean isemporium;
+    private Integer isemporium;
 
     /**
      * 暂无
      */
-    private Boolean notintegral;
+    private Integer notintegral;
 
     /**
      * 暂无
      */
-    private Boolean notdiscount;
+    private Integer notdiscount;
 
     /**
      * 暂无
      */
-    private Boolean notsendmobilemsg;
+    private Integer notsendmobilemsg;
 
     /**
      * 暂无
      */
-    private Boolean tag;
+    private Integer tag;
 
     /**
      * 暂无
@@ -379,32 +379,32 @@ public class Customer {
     /**
      * 暂无
      */
-    private Boolean isquotamanage;
+    private Integer isquotamanage;
 
     /**
      * 暂无
      */
-    private Boolean checkminusstockwhenposdaybalance;
+    private Integer checkminusstockwhenposdaybalance;
 
     /**
      * 暂无
      */
-    private Boolean isuseunitprice;
+    private Integer isuseunitprice;
 
     /**
      * 暂无
      */
-    private Boolean ismall;
+    private Integer ismall;
 
     /**
      * 暂无
      */
-    private Boolean multiselectrenotice;
+    private Integer multiselectrenotice;
 
     /**
      * 暂无
      */
-    private Boolean multiselectshopapplyout;
+    private Integer multiselectshopapplyout;
 
     /**
      * 暂无
@@ -494,7 +494,7 @@ public class Customer {
     /**
      * 是否单独核算成本
      */
-    private Boolean iscalccost;
+    private Integer iscalccost;
 
     /**
      * 暂无
@@ -520,6 +520,17 @@ public class Customer {
      * 经营企业许可、备案编号（自动生成）
      */
     private String brid;
+    //品牌名称
+    private String brandNames;
+    //开户行账户名
+    private String accountName;
+    //公司名
+    private String companyName;
+    //组织机构名
+    private String organizationName;
+    //上级渠道名
+    private String parentCustomerName;
+
 
     public String getCustomerId() {
         return customerId;
@@ -809,11 +820,11 @@ public class Customer {
         this.accountcustomerId = accountcustomerId == null ? null : accountcustomerId.trim();
     }
 
-    public Boolean getAccountcustomerflag() {
+    public Integer getAccountcustomerflag() {
         return accountcustomerflag;
     }
 
-    public void setAccountcustomerflag(Boolean accountcustomerflag) {
+    public void setAccountcustomerflag(Integer accountcustomerflag) {
         this.accountcustomerflag = accountcustomerflag;
     }
 
@@ -833,11 +844,11 @@ public class Customer {
         this.balancepricetype = balancepricetype == null ? null : balancepricetype.trim();
     }
 
-    public Boolean getBalancepricegetfromgoods() {
+    public Integer getBalancepricegetfromgoods() {
         return balancepricegetfromgoods;
     }
 
-    public void setBalancepricegetfromgoods(Boolean balancepricegetfromgoods) {
+    public void setBalancepricegetfromgoods(Integer balancepricegetfromgoods) {
         this.balancepricegetfromgoods = balancepricegetfromgoods;
     }
 
@@ -945,11 +956,11 @@ public class Customer {
         this.businessmangroup = businessmangroup == null ? null : businessmangroup.trim();
     }
 
-    public Boolean getShutout() {
+    public Integer getShutout() {
         return shutout;
     }
 
-    public void setShutout(Boolean shutout) {
+    public void setShutout(Integer shutout) {
         this.shutout = shutout;
     }
 
@@ -969,11 +980,11 @@ public class Customer {
         this.updatetimestamp = updatetimestamp;
     }
 
-    public Boolean getAllowminusstock() {
+    public Integer getAllowminusstock() {
         return allowminusstock;
     }
 
-    public void setAllowminusstock(Boolean allowminusstock) {
+    public void setAllowminusstock(Integer allowminusstock) {
         this.allowminusstock = allowminusstock;
     }
 
@@ -993,11 +1004,11 @@ public class Customer {
         this.item = item == null ? null : item.trim();
     }
 
-    public Boolean getFlag() {
+    public Integer getFlag() {
         return flag;
     }
 
-    public void setFlag(Boolean flag) {
+    public void setFlag(Integer flag) {
         this.flag = flag;
     }
 
@@ -1025,27 +1036,27 @@ public class Customer {
         this.formulaid = formulaid == null ? null : formulaid.trim();
     }
 
-    public Boolean getOvercrdt() {
+    public Integer getOvercrdt() {
         return overcrdt;
     }
 
-    public void setOvercrdt(Boolean overcrdt) {
+    public void setOvercrdt(Integer overcrdt) {
         this.overcrdt = overcrdt;
     }
 
-    public Boolean getIscheckbalancemode() {
+    public Integer getIscheckbalancemode() {
         return ischeckbalancemode;
     }
 
-    public void setIscheckbalancemode(Boolean ischeckbalancemode) {
+    public void setIscheckbalancemode(Integer ischeckbalancemode) {
         this.ischeckbalancemode = ischeckbalancemode;
     }
 
-    public Boolean getPrintpossmallbill() {
+    public Integer getPrintpossmallbill() {
         return printpossmallbill;
     }
 
-    public void setPrintpossmallbill(Boolean printpossmallbill) {
+    public void setPrintpossmallbill(Integer printpossmallbill) {
         this.printpossmallbill = printpossmallbill;
     }
 
@@ -1057,19 +1068,19 @@ public class Customer {
         this.repofficeId = repofficeId == null ? null : repofficeId.trim();
     }
 
-    public Boolean getIsautobuildbill() {
+    public Integer getIsautobuildbill() {
         return isautobuildbill;
     }
 
-    public void setIsautobuildbill(Boolean isautobuildbill) {
+    public void setIsautobuildbill(Integer isautobuildbill) {
         this.isautobuildbill = isautobuildbill;
     }
 
-    public Boolean getCompanypriceflag() {
+    public Integer getCompanypriceflag() {
         return companypriceflag;
     }
 
-    public void setCompanypriceflag(Boolean companypriceflag) {
+    public void setCompanypriceflag(Integer companypriceflag) {
         this.companypriceflag = companypriceflag;
     }
 
@@ -1081,43 +1092,43 @@ public class Customer {
         this.accountcompanyId = accountcompanyId == null ? null : accountcompanyId.trim();
     }
 
-    public Boolean getIsemporium() {
+    public Integer getIsemporium() {
         return isemporium;
     }
 
-    public void setIsemporium(Boolean isemporium) {
+    public void setIsemporium(Integer isemporium) {
         this.isemporium = isemporium;
     }
 
-    public Boolean getNotintegral() {
+    public Integer getNotintegral() {
         return notintegral;
     }
 
-    public void setNotintegral(Boolean notintegral) {
+    public void setNotintegral(Integer notintegral) {
         this.notintegral = notintegral;
     }
 
-    public Boolean getNotdiscount() {
+    public Integer getNotdiscount() {
         return notdiscount;
     }
 
-    public void setNotdiscount(Boolean notdiscount) {
+    public void setNotdiscount(Integer notdiscount) {
         this.notdiscount = notdiscount;
     }
 
-    public Boolean getNotsendmobilemsg() {
+    public Integer getNotsendmobilemsg() {
         return notsendmobilemsg;
     }
 
-    public void setNotsendmobilemsg(Boolean notsendmobilemsg) {
+    public void setNotsendmobilemsg(Integer notsendmobilemsg) {
         this.notsendmobilemsg = notsendmobilemsg;
     }
 
-    public Boolean getTag() {
+    public Integer getTag() {
         return tag;
     }
 
-    public void setTag(Boolean tag) {
+    public void setTag(Integer tag) {
         this.tag = tag;
     }
 
@@ -1129,51 +1140,51 @@ public class Customer {
         this.customergroup = customergroup == null ? null : customergroup.trim();
     }
 
-    public Boolean getIsquotamanage() {
+    public Integer getIsquotamanage() {
         return isquotamanage;
     }
 
-    public void setIsquotamanage(Boolean isquotamanage) {
+    public void setIsquotamanage(Integer isquotamanage) {
         this.isquotamanage = isquotamanage;
     }
 
-    public Boolean getCheckminusstockwhenposdaybalance() {
+    public Integer getCheckminusstockwhenposdaybalance() {
         return checkminusstockwhenposdaybalance;
     }
 
-    public void setCheckminusstockwhenposdaybalance(Boolean checkminusstockwhenposdaybalance) {
+    public void setCheckminusstockwhenposdaybalance(Integer checkminusstockwhenposdaybalance) {
         this.checkminusstockwhenposdaybalance = checkminusstockwhenposdaybalance;
     }
 
-    public Boolean getIsuseunitprice() {
+    public Integer getIsuseunitprice() {
         return isuseunitprice;
     }
 
-    public void setIsuseunitprice(Boolean isuseunitprice) {
+    public void setIsuseunitprice(Integer isuseunitprice) {
         this.isuseunitprice = isuseunitprice;
     }
 
-    public Boolean getIsmall() {
+    public Integer getIsmall() {
         return ismall;
     }
 
-    public void setIsmall(Boolean ismall) {
+    public void setIsmall(Integer ismall) {
         this.ismall = ismall;
     }
 
-    public Boolean getMultiselectrenotice() {
+    public Integer getMultiselectrenotice() {
         return multiselectrenotice;
     }
 
-    public void setMultiselectrenotice(Boolean multiselectrenotice) {
+    public void setMultiselectrenotice(Integer multiselectrenotice) {
         this.multiselectrenotice = multiselectrenotice;
     }
 
-    public Boolean getMultiselectshopapplyout() {
+    public Integer getMultiselectshopapplyout() {
         return multiselectshopapplyout;
     }
 
-    public void setMultiselectshopapplyout(Boolean multiselectshopapplyout) {
+    public void setMultiselectshopapplyout(Integer multiselectshopapplyout) {
         this.multiselectshopapplyout = multiselectshopapplyout;
     }
 
@@ -1313,11 +1324,11 @@ public class Customer {
         this.ownbrand = ownbrand == null ? null : ownbrand.trim();
     }
 
-    public Boolean getIscalccost() {
+    public Integer getIscalccost() {
         return iscalccost;
     }
 
-    public void setIscalccost(Boolean iscalccost) {
+    public void setIscalccost(Integer iscalccost) {
         this.iscalccost = iscalccost;
     }
 
@@ -1359,5 +1370,45 @@ public class Customer {
 
     public void setBrid(String brid) {
         this.brid = brid == null ? null : brid.trim();
+    }
+
+    public String getBrandNames() {
+        return brandNames;
+    }
+
+    public void setBrandNames(String brandNames) {
+        this.brandNames = brandNames;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getOrganizationName() {
+        return organizationName;
+    }
+
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
+    }
+
+    public String getParentCustomerName() {
+        return parentCustomerName;
+    }
+
+    public void setParentCustomerName(String parentCustomerName) {
+        this.parentCustomerName = parentCustomerName;
     }
 }

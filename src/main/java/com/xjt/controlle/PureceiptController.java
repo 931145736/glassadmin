@@ -69,7 +69,7 @@ public class PureceiptController {
     @ApiOperation("查看厂家到货单列表")
     @ApiImplicitParam(name = "pageNo",value = "分页参数，第几页",required = true)
     public BaseResDto queryPureceiptOrderList(@RequestBody OrderEntity reqDto){
-        reqDto.setPageSize(20);
+
         return pureceiptService.queryPureceiptOrderList(reqDto);
     }
 

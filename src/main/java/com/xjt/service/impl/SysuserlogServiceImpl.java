@@ -43,7 +43,7 @@ public class SysuserlogServiceImpl implements SysuserlogService {
     public BaseResDto queryUserLogList(SysuserlogReqDto reqDto) {
         BaseResDto baseResDto = new BaseResDto();
         Integer pageNo = reqDto.getPageNo();
-        Integer pageSize = 20;
+        Integer pageSize = reqDto.getPageSize();
         if(pageNo==null){
             baseResDto.setResultMessage("pageNo is null");
             baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());

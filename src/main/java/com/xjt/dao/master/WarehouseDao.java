@@ -49,4 +49,8 @@ public interface WarehouseDao {
      */
     List<Warehouse> queryWarehouseList(WarehouseReqDto reqDto);
 
+    int openOrStopWare(WarehouseReqDto reqDto);
+
+    int deleteWarehouse(WarehouseReqDto reqDto);
+
 }

@@ -39,10 +39,10 @@
         <result column="Credit" property="credit" jdbcType="DECIMAL" />
         <result column="ParentChannelID" property="parentchannelid" jdbcType="VARCHAR" />
         <result column="AccountCustomer_ID" property="accountcustomerId" jdbcType="VARCHAR" />
-        <result column="AccountCustomerFlag" property="accountcustomerflag" jdbcType="BIT" />
+        <result column="AccountCustomerFlag" property="accountcustomerflag" jdbcType="INTEGER" />
         <result column="DpPriceType" property="dppricetype" jdbcType="VARCHAR" />
         <result column="BalancePriceType" property="balancepricetype" jdbcType="VARCHAR" />
-        <result column="BalancePriceGetFromGoods" property="balancepricegetfromgoods" jdbcType="BIT" />
+        <result column="BalancePriceGetFromGoods" property="balancepricegetfromgoods" jdbcType="INTEGER" />
         <result column="Fdiscount" property="fdiscount" jdbcType="DECIMAL" />
         <result column="MarketPlaceDiscount" property="marketplacediscount" jdbcType="DECIMAL" />
         <result column="QiExchangeRate" property="qiexchangerate" jdbcType="DECIMAL" />
@@ -56,35 +56,35 @@
         <result column="VipUseGroup" property="vipusegroup" jdbcType="VARCHAR" />
         <result column="StockQueryGroup" property="stockquerygroup" jdbcType="VARCHAR" />
         <result column="BusinessManGroup" property="businessmangroup" jdbcType="VARCHAR" />
-        <result column="ShutOut" property="shutout" jdbcType="BIT" />
+        <result column="ShutOut" property="shutout" jdbcType="INTEGER" />
         <result column="Input_Date" property="inputDate" jdbcType="TIMESTAMP" />
         <result column="UpdateTimestamp" property="updatetimestamp" jdbcType="TIMESTAMP" />
-        <result column="AllowMinusStock" property="allowminusstock" jdbcType="BIT" />
+        <result column="AllowMinusStock" property="allowminusstock" jdbcType="INTEGER" />
         <result column="Shops_ID" property="shopsId" jdbcType="VARCHAR" />
         <result column="Item" property="item" jdbcType="VARCHAR" />
-        <result column="Flag" property="flag" jdbcType="BIT" />
+        <result column="Flag" property="flag" jdbcType="INTEGER" />
         <result column="Warehouse_No" property="warehouseNo" jdbcType="VARCHAR" />
         <result column="Calulate" property="calulate" jdbcType="INTEGER" />
         <result column="FormulaId" property="formulaid" jdbcType="VARCHAR" />
-        <result column="OverCrdt" property="overcrdt" jdbcType="BIT" />
-        <result column="IsCheckBalanceMode" property="ischeckbalancemode" jdbcType="BIT" />
-        <result column="PrintPosSmallBill" property="printpossmallbill" jdbcType="BIT" />
+        <result column="OverCrdt" property="overcrdt" jdbcType="INTEGER" />
+        <result column="IsCheckBalanceMode" property="ischeckbalancemode" jdbcType="INTEGER" />
+        <result column="PrintPosSmallBill" property="printpossmallbill" jdbcType="INTEGER" />
         <result column="RepOffice_ID" property="repofficeId" jdbcType="VARCHAR" />
-        <result column="IsAutoBuildBill" property="isautobuildbill" jdbcType="BIT" />
-        <result column="CompanyPriceFlag" property="companypriceflag" jdbcType="BIT" />
+        <result column="IsAutoBuildBill" property="isautobuildbill" jdbcType="INTEGER" />
+        <result column="CompanyPriceFlag" property="companypriceflag" jdbcType="INTEGER" />
         <result column="AccountCompany_ID" property="accountcompanyId" jdbcType="VARCHAR" />
-        <result column="IsEmporium" property="isemporium" jdbcType="BIT" />
-        <result column="NotIntegral" property="notintegral" jdbcType="BIT" />
-        <result column="NotDiscount" property="notdiscount" jdbcType="BIT" />
-        <result column="NotSendMobileMsg" property="notsendmobilemsg" jdbcType="BIT" />
-        <result column="Tag" property="tag" jdbcType="BIT" />
+        <result column="IsEmporium" property="isemporium" jdbcType="INTEGER" />
+        <result column="NotIntegral" property="notintegral" jdbcType="INTEGER" />
+        <result column="NotDiscount" property="notdiscount" jdbcType="INTEGER" />
+        <result column="NotSendMobileMsg" property="notsendmobilemsg" jdbcType="INTEGER" />
+        <result column="Tag" property="tag" jdbcType="INTEGER" />
         <result column="CustomerGroup" property="customergroup" jdbcType="VARCHAR" />
-        <result column="IsQuotaManage" property="isquotamanage" jdbcType="BIT" />
-        <result column="CheckMinusStockWhenPosDayBalance" property="checkminusstockwhenposdaybalance" jdbcType="BIT" />
-        <result column="IsUseUnitPrice" property="isuseunitprice" jdbcType="BIT" />
-        <result column="IsMall" property="ismall" jdbcType="BIT" />
-        <result column="MultiSelectRenotice" property="multiselectrenotice" jdbcType="BIT" />
-        <result column="MultiSelectShopApplyOut" property="multiselectshopapplyout" jdbcType="BIT" />
+        <result column="IsQuotaManage" property="isquotamanage" jdbcType="INTEGER" />
+        <result column="CheckMinusStockWhenPosDayBalance" property="checkminusstockwhenposdaybalance" jdbcType="INTEGER" />
+        <result column="IsUseUnitPrice" property="isuseunitprice" jdbcType="INTEGER" />
+        <result column="IsMall" property="ismall" jdbcType="INTEGER" />
+        <result column="MultiSelectRenotice" property="multiselectrenotice" jdbcType="INTEGER" />
+        <result column="MultiSelectShopApplyOut" property="multiselectshopapplyout" jdbcType="INTEGER" />
         <result column="UseArea" property="usearea" jdbcType="DECIMAL" />
         <result column="ShopTopArea" property="shoptoparea" jdbcType="DECIMAL" />
         <result column="ShopAfterArea" property="shopafterarea" jdbcType="DECIMAL" />
@@ -102,7 +102,7 @@
         <result column="Division" property="division" jdbcType="VARCHAR" />
         <result column="DivisionLevel" property="divisionlevel" jdbcType="VARCHAR" />
         <result column="OwnBrand" property="ownbrand" jdbcType="VARCHAR" />
-        <result column="IsCalcCost" property="iscalccost" jdbcType="BIT" />
+        <result column="IsCalcCost" property="iscalccost" jdbcType="INTEGER" />
         <result column="Insurance" property="insurance" jdbcType="VARCHAR" />
         <result column="GiftCardUseGroup" property="giftcardusegroup" jdbcType="VARCHAR" />
         <result column="LinkMan" property="linkman" jdbcType="VARCHAR" />
@@ -121,7 +121,7 @@
         BusinessManGroup, ShutOut, Input_Date, UpdateTimestamp, AllowMinusStock, Shops_ID, 
         Item, Flag, Warehouse_No, Calulate, FormulaId, OverCrdt, IsCheckBalanceMode, PrintPosSmallBill, 
         RepOffice_ID, IsAutoBuildBill, CompanyPriceFlag, AccountCompany_ID, IsEmporium, NotIntegral, 
-        NotDiscount, NotSendMobileMsg, Tag, CustomerGroup, IsQuotaManage, CheckMinusStockWhenPosDayBalance, 
+        NotDiscount, NotSendMobileMsg, Tag, CustomerGroup, IsQuotaManage, CheckMinusStockWhenPosDayBalance,
         IsUseUnitPrice, IsMall, MultiSelectRenotice, MultiSelectShopApplyOut, UseArea, ShopTopArea, 
         ShopAfterArea, ContractArea, ShopLocation1, ShopLocation2, StandardStockQt, StandardAreaRate, 
         ContractBeginDate, ContractEndDate, SecurityAmount, ControlMan, ShopStaffing, BillingCycle, 
@@ -129,11 +129,28 @@
         VipStoredGroup, BRID
     </sql>
 
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-        select 
-        <include refid="Base_Column_List" />
-        from customer
-        where Customer_ID = #{customerId,jdbcType=VARCHAR}
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" resultType="com.xjt.entity.Customer" >
+        SELECT
+        t1.Customer_ID, t1.Abbrev, t1.Customer_Na, t1.PractiseDate, t1.ShutOutDate, t1.FictitiousPerson, t1.TaxNumber,
+        t1.Keyman, t1.Mobile, t1.Email, t1.Fax, t1.Tel1, t1.Tel2, t1.cGroup, t1.Company_ID, t1.OrganizationID, t1.Country,
+        t1.Region, t1.Province, t1.City, t1.Address, t1.Zipcode, t1.Mathod, t1.DealInPattern, t1.cLevel, t1.Sort, t1.SaleMan,
+        t1.PropertyLevel, t1.Saletarget, t1.Fee, t1.cArea, t1.Deposit, t1.Remark, t1.Credit,
+        t1.AccountCustomer_ID, t1.AccountCustomerFlag, t1.DpPriceType, t1.BalancePriceType, t1.BalancePriceGetFromGoods,
+        t1.Fdiscount, t1.MarketPlaceDiscount, t1.QiExchangeRate, t1.QiExchangeCyc, t1.ExchangeRate, t1.ExchangeCyc,
+        t1.ExchangeFirst, t1.SPromoBeforeVip, t1.SortCycDays, t1.NoSPromoScale, t1.VipUseGroup, t1.StockQueryGroup,
+        t1.BusinessManGroup, t1.ShutOut, t1.Input_Date, t1.UpdateTimestamp, t1.AllowMinusStock, t1.Shops_ID,
+        t1.Item, t1.Flag, t1.Warehouse_No, t1.Calulate, t1.FormulaId, t1.OverCrdt, t1.IsCheckBalanceMode, t1.PrintPosSmallBill,
+        t1.RepOffice_ID, t1.IsAutoBuildBill, t1.CompanyPriceFlag, t1.AccountCompany_ID, t1.IsEmporium, t1.NotIntegral,
+        t1.NotDiscount, t1.NotSendMobileMsg, t1.Tag, t1.CustomerGroup, t1.IsQuotaManage, t1.CheckMinusStockWhenPosDayBalance,
+        t1.IsUseUnitPrice, t1.IsMall, t1.MultiSelectRenotice, t1.MultiSelectShopApplyOut, t1.UseArea, t1.ShopTopArea,
+        t1.ShopAfterArea, t1.ContractArea, t1.ShopLocation1, t1.ShopLocation2, t1.StandardStockQt, t1.StandardAreaRate,
+        t1.ContractBeginDate, t1.ContractEndDate, t1.SecurityAmount, t1.ControlMan, t1.ShopStaffing, t1.BillingCycle,
+        t1.Division, t1.DivisionLevel, t1.OwnBrand, t1.IsCalcCost, t1.Insurance, t1.GiftCardUseGroup, t1.LinkMan,
+        t1.VipStoredGroup, t1.BRID, t2.Company_Na AS companyName, t3.Organization AS organizationName, t4.Customer_Na parentCustomerName
+        FROM customer t1 LEFT JOIN company t2 ON t1.Company_ID = t2.Company_ID
+        LEFT JOIN rightorganization t3 ON t1.OrganizationID = t3.ID
+        LEFT JOIN customer t4 ON t1.ParentChannelID = t4.Customer_ID
+        where t1.Customer_ID = #{customerId,jdbcType=VARCHAR}
     </select>
     <select id="queryCustomerByIds" parameterType="java.util.List" resultMap="BaseResultMap">
         select Customer_ID, Abbrev, Customer_Na
@@ -142,6 +159,29 @@
              <foreach collection="customerIds" item="customerId" index="index" open="(" close=")" separator=",">
                  #{customerId,jdbcType=VARCHAR}
              </foreach>
+
+    </select>
+    <select id="queryCustomerLists" parameterType="com.xjt.dto.CustomerReqDto" resultMap="BaseResultMap">
+          select   Customer_ID, Abbrev, Customer_Na, PractiseDate, ShutOutDate, FictitiousPerson, TaxNumber,
+                    Keyman, Mobile, Email, Fax, Tel1,Mathod,ShutOut
+          from customer
+          <where>
+              <if test="customerNa != null and customerNa != '' ">
+                  and Customer_Na like concat('%',#{customerNa},'%')
+              </if>
+              <if test="fictitiousperson != null and fictitiousperson != '' ">
+                  and FictitiousPerson = #{fictitiousperson}
+              </if>
+              <if test="keyman != null and keyman != '' " >
+                  and Keyman = #{keyman}
+              </if>
+              <if test="mobile != null and mobile != '' ">
+                  and Mobile = #{mobile}
+              </if>
+              <if test="mathod != null and mathod != '' ">
+                  and Mathod = #{mathod}
+              </if>
+          </where>
 
     </select>
 
@@ -199,28 +239,28 @@
             #{propertylevel,jdbcType=VARCHAR}, #{saletarget,jdbcType=DECIMAL}, #{fee,jdbcType=DECIMAL}, 
             #{carea,jdbcType=DECIMAL}, #{deposit,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
             #{credit,jdbcType=DECIMAL}, #{parentchannelid,jdbcType=VARCHAR}, #{accountcustomerId,jdbcType=VARCHAR}, 
-            #{accountcustomerflag,jdbcType=BIT}, #{dppricetype,jdbcType=VARCHAR}, #{balancepricetype,jdbcType=VARCHAR}, 
-            #{balancepricegetfromgoods,jdbcType=BIT}, #{fdiscount,jdbcType=DECIMAL}, #{marketplacediscount,jdbcType=DECIMAL}, 
+            #{accountcustomerflag,jdbcType=INTEGER}, #{dppricetype,jdbcType=VARCHAR}, #{balancepricetype,jdbcType=VARCHAR}, 
+            #{balancepricegetfromgoods,jdbcType=INTEGER}, #{fdiscount,jdbcType=DECIMAL}, #{marketplacediscount,jdbcType=DECIMAL}, 
             #{qiexchangerate,jdbcType=DECIMAL}, #{qiexchangecyc,jdbcType=INTEGER}, #{exchangerate,jdbcType=DECIMAL}, 
             #{exchangecyc,jdbcType=DECIMAL}, #{exchangefirst,jdbcType=DECIMAL}, #{spromobeforevip,jdbcType=INTEGER}, 
             #{sortcycdays,jdbcType=INTEGER}, #{nospromoscale,jdbcType=DECIMAL}, #{vipusegroup,jdbcType=VARCHAR}, 
-            #{stockquerygroup,jdbcType=VARCHAR}, #{businessmangroup,jdbcType=VARCHAR}, #{shutout,jdbcType=BIT}, 
-            #{inputDate,jdbcType=TIMESTAMP}, #{updatetimestamp,jdbcType=TIMESTAMP}, #{allowminusstock,jdbcType=BIT}, 
-            #{shopsId,jdbcType=VARCHAR}, #{item,jdbcType=VARCHAR}, #{flag,jdbcType=BIT}, 
+            #{stockquerygroup,jdbcType=VARCHAR}, #{businessmangroup,jdbcType=VARCHAR}, #{shutout,jdbcType=INTEGER}, 
+            #{inputDate,jdbcType=TIMESTAMP}, #{updatetimestamp,jdbcType=TIMESTAMP}, #{allowminusstock,jdbcType=INTEGER}, 
+            #{shopsId,jdbcType=VARCHAR}, #{item,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}, 
             #{warehouseNo,jdbcType=VARCHAR}, #{calulate,jdbcType=INTEGER}, #{formulaid,jdbcType=VARCHAR}, 
-            #{overcrdt,jdbcType=BIT}, #{ischeckbalancemode,jdbcType=BIT}, #{printpossmallbill,jdbcType=BIT}, 
-            #{repofficeId,jdbcType=VARCHAR}, #{isautobuildbill,jdbcType=BIT}, #{companypriceflag,jdbcType=BIT}, 
-            #{accountcompanyId,jdbcType=VARCHAR}, #{isemporium,jdbcType=BIT}, #{notintegral,jdbcType=BIT}, 
-            #{notdiscount,jdbcType=BIT}, #{notsendmobilemsg,jdbcType=BIT}, #{tag,jdbcType=BIT}, 
-            #{customergroup,jdbcType=VARCHAR}, #{isquotamanage,jdbcType=BIT}, #{checkminusstockwhenposdaybalance,jdbcType=BIT}, 
-            #{isuseunitprice,jdbcType=BIT}, #{ismall,jdbcType=BIT}, #{multiselectrenotice,jdbcType=BIT}, 
-            #{multiselectshopapplyout,jdbcType=BIT}, #{usearea,jdbcType=DECIMAL}, #{shoptoparea,jdbcType=DECIMAL}, 
+            #{overcrdt,jdbcType=INTEGER}, #{ischeckbalancemode,jdbcType=INTEGER}, #{printpossmallbill,jdbcType=INTEGER}, 
+            #{repofficeId,jdbcType=VARCHAR}, #{isautobuildbill,jdbcType=INTEGER}, #{companypriceflag,jdbcType=INTEGER}, 
+            #{accountcompanyId,jdbcType=VARCHAR}, #{isemporium,jdbcType=INTEGER}, #{notintegral,jdbcType=INTEGER}, 
+            #{notdiscount,jdbcType=INTEGER}, #{notsendmobilemsg,jdbcType=INTEGER}, #{tag,jdbcType=INTEGER}, 
+            #{customergroup,jdbcType=VARCHAR}, #{isquotamanage,jdbcType=INTEGER}, #{checkminusstockwhenposdaybalance,jdbcType=INTEGER}, 
+            #{isuseunitprice,jdbcType=INTEGER}, #{ismall,jdbcType=INTEGER}, #{multiselectrenotice,jdbcType=INTEGER}, 
+            #{multiselectshopapplyout,jdbcType=INTEGER}, #{usearea,jdbcType=DECIMAL}, #{shoptoparea,jdbcType=DECIMAL}, 
             #{shopafterarea,jdbcType=DECIMAL}, #{contractarea,jdbcType=DECIMAL}, #{shoplocation1,jdbcType=DECIMAL}, 
             #{shoplocation2,jdbcType=DECIMAL}, #{standardstockqt,jdbcType=INTEGER}, #{standardarearate,jdbcType=DECIMAL}, 
             #{contractbegindate,jdbcType=TIMESTAMP}, #{contractenddate,jdbcType=TIMESTAMP}, 
             #{securityamount,jdbcType=DECIMAL}, #{controlman,jdbcType=VARCHAR}, #{shopstaffing,jdbcType=VARCHAR}, 
             #{billingcycle,jdbcType=INTEGER}, #{division,jdbcType=VARCHAR}, #{divisionlevel,jdbcType=VARCHAR}, 
-            #{ownbrand,jdbcType=VARCHAR}, #{iscalccost,jdbcType=BIT}, #{insurance,jdbcType=VARCHAR}, 
+            #{ownbrand,jdbcType=VARCHAR}, #{iscalccost,jdbcType=INTEGER}, #{insurance,jdbcType=VARCHAR}, 
             #{giftcardusegroup,jdbcType=VARCHAR}, #{linkman,jdbcType=VARCHAR}, #{vipstoredgroup,jdbcType=VARCHAR}, 
             #{brid,jdbcType=VARCHAR})
     </insert>
@@ -654,7 +694,7 @@
                 #{accountcustomerId,jdbcType=VARCHAR},
             </if>
             <if test="accountcustomerflag != null" >
-                #{accountcustomerflag,jdbcType=BIT},
+                #{accountcustomerflag,jdbcType=INTEGER},
             </if>
             <if test="dppricetype != null" >
                 #{dppricetype,jdbcType=VARCHAR},
@@ -663,7 +703,7 @@
                 #{balancepricetype,jdbcType=VARCHAR},
             </if>
             <if test="balancepricegetfromgoods != null" >
-                #{balancepricegetfromgoods,jdbcType=BIT},
+                #{balancepricegetfromgoods,jdbcType=INTEGER},
             </if>
             <if test="fdiscount != null" >
                 #{fdiscount,jdbcType=DECIMAL},
@@ -705,7 +745,7 @@
                 #{businessmangroup,jdbcType=VARCHAR},
             </if>
             <if test="shutout != null" >
-                #{shutout,jdbcType=BIT},
+                #{shutout,jdbcType=INTEGER},
             </if>
             <if test="inputDate != null" >
                 #{inputDate,jdbcType=TIMESTAMP},
@@ -714,7 +754,7 @@
                 #{updatetimestamp,jdbcType=TIMESTAMP},
             </if>
             <if test="allowminusstock != null" >
-                #{allowminusstock,jdbcType=BIT},
+                #{allowminusstock,jdbcType=INTEGER},
             </if>
             <if test="shopsId != null" >
                 #{shopsId,jdbcType=VARCHAR},
@@ -723,7 +763,7 @@
                 #{item,jdbcType=VARCHAR},
             </if>
             <if test="flag != null" >
-                #{flag,jdbcType=BIT},
+                #{flag,jdbcType=INTEGER},
             </if>
             <if test="warehouseNo != null" >
                 #{warehouseNo,jdbcType=VARCHAR},
@@ -735,61 +775,61 @@
                 #{formulaid,jdbcType=VARCHAR},
             </if>
             <if test="overcrdt != null" >
-                #{overcrdt,jdbcType=BIT},
+                #{overcrdt,jdbcType=INTEGER},
             </if>
             <if test="ischeckbalancemode != null" >
-                #{ischeckbalancemode,jdbcType=BIT},
+                #{ischeckbalancemode,jdbcType=INTEGER},
             </if>
             <if test="printpossmallbill != null" >
-                #{printpossmallbill,jdbcType=BIT},
+                #{printpossmallbill,jdbcType=INTEGER},
             </if>
             <if test="repofficeId != null" >
                 #{repofficeId,jdbcType=VARCHAR},
             </if>
             <if test="isautobuildbill != null" >
-                #{isautobuildbill,jdbcType=BIT},
+                #{isautobuildbill,jdbcType=INTEGER},
             </if>
             <if test="companypriceflag != null" >
-                #{companypriceflag,jdbcType=BIT},
+                #{companypriceflag,jdbcType=INTEGER},
             </if>
             <if test="accountcompanyId != null" >
                 #{accountcompanyId,jdbcType=VARCHAR},
             </if>
             <if test="isemporium != null" >
-                #{isemporium,jdbcType=BIT},
+                #{isemporium,jdbcType=INTEGER},
             </if>
             <if test="notintegral != null" >
-                #{notintegral,jdbcType=BIT},
+                #{notintegral,jdbcType=INTEGER},
             </if>
             <if test="notdiscount != null" >
-                #{notdiscount,jdbcType=BIT},
+                #{notdiscount,jdbcType=INTEGER},
             </if>
             <if test="notsendmobilemsg != null" >
-                #{notsendmobilemsg,jdbcType=BIT},
+                #{notsendmobilemsg,jdbcType=INTEGER},
             </if>
             <if test="tag != null" >
-                #{tag,jdbcType=BIT},
+                #{tag,jdbcType=INTEGER},
             </if>
             <if test="customergroup != null" >
                 #{customergroup,jdbcType=VARCHAR},
             </if>
             <if test="isquotamanage != null" >
-                #{isquotamanage,jdbcType=BIT},
+                #{isquotamanage,jdbcType=INTEGER},
             </if>
             <if test="checkminusstockwhenposdaybalance != null" >
-                #{checkminusstockwhenposdaybalance,jdbcType=BIT},
+                #{checkminusstockwhenposdaybalance,jdbcType=INTEGER},
             </if>
             <if test="isuseunitprice != null" >
-                #{isuseunitprice,jdbcType=BIT},
+                #{isuseunitprice,jdbcType=INTEGER},
             </if>
             <if test="ismall != null" >
-                #{ismall,jdbcType=BIT},
+                #{ismall,jdbcType=INTEGER},
             </if>
             <if test="multiselectrenotice != null" >
-                #{multiselectrenotice,jdbcType=BIT},
+                #{multiselectrenotice,jdbcType=INTEGER},
             </if>
             <if test="multiselectshopapplyout != null" >
-                #{multiselectshopapplyout,jdbcType=BIT},
+                #{multiselectshopapplyout,jdbcType=INTEGER},
             </if>
             <if test="usearea != null" >
                 #{usearea,jdbcType=DECIMAL},
@@ -843,7 +883,7 @@
                 #{ownbrand,jdbcType=VARCHAR},
             </if>
             <if test="iscalccost != null" >
-                #{iscalccost,jdbcType=BIT},
+                #{iscalccost,jdbcType=INTEGER},
             </if>
             <if test="insurance != null" >
                 #{insurance,jdbcType=VARCHAR},
@@ -972,7 +1012,7 @@
                 AccountCustomer_ID = #{accountcustomerId,jdbcType=VARCHAR},
             </if>
             <if test="accountcustomerflag != null" >
-                AccountCustomerFlag = #{accountcustomerflag,jdbcType=BIT},
+                AccountCustomerFlag = #{accountcustomerflag,jdbcType=INTEGER},
             </if>
             <if test="dppricetype != null" >
                 DpPriceType = #{dppricetype,jdbcType=VARCHAR},
@@ -981,7 +1021,7 @@
                 BalancePriceType = #{balancepricetype,jdbcType=VARCHAR},
             </if>
             <if test="balancepricegetfromgoods != null" >
-                BalancePriceGetFromGoods = #{balancepricegetfromgoods,jdbcType=BIT},
+                BalancePriceGetFromGoods = #{balancepricegetfromgoods,jdbcType=INTEGER},
             </if>
             <if test="fdiscount != null" >
                 Fdiscount = #{fdiscount,jdbcType=DECIMAL},
@@ -1023,7 +1063,7 @@
                 BusinessManGroup = #{businessmangroup,jdbcType=VARCHAR},
             </if>
             <if test="shutout != null" >
-                ShutOut = #{shutout,jdbcType=BIT},
+                ShutOut = #{shutout,jdbcType=INTEGER},
             </if>
             <if test="inputDate != null" >
                 Input_Date = #{inputDate,jdbcType=TIMESTAMP},
@@ -1032,7 +1072,7 @@
                 UpdateTimestamp = #{updatetimestamp,jdbcType=TIMESTAMP},
             </if>
             <if test="allowminusstock != null" >
-                AllowMinusStock = #{allowminusstock,jdbcType=BIT},
+                AllowMinusStock = #{allowminusstock,jdbcType=INTEGER},
             </if>
             <if test="shopsId != null" >
                 Shops_ID = #{shopsId,jdbcType=VARCHAR},
@@ -1041,7 +1081,7 @@
                 Item = #{item,jdbcType=VARCHAR},
             </if>
             <if test="flag != null" >
-                Flag = #{flag,jdbcType=BIT},
+                Flag = #{flag,jdbcType=INTEGER},
             </if>
             <if test="warehouseNo != null" >
                 Warehouse_No = #{warehouseNo,jdbcType=VARCHAR},
@@ -1053,61 +1093,61 @@
                 FormulaId = #{formulaid,jdbcType=VARCHAR},
             </if>
             <if test="overcrdt != null" >
-                OverCrdt = #{overcrdt,jdbcType=BIT},
+                OverCrdt = #{overcrdt,jdbcType=INTEGER},
             </if>
             <if test="ischeckbalancemode != null" >
-                IsCheckBalanceMode = #{ischeckbalancemode,jdbcType=BIT},
+                IsCheckBalanceMode = #{ischeckbalancemode,jdbcType=INTEGER},
             </if>
             <if test="printpossmallbill != null" >
-                PrintPosSmallBill = #{printpossmallbill,jdbcType=BIT},
+                PrintPosSmallBill = #{printpossmallbill,jdbcType=INTEGER},
             </if>
             <if test="repofficeId != null" >
                 RepOffice_ID = #{repofficeId,jdbcType=VARCHAR},
             </if>
             <if test="isautobuildbill != null" >
-                IsAutoBuildBill = #{isautobuildbill,jdbcType=BIT},
+                IsAutoBuildBill = #{isautobuildbill,jdbcType=INTEGER},
             </if>
             <if test="companypriceflag != null" >
-                CompanyPriceFlag = #{companypriceflag,jdbcType=BIT},
+                CompanyPriceFlag = #{companypriceflag,jdbcType=INTEGER},
             </if>
             <if test="accountcompanyId != null" >
                 AccountCompany_ID = #{accountcompanyId,jdbcType=VARCHAR},
             </if>
             <if test="isemporium != null" >
-                IsEmporium = #{isemporium,jdbcType=BIT},
+                IsEmporium = #{isemporium,jdbcType=INTEGER},
             </if>
             <if test="notintegral != null" >
-                NotIntegral = #{notintegral,jdbcType=BIT},
+                NotIntegral = #{notintegral,jdbcType=INTEGER},
             </if>
             <if test="notdiscount != null" >
-                NotDiscount = #{notdiscount,jdbcType=BIT},
+                NotDiscount = #{notdiscount,jdbcType=INTEGER},
             </if>
             <if test="notsendmobilemsg != null" >
-                NotSendMobileMsg = #{notsendmobilemsg,jdbcType=BIT},
+                NotSendMobileMsg = #{notsendmobilemsg,jdbcType=INTEGER},
             </if>
             <if test="tag != null" >
-                Tag = #{tag,jdbcType=BIT},
+                Tag = #{tag,jdbcType=INTEGER},
             </if>
             <if test="customergroup != null" >
                 CustomerGroup = #{customergroup,jdbcType=VARCHAR},
             </if>
             <if test="isquotamanage != null" >
-                IsQuotaManage = #{isquotamanage,jdbcType=BIT},
+                IsQuotaManage = #{isquotamanage,jdbcType=INTEGER},
             </if>
             <if test="checkminusstockwhenposdaybalance != null" >
-                CheckMinusStockWhenPosDayBalance = #{checkminusstockwhenposdaybalance,jdbcType=BIT},
+                CheckMinusStockWhenPosDayBalance = #{checkminusstockwhenposdaybalance,jdbcType=INTEGER},
             </if>
             <if test="isuseunitprice != null" >
-                IsUseUnitPrice = #{isuseunitprice,jdbcType=BIT},
+                IsUseUnitPrice = #{isuseunitprice,jdbcType=INTEGER},
             </if>
             <if test="ismall != null" >
-                IsMall = #{ismall,jdbcType=BIT},
+                IsMall = #{ismall,jdbcType=INTEGER},
             </if>
             <if test="multiselectrenotice != null" >
-                MultiSelectRenotice = #{multiselectrenotice,jdbcType=BIT},
+                MultiSelectRenotice = #{multiselectrenotice,jdbcType=INTEGER},
             </if>
             <if test="multiselectshopapplyout != null" >
-                MultiSelectShopApplyOut = #{multiselectshopapplyout,jdbcType=BIT},
+                MultiSelectShopApplyOut = #{multiselectshopapplyout,jdbcType=INTEGER},
             </if>
             <if test="usearea != null" >
                 UseArea = #{usearea,jdbcType=DECIMAL},
@@ -1161,7 +1201,7 @@
                 OwnBrand = #{ownbrand,jdbcType=VARCHAR},
             </if>
             <if test="iscalccost != null" >
-                IsCalcCost = #{iscalccost,jdbcType=BIT},
+                IsCalcCost = #{iscalccost,jdbcType=INTEGER},
             </if>
             <if test="insurance != null" >
                 Insurance = #{insurance,jdbcType=VARCHAR},
@@ -1219,10 +1259,10 @@
             Credit = #{credit,jdbcType=DECIMAL},
             ParentChannelID = #{parentchannelid,jdbcType=VARCHAR},
             AccountCustomer_ID = #{accountcustomerId,jdbcType=VARCHAR},
-            AccountCustomerFlag = #{accountcustomerflag,jdbcType=BIT},
+            AccountCustomerFlag = #{accountcustomerflag,jdbcType=INTEGER},
             DpPriceType = #{dppricetype,jdbcType=VARCHAR},
             BalancePriceType = #{balancepricetype,jdbcType=VARCHAR},
-            BalancePriceGetFromGoods = #{balancepricegetfromgoods,jdbcType=BIT},
+            BalancePriceGetFromGoods = #{balancepricegetfromgoods,jdbcType=INTEGER},
             Fdiscount = #{fdiscount,jdbcType=DECIMAL},
             MarketPlaceDiscount = #{marketplacediscount,jdbcType=DECIMAL},
             QiExchangeRate = #{qiexchangerate,jdbcType=DECIMAL},
@@ -1236,35 +1276,35 @@
             VipUseGroup = #{vipusegroup,jdbcType=VARCHAR},
             StockQueryGroup = #{stockquerygroup,jdbcType=VARCHAR},
             BusinessManGroup = #{businessmangroup,jdbcType=VARCHAR},
-            ShutOut = #{shutout,jdbcType=BIT},
+            ShutOut = #{shutout,jdbcType=INTEGER},
             Input_Date = #{inputDate,jdbcType=TIMESTAMP},
             UpdateTimestamp = #{updatetimestamp,jdbcType=TIMESTAMP},
-            AllowMinusStock = #{allowminusstock,jdbcType=BIT},
+            AllowMinusStock = #{allowminusstock,jdbcType=INTEGER},
             Shops_ID = #{shopsId,jdbcType=VARCHAR},
             Item = #{item,jdbcType=VARCHAR},
-            Flag = #{flag,jdbcType=BIT},
+            Flag = #{flag,jdbcType=INTEGER},
             Warehouse_No = #{warehouseNo,jdbcType=VARCHAR},
             Calulate = #{calulate,jdbcType=INTEGER},
             FormulaId = #{formulaid,jdbcType=VARCHAR},
-            OverCrdt = #{overcrdt,jdbcType=BIT},
-            IsCheckBalanceMode = #{ischeckbalancemode,jdbcType=BIT},
-            PrintPosSmallBill = #{printpossmallbill,jdbcType=BIT},
+            OverCrdt = #{overcrdt,jdbcType=INTEGER},
+            IsCheckBalanceMode = #{ischeckbalancemode,jdbcType=INTEGER},
+            PrintPosSmallBill = #{printpossmallbill,jdbcType=INTEGER},
             RepOffice_ID = #{repofficeId,jdbcType=VARCHAR},
-            IsAutoBuildBill = #{isautobuildbill,jdbcType=BIT},
-            CompanyPriceFlag = #{companypriceflag,jdbcType=BIT},
+            IsAutoBuildBill = #{isautobuildbill,jdbcType=INTEGER},
+            CompanyPriceFlag = #{companypriceflag,jdbcType=INTEGER},
             AccountCompany_ID = #{accountcompanyId,jdbcType=VARCHAR},
-            IsEmporium = #{isemporium,jdbcType=BIT},
-            NotIntegral = #{notintegral,jdbcType=BIT},
-            NotDiscount = #{notdiscount,jdbcType=BIT},
-            NotSendMobileMsg = #{notsendmobilemsg,jdbcType=BIT},
-            Tag = #{tag,jdbcType=BIT},
+            IsEmporium = #{isemporium,jdbcType=INTEGER},
+            NotIntegral = #{notintegral,jdbcType=INTEGER},
+            NotDiscount = #{notdiscount,jdbcType=INTEGER},
+            NotSendMobileMsg = #{notsendmobilemsg,jdbcType=INTEGER},
+            Tag = #{tag,jdbcType=INTEGER},
             CustomerGroup = #{customergroup,jdbcType=VARCHAR},
-            IsQuotaManage = #{isquotamanage,jdbcType=BIT},
-            CheckMinusStockWhenPosDayBalance = #{checkminusstockwhenposdaybalance,jdbcType=BIT},
-            IsUseUnitPrice = #{isuseunitprice,jdbcType=BIT},
-            IsMall = #{ismall,jdbcType=BIT},
-            MultiSelectRenotice = #{multiselectrenotice,jdbcType=BIT},
-            MultiSelectShopApplyOut = #{multiselectshopapplyout,jdbcType=BIT},
+            IsQuotaManage = #{isquotamanage,jdbcType=INTEGER},
+            CheckMinusStockWhenPosDayBalance = #{checkminusstockwhenposdaybalance,jdbcType=INTEGER},
+            IsUseUnitPrice = #{isuseunitprice,jdbcType=INTEGER},
+            IsMall = #{ismall,jdbcType=INTEGER},
+            MultiSelectRenotice = #{multiselectrenotice,jdbcType=INTEGER},
+            MultiSelectShopApplyOut = #{multiselectshopapplyout,jdbcType=INTEGER},
             UseArea = #{usearea,jdbcType=DECIMAL},
             ShopTopArea = #{shoptoparea,jdbcType=DECIMAL},
             ShopAfterArea = #{shopafterarea,jdbcType=DECIMAL},
@@ -1282,7 +1322,7 @@
             Division = #{division,jdbcType=VARCHAR},
             DivisionLevel = #{divisionlevel,jdbcType=VARCHAR},
             OwnBrand = #{ownbrand,jdbcType=VARCHAR},
-            IsCalcCost = #{iscalccost,jdbcType=BIT},
+            IsCalcCost = #{iscalccost,jdbcType=INTEGER},
             Insurance = #{insurance,jdbcType=VARCHAR},
             GiftCardUseGroup = #{giftcardusegroup,jdbcType=VARCHAR},
             LinkMan = #{linkman,jdbcType=VARCHAR},

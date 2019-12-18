@@ -43,7 +43,7 @@ public class WarehouseController {
             @ApiImplicitParam(name = "pageSize",value = "分页参数 每页数据量")
     })
     public BaseResDto queryWarehouseList(@RequestBody WarehouseReqDto reqDto){
-        reqDto.setPageSize(20);
+
         return warehouseService.queryWarehouseList(reqDto);
     }
 
@@ -52,7 +52,31 @@ public class WarehouseController {
     @PostMapping("/queryWareInfo")
     @ApiOperation("查看仓库详细信息")
     @ApiImplicitParam(name = "warehouseNo",value = "仓库编号",required = true)
-    public BaseResDto queryWareInfo( WarehouseReqDto reqDto){
+    public BaseResDto queryWareInfo( @RequestBody WarehouseReqDto reqDto){
         return warehouseService.queryHouseInfo(reqDto);
+    }
+
+
+    @UserLog("更新仓库")
+    @SecurityParameter(outEncode = false)
+    @PostMapping("/updateWareHouse")
+    public BaseResDto updateWare(@RequestBody WarehouseReqDto reqDto){
+        return warehouseService.updateWarehouseInfo(reqDto);
+
+    }
+
+    @UserLog("停启用仓库")
+    @SecurityParameter(outEncode = false)
+    @PostMapping("/openOrStopWare")
+    public BaseResDto openOrStopWare(@RequestBody WarehouseReqDto reqDto){
+
+        return warehouseService.openOrCloseWare(reqDto);
+    }
+
+    @UserLog("删除仓库")
+    @SecurityParameter(outEncode = false)
+    @PostMapping("/deleteWarehouse")
+    public BaseResDto deleteWarehouse(@RequestBody  WarehouseReqDto reqDto){
+        return warehouseService.deleteWareHouse(reqDto);
     }
 }

@@ -43,11 +43,12 @@
     </sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-       SELECT   Warehouse_No, Warehouse_Na, Address, Tele, Zipcode, Keyman, Tag, E_mail, Region,
+       SELECT Warehouse_No, Warehouse_Na, Address, Tele, Zipcode, Keyman, Tag, E_mail, Region,
         Fax, AllowMinusStock, ShutOut, Item, Discount, QiDiscount, BuDiscount, PuDiscount,
         MaiDiscount, RepOffice_ID, ChannelID, WareGroup, AccountCustomer_ID, Insurance, WarehousePrice,
         FreightCorp, IsCalcCost, IsCustomize, Supply_No, ID, Company_ID
-        where Warehouse_No = #{warehouseNo,jdbcType=VARCHAR}
+        from warehouse
+        where Warehouse_No = #{warehouseNo,jdbcType=VARCHAR} and delete_flag = 1
     </select>
 
     <select id="queryHouseList" resultMap="BaseResultMap" parameterType="java.util.List">
@@ -57,22 +58,24 @@
           <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
               #{id,jdbcType=VARCHAR}
           </foreach>
+        and delete_flag = 1
 
     </select>
     <select id="queryWarehouseList" resultMap="BaseResultMap" parameterType="com.xjt.dto.WarehouseReqDto">
-        select Warehouse_No, Warehouse_Na, Address, Tele, Zipcode, Keyman, AllowMinusStock, ShutOut
+        select Warehouse_No, Warehouse_Na, Address, Tele, Zipcode, Keyman, AllowMinusStock, ShutOut,E_mail, Region,
+        Fax, Supply_No, ID, Company_ID
            from warehouse
-           <where>
-               <if test="warehouseNa != null">
+        where   delete_flag = 1
+               <if test="warehouseNa != null and warehouseNa != ''">
                    and Warehouse_Na like concat ('%',#{warehouseNa},'%')
                </if>
-               <if test="keyman != null">
+               <if test="keyman != null and keyman != ''">
                    and Keyman like concat('%',#{keyman},'%')
                </if>
-               <if test="tele != null">
+               <if test="tele != null and tele != ''">
                    and Tele like concat('%',#{tele},'%')
                </if>
-           </where>
+
 
     </select>
 
@@ -418,5 +421,15 @@
             ID = #{id,jdbcType=VARCHAR},
             Company_ID = #{companyId,jdbcType=VARCHAR}
         where Warehouse_No = #{warehouseNo,jdbcType=VARCHAR}
+    </update>
+    <update id="openOrStopWare" parameterType="com.xjt.dto.WarehouseReqDto">
+        update warehouse
+        set  ShutOut = #{shutout,jdbcType=INTEGER}
+        where  Warehouse_No = #{warehouseNo,jdbcType=VARCHAR} and ShutOut != #{shutout}
+    </update>
+    <update id="deleteWarehouse" parameterType="com.xjt.dto.WarehouseReqDto">
+          update warehouse
+        set  delete_flag = 0
+        where  Warehouse_No = #{warehouseNo,jdbcType=VARCHAR} and delete_flag = 1
     </update>
 </mapper>

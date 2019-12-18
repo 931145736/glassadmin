@@ -44,7 +44,6 @@ public class SysLogAspect {
     @Transactional(rollbackFor = Exception.class)
     @AfterReturning("logPoinCut()")
     public void saveSysLog(JoinPoint joinPoint) {
-        System.out.println("切面。。。。。");
         HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
         Master master = (Master) request.getAttribute("currentUser");
 

@@ -1,5 +1,7 @@
 package com.xjt.controlle;
 
+import com.alibaba.fastjson.JSONObject;
+import com.xjt.annotation.SecurityParameter;
 import com.xjt.annotation.UserLog;
 import com.xjt.dto.BaseResDto;
 import com.xjt.dto.CustomerReqDto;
@@ -9,8 +11,11 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.checkerframework.checker.units.qual.A;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +33,7 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
+    private Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
     /***
     *@Description 添加渠道信息
@@ -38,6 +44,7 @@ public class CustomerController {
     *@Time
     */
     @UserLog("添加渠道")
+    @SecurityParameter(outEncode = false)
     @PostMapping("/insertCustomer")
     @ApiOperation("添加渠道信息")
     @ApiImplicitParams({
@@ -45,15 +52,33 @@ public class CustomerController {
             @ApiImplicitParam(name = "abbrev",value = "渠道简称",required = true),
             @ApiImplicitParam(name = "fictitiousperson",value = "企业法人",required = true)
     })
-    public BaseResDto insertCustomer(CustomerReqDto reqDto){
+    public BaseResDto insertCustomer(@RequestBody CustomerReqDto reqDto){
+        logger.info("参数信息"+JSONObject.toJSONString(reqDto));
         return customerService.insertCustomer(reqDto);
     }
 
     @UserLog("查看渠道详情")
+    @SecurityParameter(outEncode = false)
     @PostMapping("/queryCustomerInfo")
     @ApiOperation("查看渠道详情")
-    @ApiImplicitParam(name = "customerId",value = "渠道名称",required = true)
-    public BaseResDto queryCustomerInfo(CustomerReqDto reqDto){
+    @ApiImplicitParam(name = "customerId",value = "渠道id",required = true)
+    public BaseResDto queryCustomerInfo(@RequestBody CustomerReqDto reqDto){
         return customerService.queryCustomerInfo(reqDto);
+    }
+
+
+    /***
+    *@Description 查看渠道列表
+    * * @param reqDto
+    *@Return com.xjt.dto.BaseResDto
+    *@Author Administrator
+    *@Date 2019/12/13
+    *@Time
+    */
+    @UserLog("查看渠道列表")
+    @PostMapping("/queryCustomerList")
+    @SecurityParameter(outEncode = false)
+    public BaseResDto queryCustomerList(@RequestBody CustomerReqDto reqDto){
+        return customerService.queryCustomerList(reqDto);
     }
 }

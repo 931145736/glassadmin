@@ -32,6 +32,8 @@ import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class WarehouseServiceImpl implements WarehouseService {
@@ -128,6 +130,8 @@ public class WarehouseServiceImpl implements WarehouseService {
         try{
             PageHelper.startPage(pageNo,pageSize);
             List<Warehouse> warehouses = warehouseDao.queryWarehouseList(reqDto);
+            getOtherInfos(warehouses);
+
             PageInfo<Warehouse> pageInfo = new PageInfo<>(warehouses);
             baseResDto.setData(pageInfo);
 
@@ -139,6 +143,16 @@ public class WarehouseServiceImpl implements WarehouseService {
         }
         return baseResDto;
     }
+
+    private void getOtherInfos(List<Warehouse> warehouses){
+        if(warehouses!=null&&warehouses.size()>0){
+            for(Warehouse warehouse:warehouses){
+                getOtherInfo(warehouse);
+            }
+
+        }
+    }
+
 
     /**
      * 查看仓库详情
@@ -166,26 +180,129 @@ public class WarehouseServiceImpl implements WarehouseService {
         return baseResDto;
     }
 
+    @Override
+    public BaseResDto updateWarehouseInfo(WarehouseReqDto reqDto) {
+        BaseResDto baseResDto = new BaseResDto();
+        if(!checkParams(reqDto,baseResDto)){
+            return baseResDto;
+        }
+        try{
+            Warehouse warehouse = new Warehouse();
+            BeanUtils.copyProperties(reqDto,warehouse);
+            warehouseDao.updateByPrimaryKeySelective(warehouse);
+
+        }catch (Exception e){
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            baseResDto.setResultMessage("更新仓库信息异常");
+            logger.error("更新仓库信息异常",e);
+        }
+        return baseResDto;
+    }
+
+    @Override
+    public BaseResDto openOrCloseWare(WarehouseReqDto reqDto) {
+        BaseResDto baseResDto = new BaseResDto();
+        logger.info("参数信息"+JSONObject.toJSONString(reqDto));
+        if(StringUtils.isEmpty(reqDto.getWarehouseNo())){
+            baseResDto.setResultMessage("仓库编号为空");
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            return baseResDto;
+        }
+        if(reqDto.getShutout()==null){
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            baseResDto.setResultMessage("参数错误");
+            return baseResDto;
+        }
+        try{
+            if(reqDto.getShutout()==0){
+                reqDto.setShutout(1);
+            }else if(reqDto.getShutout()==1){
+                reqDto.setShutout(0);
+            }
+            int num = warehouseDao.openOrStopWare(reqDto);
+            if(num != 1){
+                baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+                baseResDto.setResultMessage("停启用仓库异常");
+            }
+
+        }catch (Exception e){
+            baseResDto.setResultMessage("停启用仓库异常");
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            logger.error("停启用仓库异常",e);
+        }
+        return baseResDto;
+    }
+
+    @Override
+    public BaseResDto deleteWareHouse(WarehouseReqDto reqDto) {
+        BaseResDto baseResDto = new BaseResDto();
+        if(StringUtils.isEmpty(reqDto.getWarehouseNo())){
+            baseResDto.setResultMessage("warehouseNo is null");
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            return baseResDto;
+        }
+        try{
+            int num =warehouseDao.deleteWarehouse(reqDto);
+            if(num !=1){
+                baseResDto.setResultMessage("删除仓库异常");
+                baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            }
+        }catch (Exception e){
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            baseResDto.setResultMessage("删除仓库异常");
+            logger.error("删除仓库异常",e);
+        }
+        return baseResDto;
+    }
+
     private void getOtherInfo(Warehouse warehouse){
+        StringBuilder sbu = new StringBuilder();
         String supplyIds =warehouse.getSupplyNo();
         List<String> ids = new ArrayList<>();
         if(!STRUtils.isEmpty(supplyIds)){
            ids = Arrays.asList(supplyIds.split(","));
            List<Supply> supplies = supplyDao.querySupplyList(ids);
-           warehouse.setSupplies(supplies);
+            if(supplies!=null&&supplies.size()>0){
+                for(Supply s:supplies){
+                    sbu.append(s.getSupplyNa()).append(",");
+                }
+                sbu.delete(sbu.length()-1,sbu.length());
+                warehouse.setSupplyName(sbu.toString());
+                sbu.delete(0,sbu.length());
+            }
+           //warehouse.setSupplies(supplies);
         }
         String companyIds = warehouse.getCompanyId();
         if(!STRUtils.isEmpty(companyIds)){
             ids = Arrays.asList(companyIds.split(","));
             List<Company> companies = companyDao.queryCompanyListByIds(ids);
-            warehouse.setCompanies(companies);
+            if(companies!=null&&companies.size()>0){
+                for(Company c:companies){
+                    sbu.append(c.getCompanyNa()).append(",");
+                }
+                sbu.delete(sbu.length()-1,sbu.length());
+                warehouse.setCompanyName(sbu.toString());
+                sbu.delete(0,sbu.length());
+            }
+            //warehouse.setCompanies(companies);
         }
         String organizationIds = warehouse.getId();
         if(!STRUtils.isEmpty(organizationIds)){
             ids = Arrays.asList(organizationIds.split(","));
             List<Rightorganization> rightorganizations = rightorganizationDao.queryListByIds(ids);
-            warehouse.setRightorganizations(rightorganizations);
+            if(rightorganizations!=null&&rightorganizations.size()>0){
+                for(Rightorganization r:rightorganizations){
+                    sbu.append(r.getOrganization()).append(",");
+                }
+                sbu.delete(sbu.length()-1,sbu.length());
+                warehouse.setOrganizationName(sbu.toString());
+                sbu.delete(0,sbu.length());
+            }
+            //warehouse.setRightorganizations(rightorganizations);
         }
+
+
+
 
     }
 

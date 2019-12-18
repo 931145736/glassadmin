@@ -22,7 +22,7 @@
     </delete>
     <!--查看数据-->
     <select id="queryAllDatas" parameterType="com.xjt.dto.CommonReqDto" resultType="com.xjt.entity.CommonData">
-        select ${colName}
+        select ${colName} as `value`
          from ${tableName}
           <where>
               <if test="value != null">
@@ -33,5 +33,16 @@
     <select id="selectOptionList" parameterType="com.xjt.dto.CommonReqDto" resultType="com.xjt.entity.SelectListPojo">
         select ${colId} as `value`, ${colName} as `label`
          from ${tableName}
+         <where>
+             <if test="filterCol != null">
+                 ${filterColumn} = #{filterCol}
+             </if>
+         </where>
     </select>
+
+    <update id="openOrCloseTarget" parameterType="com.xjt.dto.CommonReqDto">
+        update ${tableName}
+        set ShutOut = #{shutout,jdbcType=INTEGER}
+        where ${colId} = #{value} and  ShutOut  != #{shutout}
+    </update>
 </mapper>

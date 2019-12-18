@@ -1,5 +1,6 @@
 package com.xjt.dao.master;
 
+import com.xjt.dto.CustomerReqDto;
 import com.xjt.entity.Customer;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,4 +22,6 @@ public interface CustomerDao {
     int updateByPrimaryKey(Customer record);
 
     List<Customer> queryCustomerByIds(@Param("customerIds") List<String> customerIds);
+
+    List<Customer> queryCustomerLists(CustomerReqDto reqDto);
 }

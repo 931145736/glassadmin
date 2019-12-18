@@ -2,6 +2,7 @@ package com.xjt.dto;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassNameCustomerReqDto
@@ -10,7 +11,7 @@ import java.util.Date;
  * @Date2019/11/6 9:45
  * @Version V1.0
  **/
-public class CustomerReqDto {
+public class CustomerReqDto extends BaseReqDto {
 
     /**
      * 渠道编号
@@ -31,11 +32,13 @@ public class CustomerReqDto {
      * 开业时间
      */
     private Date practisedate;
+    private String practisedatestr;
 
     /**
      * 停业时间
      */
     private Date shutoutdate;
+    private String shutoutdatestr;
 
     /**
      * 法人
@@ -146,6 +149,7 @@ public class CustomerReqDto {
      * 业务员
      */
     private String saleman;
+    private Object salemans;
 
     private String propertylevel;
 
@@ -192,7 +196,7 @@ public class CustomerReqDto {
     /**
      * 应收户口
      */
-    private Boolean accountcustomerflag;
+    private Integer accountcustomerflag;
 
     /**
      * 零售价类型
@@ -207,7 +211,7 @@ public class CustomerReqDto {
     /**
      * 结算价是否从货品档案取
      */
-    private Boolean balancepricegetfromgoods;
+    private Integer balancepricegetfromgoods;
 
     /**
      * 折扣
@@ -265,7 +269,7 @@ public class CustomerReqDto {
     /**
      * 是否停用
      */
-    private Boolean shutout;
+    private Integer shutout;
 
     /**
      * 建立日期
@@ -280,7 +284,7 @@ public class CustomerReqDto {
     /**
      * 允许负库存
      */
-    private Boolean allowminusstock;
+    private Integer allowminusstock;
 
     /**
      * 暂无
@@ -295,7 +299,7 @@ public class CustomerReqDto {
     /**
      * 暂无
      */
-    private Boolean flag;
+    private Integer flag;
 
     /**
      * 暂无
@@ -315,17 +319,17 @@ public class CustomerReqDto {
     /**
      * 暂无
      */
-    private Boolean overcrdt;
+    private Integer overcrdt;
 
     /**
      * 暂无
      */
-    private Boolean ischeckbalancemode;
+    private Integer ischeckbalancemode;
 
     /**
      * 暂无
      */
-    private Boolean printpossmallbill;
+    private Integer printpossmallbill;
 
     /**
      * 暂无
@@ -335,12 +339,12 @@ public class CustomerReqDto {
     /**
      * 暂无
      */
-    private Boolean isautobuildbill;
+    private Integer isautobuildbill;
 
     /**
      * 暂无
      */
-    private Boolean companypriceflag;
+    private Integer companypriceflag;
 
     /**
      * 暂无
@@ -350,27 +354,27 @@ public class CustomerReqDto {
     /**
      * 暂无
      */
-    private Boolean isemporium;
+    private Integer isemporium;
 
     /**
      * 暂无
      */
-    private Boolean notintegral;
+    private Integer notintegral;
 
     /**
      * 暂无
      */
-    private Boolean notdiscount;
+    private Integer notdiscount;
 
     /**
      * 暂无
      */
-    private Boolean notsendmobilemsg;
+    private Integer notsendmobilemsg;
 
     /**
      * 暂无
      */
-    private Boolean tag;
+    private Integer tag;
 
     /**
      * 暂无
@@ -380,32 +384,32 @@ public class CustomerReqDto {
     /**
      * 暂无
      */
-    private Boolean isquotamanage;
+    private Integer isquotamanage;
 
     /**
      * 暂无
      */
-    private Boolean checkminusstockwhenposdaybalance;
+    private Integer checkminusstockwhenposdaybalance;
 
     /**
      * 暂无
      */
-    private Boolean isuseunitprice;
+    private Integer isuseunitprice;
 
     /**
      * 暂无
      */
-    private Boolean ismall;
+    private Integer ismall;
 
     /**
      * 暂无
      */
-    private Boolean multiselectrenotice;
+    private Integer multiselectrenotice;
 
     /**
      * 暂无
      */
-    private Boolean multiselectshopapplyout;
+    private Integer multiselectshopapplyout;
 
     /**
      * 暂无
@@ -495,7 +499,7 @@ public class CustomerReqDto {
     /**
      * 是否单独核算成本
      */
-    private Boolean iscalccost;
+    private Integer iscalccost;
 
     /**
      * 暂无
@@ -521,6 +525,13 @@ public class CustomerReqDto {
      * 经营企业许可、备案编号（自动生成）
      */
     private String brid;
+    //渠道品牌
+    private Object brands;
+    private List<String> brandNames;
+    //渠道开户行
+    private String accountId;
+    //渠道组
+    private String customerGroup;
 
     public String getCustomerId() {
         return customerId;
@@ -810,11 +821,11 @@ public class CustomerReqDto {
         this.accountcustomerId = accountcustomerId;
     }
 
-    public Boolean getAccountcustomerflag() {
+    public Integer getAccountcustomerflag() {
         return accountcustomerflag;
     }
 
-    public void setAccountcustomerflag(Boolean accountcustomerflag) {
+    public void setAccountcustomerflag(Integer accountcustomerflag) {
         this.accountcustomerflag = accountcustomerflag;
     }
 
@@ -834,11 +845,11 @@ public class CustomerReqDto {
         this.balancepricetype = balancepricetype;
     }
 
-    public Boolean getBalancepricegetfromgoods() {
+    public Integer getBalancepricegetfromgoods() {
         return balancepricegetfromgoods;
     }
 
-    public void setBalancepricegetfromgoods(Boolean balancepricegetfromgoods) {
+    public void setBalancepricegetfromgoods(Integer balancepricegetfromgoods) {
         this.balancepricegetfromgoods = balancepricegetfromgoods;
     }
 
@@ -946,11 +957,11 @@ public class CustomerReqDto {
         this.businessmangroup = businessmangroup;
     }
 
-    public Boolean getShutout() {
+    public Integer getShutout() {
         return shutout;
     }
 
-    public void setShutout(Boolean shutout) {
+    public void setShutout(Integer shutout) {
         this.shutout = shutout;
     }
 
@@ -970,11 +981,11 @@ public class CustomerReqDto {
         this.updatetimestamp = updatetimestamp;
     }
 
-    public Boolean getAllowminusstock() {
+    public Integer getAllowminusstock() {
         return allowminusstock;
     }
 
-    public void setAllowminusstock(Boolean allowminusstock) {
+    public void setAllowminusstock(Integer allowminusstock) {
         this.allowminusstock = allowminusstock;
     }
 
@@ -994,11 +1005,11 @@ public class CustomerReqDto {
         this.item = item;
     }
 
-    public Boolean getFlag() {
+    public Integer getFlag() {
         return flag;
     }
 
-    public void setFlag(Boolean flag) {
+    public void setFlag(Integer flag) {
         this.flag = flag;
     }
 
@@ -1026,27 +1037,27 @@ public class CustomerReqDto {
         this.formulaid = formulaid;
     }
 
-    public Boolean getOvercrdt() {
+    public Integer getOvercrdt() {
         return overcrdt;
     }
 
-    public void setOvercrdt(Boolean overcrdt) {
+    public void setOvercrdt(Integer overcrdt) {
         this.overcrdt = overcrdt;
     }
 
-    public Boolean getIscheckbalancemode() {
+    public Integer getIscheckbalancemode() {
         return ischeckbalancemode;
     }
 
-    public void setIscheckbalancemode(Boolean ischeckbalancemode) {
+    public void setIscheckbalancemode(Integer ischeckbalancemode) {
         this.ischeckbalancemode = ischeckbalancemode;
     }
 
-    public Boolean getPrintpossmallbill() {
+    public Integer getPrintpossmallbill() {
         return printpossmallbill;
     }
 
-    public void setPrintpossmallbill(Boolean printpossmallbill) {
+    public void setPrintpossmallbill(Integer printpossmallbill) {
         this.printpossmallbill = printpossmallbill;
     }
 
@@ -1058,19 +1069,19 @@ public class CustomerReqDto {
         this.repofficeId = repofficeId;
     }
 
-    public Boolean getIsautobuildbill() {
+    public Integer getIsautobuildbill() {
         return isautobuildbill;
     }
 
-    public void setIsautobuildbill(Boolean isautobuildbill) {
+    public void setIsautobuildbill(Integer isautobuildbill) {
         this.isautobuildbill = isautobuildbill;
     }
 
-    public Boolean getCompanypriceflag() {
+    public Integer getCompanypriceflag() {
         return companypriceflag;
     }
 
-    public void setCompanypriceflag(Boolean companypriceflag) {
+    public void setCompanypriceflag(Integer companypriceflag) {
         this.companypriceflag = companypriceflag;
     }
 
@@ -1082,43 +1093,43 @@ public class CustomerReqDto {
         this.accountcompanyId = accountcompanyId;
     }
 
-    public Boolean getIsemporium() {
+    public Integer getIsemporium() {
         return isemporium;
     }
 
-    public void setIsemporium(Boolean isemporium) {
+    public void setIsemporium(Integer isemporium) {
         this.isemporium = isemporium;
     }
 
-    public Boolean getNotintegral() {
+    public Integer getNotintegral() {
         return notintegral;
     }
 
-    public void setNotintegral(Boolean notintegral) {
+    public void setNotintegral(Integer notintegral) {
         this.notintegral = notintegral;
     }
 
-    public Boolean getNotdiscount() {
+    public Integer getNotdiscount() {
         return notdiscount;
     }
 
-    public void setNotdiscount(Boolean notdiscount) {
+    public void setNotdiscount(Integer notdiscount) {
         this.notdiscount = notdiscount;
     }
 
-    public Boolean getNotsendmobilemsg() {
+    public Integer getNotsendmobilemsg() {
         return notsendmobilemsg;
     }
 
-    public void setNotsendmobilemsg(Boolean notsendmobilemsg) {
+    public void setNotsendmobilemsg(Integer notsendmobilemsg) {
         this.notsendmobilemsg = notsendmobilemsg;
     }
 
-    public Boolean getTag() {
+    public Integer getTag() {
         return tag;
     }
 
-    public void setTag(Boolean tag) {
+    public void setTag(Integer tag) {
         this.tag = tag;
     }
 
@@ -1130,51 +1141,51 @@ public class CustomerReqDto {
         this.customergroup = customergroup;
     }
 
-    public Boolean getIsquotamanage() {
+    public Integer getIsquotamanage() {
         return isquotamanage;
     }
 
-    public void setIsquotamanage(Boolean isquotamanage) {
+    public void setIsquotamanage(Integer isquotamanage) {
         this.isquotamanage = isquotamanage;
     }
 
-    public Boolean getCheckminusstockwhenposdaybalance() {
+    public Integer getCheckminusstockwhenposdaybalance() {
         return checkminusstockwhenposdaybalance;
     }
 
-    public void setCheckminusstockwhenposdaybalance(Boolean checkminusstockwhenposdaybalance) {
+    public void setCheckminusstockwhenposdaybalance(Integer checkminusstockwhenposdaybalance) {
         this.checkminusstockwhenposdaybalance = checkminusstockwhenposdaybalance;
     }
 
-    public Boolean getIsuseunitprice() {
+    public Integer getIsuseunitprice() {
         return isuseunitprice;
     }
 
-    public void setIsuseunitprice(Boolean isuseunitprice) {
+    public void setIsuseunitprice(Integer isuseunitprice) {
         this.isuseunitprice = isuseunitprice;
     }
 
-    public Boolean getIsmall() {
+    public Integer getIsmall() {
         return ismall;
     }
 
-    public void setIsmall(Boolean ismall) {
+    public void setIsmall(Integer ismall) {
         this.ismall = ismall;
     }
 
-    public Boolean getMultiselectrenotice() {
+    public Integer getMultiselectrenotice() {
         return multiselectrenotice;
     }
 
-    public void setMultiselectrenotice(Boolean multiselectrenotice) {
+    public void setMultiselectrenotice(Integer multiselectrenotice) {
         this.multiselectrenotice = multiselectrenotice;
     }
 
-    public Boolean getMultiselectshopapplyout() {
+    public Integer getMultiselectshopapplyout() {
         return multiselectshopapplyout;
     }
 
-    public void setMultiselectshopapplyout(Boolean multiselectshopapplyout) {
+    public void setMultiselectshopapplyout(Integer multiselectshopapplyout) {
         this.multiselectshopapplyout = multiselectshopapplyout;
     }
 
@@ -1314,11 +1325,11 @@ public class CustomerReqDto {
         this.ownbrand = ownbrand;
     }
 
-    public Boolean getIscalccost() {
+    public Integer getIscalccost() {
         return iscalccost;
     }
 
-    public void setIscalccost(Boolean iscalccost) {
+    public void setIscalccost(Integer iscalccost) {
         this.iscalccost = iscalccost;
     }
 
@@ -1360,5 +1371,61 @@ public class CustomerReqDto {
 
     public void setBrid(String brid) {
         this.brid = brid;
+    }
+
+    public Object getBrands() {
+        return brands;
+    }
+
+    public void setBrands(Object brands) {
+        this.brands = brands;
+    }
+
+    public List<String> getBrandNames() {
+        return brandNames;
+    }
+
+    public void setBrandNames(List<String> brandNames) {
+        this.brandNames = brandNames;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getCustomerGroup() {
+        return customerGroup;
+    }
+
+    public void setCustomerGroup(String customerGroup) {
+        this.customerGroup = customerGroup;
+    }
+
+    public Object getSalemans() {
+        return salemans;
+    }
+
+    public void setSalemans(Object salemans) {
+        this.salemans = salemans;
+    }
+
+    public String getPractisedatestr() {
+        return practisedatestr;
+    }
+
+    public void setPractisedatestr(String practisedatestr) {
+        this.practisedatestr = practisedatestr;
+    }
+
+    public String getShutoutdatestr() {
+        return shutoutdatestr;
+    }
+
+    public void setShutoutdatestr(String shutoutdatestr) {
+        this.shutoutdatestr = shutoutdatestr;
     }
 }

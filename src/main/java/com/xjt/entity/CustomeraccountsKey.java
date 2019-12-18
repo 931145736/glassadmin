@@ -10,6 +10,8 @@ public class CustomeraccountsKey {
      * 渠道编号
      */
     private String customerId;
+    //户名
+    private String accountName;
 
     public String getId() {
         return id;
@@ -25,5 +27,13 @@ public class CustomeraccountsKey {
 
     public void setCustomerId(String customerId) {
         this.customerId = customerId == null ? null : customerId.trim();
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
     }
 }

@@ -45,4 +45,14 @@ public interface CommonDao {
     *@Time
     */
     List<SelectListPojo> selectOptionList(CommonReqDto reqDto);
+
+    /***
+    *@Description 停用启用功能
+    * * @param null
+    *@Return
+    *@Author Administrator
+    *@Date 2019/12/13
+    *@Time
+    */
+    int openOrCloseTarget(CommonReqDto reqDto);
 }

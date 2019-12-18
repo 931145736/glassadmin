@@ -30,6 +30,14 @@
         select  Company_ID, Company_Abv, Company_Na, Address, Tel,  Keyman
          from company
     </select>
+    <select id="queryCompanyListByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+           select  Company_ID, Company_Abv, Company_Na, Address, Tel,  Keyman
+         from company
+         where  Company_ID in
+         <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+             #{id}
+         </foreach>
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
         delete from company

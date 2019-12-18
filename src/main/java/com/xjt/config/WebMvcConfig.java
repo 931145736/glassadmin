@@ -27,7 +27,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
 
         registry.addInterceptor(getUserLoginHandler()).addPathPatterns("/**")
-        .excludePathPatterns("/userLogin","/uploadFileToMongo","/downloadFile","/deleteFile","/encode","/index","/login","/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg", "/*.html", "/**/*.html","/swagger-resources/**");
+        .excludePathPatterns("/userLogin","/uploadFileToFASTDfs","/downloadFile","/deleteFile","/encode","/index","/login","/**/*.css", "/**/*.js", "/**/*.png", "/**/*.jpg", "/**/*.jpeg", "/*.html", "/**/*.html","/swagger-resources/**");
 
     }
 

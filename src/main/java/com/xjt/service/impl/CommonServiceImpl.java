@@ -29,6 +29,12 @@ public class CommonServiceImpl implements CommonService {
     private CommonDao commonDao;
     @Resource
     private CommonSqlDao commonSqlDao;
+    @Value("${selectOptionList}")
+    private String selectOptionList;
+    @Value("${openOrClosedTarget}")
+    private String openOrClosedTarget;
+    @Value("${dictRequestList}")
+    private String dictRequestList;
 
     private Logger logger = LoggerFactory.getLogger(CommonServiceImpl.class);
 
@@ -94,20 +100,16 @@ public class CommonServiceImpl implements CommonService {
     @Override
     public BaseResDto queryAllData(CommonReqDto reqDto) {
         BaseResDto baseResDto = new BaseResDto();
-        Integer db = reqDto.getDb();
-        if(db==null){
+        Integer requestType = reqDto.getRequestType();
+        if(requestType==null){
             baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
-            baseResDto.setResultMessage("参数错误");
+            baseResDto.setResultMessage("exception");
             return baseResDto;
         }
         try{
-            List<CommonData> commonDatas = new ArrayList<>();
+            reqDto =addParams(requestType,reqDto,dictRequestList);
+            List<CommonData> commonDatas = commonDao.queryAllDatas(reqDto);
 
-            if(db==1){
-                commonDatas = commonDao.queryAllDatas(reqDto);
-            }else{
-                commonDatas = commonSqlDao.queryAllDatas(reqDto);
-            }
             if(commonDatas.size()==0){
                 baseResDto.setResultCode(ResultCode.RESULT_CODE_NODATA.getCode());
                 baseResDto.setResultMessage("no data");
@@ -141,7 +143,10 @@ public class CommonServiceImpl implements CommonService {
             return baseResDto;
         }
         try{
-            reqDto = addParams(requestType,reqDto);
+            reqDto = addParams(requestType,reqDto,selectOptionList);
+            if(requestType==7){
+                reqDto.setFilterCol("业务员");
+            }
             List<SelectListPojo> selectListPojos = commonDao.selectOptionList(reqDto);
             logger.info("数据库对象"+JSONObject.toJSONString(selectListPojos));
             baseResDto.setData(selectListPojos);
@@ -154,10 +159,43 @@ public class CommonServiceImpl implements CommonService {
         }
         return baseResDto;
     }
-    @Value("${selectOptionList}")
-    private String selectOptionList;
-    private CommonReqDto addParams(Integer requestType,CommonReqDto reqDto){
-        JSONObject object = JSONObject.parseObject(selectOptionList);
+
+
+    @Override
+    public BaseResDto openOrClosedTarget(CommonReqDto reqDto) {
+        BaseResDto baseResDto = new BaseResDto();
+        Integer requestType = reqDto.getRequestType();
+        if(requestType==null){
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            baseResDto.setResultMessage("exception");
+            return baseResDto;
+        }
+        try{
+            if(reqDto.getShutout()==0){
+                reqDto.setShutout(1);
+            }else if(reqDto.getShutout()==1){
+                reqDto.setShutout(0);
+            }
+            Integer shutout = reqDto.getShutout();
+            String id = reqDto.getValue();
+            reqDto = addParams(requestType,reqDto,openOrClosedTarget);
+            reqDto.setShutout(shutout);
+            reqDto.setValue(id);
+            commonDao.openOrCloseTarget(reqDto);
+
+
+        }catch (Exception e){
+            baseResDto.setResultMessage("停启用异常");
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            logger.error("停启用异常", e);
+
+        }
+        return baseResDto;
+    }
+
+
+    private CommonReqDto addParams(Integer requestType,CommonReqDto reqDto, String json){
+        JSONObject object = JSONObject.parseObject(json);
         reqDto = JSONObject.parseObject(JSONObject.toJSONString(object.get(requestType)),CommonReqDto.class);
         return reqDto;
     }

@@ -148,7 +148,7 @@ public class ArrivalServiceImpl implements ArrivalService {
             baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
             return baseResDto;
         }
-        Integer pageSize = 20;
+        Integer pageSize = reqDto.getPageSize();
         try{
 
             PageHelper.startPage(pageNo,pageSize);

@@ -142,6 +142,8 @@ public class Warehouse {
     private List<Company> companies;
 
     private String supplyName;
+    private String companyName;
+    private String organizationName;
 
     public String getWarehouseNo() {
         return warehouseNo;
@@ -413,5 +415,21 @@ public class Warehouse {
 
     public void setCompanies(List<Company> companies) {
         this.companies = companies;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getOrganizationName() {
+        return organizationName;
+    }
+
+    public void setOrganizationName(String organizationName) {
+        this.organizationName = organizationName;
     }
 }

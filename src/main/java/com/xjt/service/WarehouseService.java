@@ -26,4 +26,17 @@ public interface WarehouseService {
      * @return
      */
     BaseResDto queryHouseInfo(WarehouseReqDto reqDto);
+    /***
+    *@Description 更新仓库信息
+    * * @param reqDto
+    *@Return com.xjt.dto.BaseResDto
+    *@Author Administrator
+    *@Date 2019/12/10
+    *@Time
+    */
+    BaseResDto updateWarehouseInfo(WarehouseReqDto reqDto);
+
+    BaseResDto openOrCloseWare(WarehouseReqDto reqDto);
+
+    BaseResDto deleteWareHouse(WarehouseReqDto reqDto);
 }

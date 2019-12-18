@@ -147,7 +147,7 @@ public class MasterServiceImpl implements MasterService {
         BaseResDto baseResDto = new BaseResDto();
        Integer pageNo = reqDto.getPageNo();
 
-       reqDto.setPageSize(20);
+      
         Integer pageSize = reqDto.getPageSize();
         if(pageNo==null||pageSize==null){
             baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());

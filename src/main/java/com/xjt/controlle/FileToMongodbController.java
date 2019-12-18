@@ -3,11 +3,13 @@ package com.xjt.controlle;
 import com.alibaba.fastjson.JSONObject;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mongodb.gridfs.GridFSFile;
+import com.xjt.utils.FastDFSClientWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +32,16 @@ public class FileToMongodbController {
     // 获得SpringBoot提供的mongodb的GridFS对象
     @Autowired
     private GridFsTemplate gridFsTemplate;
+    @Autowired
+    private FastDFSClientWrapper fastDFSClientWrapper;
+
+    @RequestMapping("/uploadFileToFASTDfs")
+    public String uploadFileToFASTDfs(@RequestParam("file") MultipartFile file) throws IOException {
+        String path = fastDFSClientWrapper.uploadFile(file);
+
+        return path;
+    }
+
 
     @RequestMapping("/uploadFileToMongo")
     public Object uploadFile(MultipartFile file) throws IOException {

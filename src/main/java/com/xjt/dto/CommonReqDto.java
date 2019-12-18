@@ -35,6 +35,11 @@ public class CommonReqDto extends BaseReqDto {
     private String value;
 
     private Integer requestType;
+    private Integer shutout;
+    //过滤字段值
+    private String filterCol;
+    //过滤字段名
+    private String filterColumn;
 
 
     public String getTableName() {
@@ -83,5 +88,29 @@ public class CommonReqDto extends BaseReqDto {
 
     public void setRequestType(Integer requestType) {
         this.requestType = requestType;
+    }
+
+    public Integer getShutout() {
+        return shutout;
+    }
+
+    public void setShutout(Integer shutout) {
+        this.shutout = shutout;
+    }
+
+    public String getFilterCol() {
+        return filterCol;
+    }
+
+    public void setFilterCol(String filterCol) {
+        this.filterCol = filterCol;
+    }
+
+    public String getFilterColumn() {
+        return filterColumn;
+    }
+
+    public void setFilterColumn(String filterColumn) {
+        this.filterColumn = filterColumn;
     }
 }
