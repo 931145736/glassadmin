@@ -41,6 +41,8 @@ public class CommonReqDto extends BaseReqDto {
     //过滤字段名
     private String filterColumn;
 
+    private String objId;
+
 
     public String getTableName() {
         return tableName;
@@ -112,5 +114,13 @@ public class CommonReqDto extends BaseReqDto {
 
     public void setFilterColumn(String filterColumn) {
         this.filterColumn = filterColumn;
+    }
+
+    public String getObjId() {
+        return objId;
+    }
+
+    public void setObjId(String objId) {
+        this.objId = objId;
     }
 }

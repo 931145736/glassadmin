@@ -24,6 +24,9 @@ public class Customerbrand {
      * 区域
      */
     private BigDecimal carea;
+    private Integer deleteFlag;
+
+    private String brandName;
 
     public String getCustomerId() {
         return customerId;
@@ -47,5 +50,21 @@ public class Customerbrand {
 
     public void setCarea(BigDecimal carea) {
         this.carea = carea;
+    }
+
+    public Integer getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Integer deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 }

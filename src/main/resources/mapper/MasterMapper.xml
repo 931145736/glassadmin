@@ -38,6 +38,14 @@
         select id, `name`,true_name from master
           where `name` = #{userName} and password = #{password} and delete_flag = 1
     </select>
+    <select id="queryByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+        select id , true_name
+        from master
+         where delete_flag = 1 and id in
+         <foreach collection="masterIds" item="id" separator="," index="index" open="(" close=")">
+             #{id}
+         </foreach>
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
         delete from master

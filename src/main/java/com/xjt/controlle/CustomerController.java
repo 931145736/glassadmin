@@ -57,7 +57,6 @@ public class CustomerController {
         return customerService.insertCustomer(reqDto);
     }
 
-    @UserLog("查看渠道详情")
     @SecurityParameter(outEncode = false)
     @PostMapping("/queryCustomerInfo")
     @ApiOperation("查看渠道详情")
@@ -75,10 +74,33 @@ public class CustomerController {
     *@Date 2019/12/13
     *@Time
     */
-    @UserLog("查看渠道列表")
+
     @PostMapping("/queryCustomerList")
     @SecurityParameter(outEncode = false)
+    @ApiOperation("查看渠道列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNo", value ="分页参数，第几页", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "分页参数，每页数据量", required = true)
+    })
     public BaseResDto queryCustomerList(@RequestBody CustomerReqDto reqDto){
         return customerService.queryCustomerList(reqDto);
+    }
+
+
+    @UserLog("删除渠道")
+    @SecurityParameter(outEncode = false)
+    @PostMapping("/deleteCustomer")
+    @ApiOperation("删除渠道")
+    public BaseResDto deleteCustomer(@RequestBody CustomerReqDto reqDto){
+        return customerService.deleteCustomer(reqDto);
+    }
+
+    @UserLog("更新渠道信息")
+    @SecurityParameter(outEncode = false)
+    @PostMapping("/updateCustomer")
+    @ApiOperation("更新渠道信息")
+    @ApiImplicitParam(name = "customerId",value = "渠道id",required = true)
+    public BaseResDto updateCustomer(@RequestBody CustomerReqDto reqDto){
+        return customerService.updateCustomer(reqDto);
     }
 }

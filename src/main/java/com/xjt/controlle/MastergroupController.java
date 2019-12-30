@@ -63,7 +63,7 @@ public class MastergroupController {
      * @param reqDto
      * @return
      */
-    @UserLog("查看组里的用户信息")
+
     @GetMapping("/queryMasterInfoOfGroup")
     @ApiOperation("查看组里的用户信息,如需分页查看 添加分页参数")
     @ApiImplicitParams({

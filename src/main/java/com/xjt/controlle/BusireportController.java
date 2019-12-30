@@ -29,7 +29,7 @@ public class BusireportController {
       return  busireportService.insertBusireport(reqDto);
     }
 
-    @UserLog("查看许可证经营信息")
+
     @GetMapping("/queryBusInfo")
     @ApiOperation("根据 许可证编号 企业名称 法人 查看经营许可证信息")
     @ApiImplicitParams({

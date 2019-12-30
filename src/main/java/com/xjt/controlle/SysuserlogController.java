@@ -29,7 +29,6 @@ public class SysuserlogController {
     private SysuserlogService sysuserlogService;
 
     @SecurityParameter(outEncode = false)
-    @UserLog("查看用户操作日志")
     @PostMapping("/querySysUserLog")
     @ApiOperation("查看用户操作日志接口")
     public BaseResDto querySysUserLog(@RequestBody SysuserlogReqDto reqDto){

@@ -13,5 +13,7 @@ public interface CustomeraccountsDao {
     int insertSelective(CustomeraccountsKey record);
 
     //查看渠道开户行信息
-    List<CustomeraccountsKey> queryCustomerAccounts(@Param("customerIds") List<String> customerIds);
+    List<CustomeraccountsKey> queryCustomerAccounts(String customerId);
+
+    int deleteCustomer(@Param("customerId") String customerId);
 }

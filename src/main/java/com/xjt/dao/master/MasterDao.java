@@ -76,4 +76,6 @@ public interface MasterDao {
     List<Master> queryUserDim(MasterReqDto master);
 
     Master queryNameId(String masterId);
+
+    List<Master> queryByIds(@Param("masterIds") List<String> masterIds);
 }

@@ -7,11 +7,13 @@ import com.xjt.business.CustomerBusinessService;
 import com.xjt.dao.master.CustomerDao;
 import com.xjt.dao.master.CustomeraccountsDao;
 import com.xjt.dao.master.CustomerbrandDao;
+import com.xjt.dao.master.MasterDao;
 import com.xjt.dto.BaseResDto;
 import com.xjt.dto.CustomerReqDto;
 import com.xjt.entity.Customer;
 import com.xjt.entity.CustomeraccountsKey;
 import com.xjt.entity.Customerbrand;
+import com.xjt.entity.Master;
 import com.xjt.enums.ResultCode;
 import com.xjt.service.CustomerService;
 import com.xjt.utils.DateUtil;
@@ -24,10 +26,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -48,6 +47,8 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerbrandDao customerbrandDao;
     @Resource
     private CustomeraccountsDao accountDao;
+    @Resource
+    private MasterDao masterDao;
 
     private Logger logger = LoggerFactory.getLogger(CustomerServiceImpl.class);
 
@@ -88,7 +89,7 @@ public class CustomerServiceImpl implements CustomerService {
             reqDto.setBrandNames(brands);
         }
         List<String> saleMans = null;
-        if(reqDto.getSalemans()!=null&&reqDto.getSalemans().toString().equals("")){
+        if(reqDto.getSalemans()!=null&&!reqDto.getSalemans().toString().equals("")){
             saleMans = (List<String>) reqDto.getSalemans();
             if(saleMans!=null&&saleMans.size()>0){
 
@@ -130,11 +131,8 @@ public class CustomerServiceImpl implements CustomerService {
         }
         try{
             Customer customer = customerDao.selectByPrimaryKey(customerId);
-            List<Customer> customers = new ArrayList<>();
-            customers.add(customer);
-            logger.info("渠道详情"+JSONObject.toJSONString(customers));
-            customers =getOtherInfo(customers);
-            baseResDto.setData(customers.get(0));
+            Customer customer1 =getOtherInfo(customer);
+            baseResDto.setData(customer1);
 
         }catch (Exception e){
             baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
@@ -175,39 +173,92 @@ public class CustomerServiceImpl implements CustomerService {
         return baseResDto;
     }
 
-    private List<Customer>  getOtherInfo(List<Customer> customers){
-        if(customers!=null&&customers.size()>0){
-            Map<String, Customer> customerMap = customers.stream().collect(Collectors.toMap(Customer::getCustomerId,k->k,(k1,k2)->k2));
-            List<String> customerIds = customers.stream().map(Customer::getCustomerId).collect(Collectors.toList());
+    @Override
+    public BaseResDto deleteCustomer(CustomerReqDto reqDto) {
+        BaseResDto baseResDto = new BaseResDto();
+        String customerId = reqDto.getCustomerId();
+        if(STRUtils.isEmpty(customerId)){
+            baseResDto.setResultMessage("customerId is null");
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            return baseResDto;
+        }
+        try{
+            reqDto.setDeleteFlag(0);
+            businessService.deleteCustomer(reqDto);
+
+        }catch (Exception e){
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            baseResDto.setResultMessage("删除渠道异常");
+            logger.error("删除渠道异常",e);
+        }
+        return baseResDto;
+    }
+
+    /***
+    *@Description 更新渠道信息
+    * * @param reqDto
+    *@Return com.xjt.dto.BaseResDto
+    *@Author Administrator
+    *@Date 2019/12/20
+    *@Time
+    */
+    @Override
+    public BaseResDto updateCustomer(CustomerReqDto reqDto) {
+        BaseResDto baseResDto = new BaseResDto();
+        String customerId = reqDto.getCustomerId();
+        if(STRUtils.isEmpty(customerId)){
+            baseResDto.setResultMessage("customerId is null");
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            return baseResDto;
+        }
+        try{
+            getBrands(reqDto);
+            businessService.updateCustomer(reqDto);
+
+        }catch (Exception e){
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            baseResDto.setResultMessage("更新渠道信息异常");
+            logger.error("更新渠道信息异常");
+        }
+        return baseResDto;
+    }
+
+    private Customer getOtherInfo(Customer customer){
             //渠道品牌信息
-            logger.info("渠道id"+JSONObject.toJSONString(customerIds));
-            List<Customerbrand> customerbrands = customerbrandDao.queryListByCId(customerIds);
-            Map<String,List<Customerbrand>> cbmap = customerbrands.stream().collect(Collectors.groupingBy(Customerbrand::getCustomerId));
-            for(Map.Entry<String, List<Customerbrand>> map:cbmap.entrySet()){
-                String customerId = map.getKey();
-                Customer customer = customerMap.get(customerId);
-                List<Customerbrand> customerbrandsList = map.getValue();
+            String customerId = customer.getCustomerId();
+            List<Customerbrand> customerbrands = customerbrandDao.queryListByCId(customerId);
+            if(customerbrands!=null&&customerbrands.size()>0){
                 //渠道品牌
-                List<String> brands = customerbrandsList.stream().map(Customerbrand::getBrand).collect(Collectors.toList());
+                List<String> brands = customerbrands.stream().map(Customerbrand::getBrandName).collect(Collectors.toList());
                 String brandNames = listToString(brands);
                 customer.setBrandNames(brandNames);
-
             }
             //渠道开户行信息
-            List<CustomeraccountsKey> accounts = accountDao.queryCustomerAccounts(customerIds);
-            Map<String, List<CustomeraccountsKey>> acmap = accounts.stream().collect(Collectors.groupingBy(CustomeraccountsKey::getCustomerId));
-            for(Map.Entry<String, List<CustomeraccountsKey>> acMap:acmap.entrySet()){
-                String customerId = acMap.getKey();
-                Customer customer = customerMap.get(customerId);
-                List<CustomeraccountsKey> accountskey = acMap.getValue();
-                List<String> accountNames = accountskey.stream().map(CustomeraccountsKey::getAccountName).collect(Collectors.toList());
-                String accountStr = listToString(accountNames);
-                customer.setAccountName(accountStr);
+            List<CustomeraccountsKey> accounts = accountDao.queryCustomerAccounts(customerId);
+            if(accounts!=null&&accounts.size()>0){
+                CustomeraccountsKey key = accounts.get(0);
+                customer.setAccountName(key.getAccountName());
+                customer.setAccounts(key.getAccounts());
+                customer.setBank(key.getBank());
+                customer.setBankaddr(key.getBankaddr());
+                customer.setBanknumber(key.getBanknumber());
+                customer.setBanktel(key.getBanktel());
+                customer.setTel(key.getTel());
+                customer.setCmemo(key.getCmemo());
+            }
+            //业务员信息
+            String saleMans = customer.getSaleman();
+            if(!STRUtils.isEmpty(saleMans)){
+                List<String> manIds = Arrays.asList(saleMans.split(","));
+                List<Master> masters = masterDao.queryByIds(manIds);
+                List<String> masterNames = masters.stream().map(Master::getTrueName).collect(Collectors.toList());
+                String masterName = listToString(masterNames);
+                customer.setSaleman(masterName);
+
             }
 
 
-        }
-        return customers;
+            return customer;
     }
 
     private String listToString(List<String> list){

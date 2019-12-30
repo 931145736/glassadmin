@@ -1,5 +1,8 @@
 package com.xjt.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -11,144 +14,173 @@ import java.util.List;
  * @Date2019/11/6 9:45
  * @Version V1.0
  **/
+@ApiModel
 public class CustomerReqDto extends BaseReqDto {
 
     /**
      * 渠道编号
      */
+    @ApiModelProperty("渠道编号")
     private String customerId;
 
     /**
      * 渠道简称
      */
+    @ApiModelProperty("渠道简称")
     private String abbrev;
 
     /**
      * 渠道名称
      */
+    @ApiModelProperty("渠道名称")
     private String customerNa;
 
     /**
      * 开业时间
      */
     private Date practisedate;
+    @ApiModelProperty("开业时间")
     private String practisedatestr;
 
     /**
      * 停业时间
      */
     private Date shutoutdate;
+    @ApiModelProperty("停业时间")
     private String shutoutdatestr;
 
     /**
      * 法人
      */
+    @ApiModelProperty("法人")
     private String fictitiousperson;
 
     /**
      * 社会信用代码(税号)
      */
+    @ApiModelProperty("社会信用代码(税号)")
     private String taxnumber;
 
     /**
      * 联系人
      */
+    @ApiModelProperty("联系人")
     private String keyman;
 
     /**
      * 手机
      */
+    @ApiModelProperty("手机")
     private String mobile;
 
     /**
      * 邮箱
      */
+    @ApiModelProperty("邮箱")
     private String email;
 
     /**
      * 传真
      */
+    @ApiModelProperty("传真")
     private String fax;
 
     /**
      * 电话
      */
+    @ApiModelProperty("电话")
     private String tel1;
 
     /**
      * 电话
      */
+    @ApiModelProperty("电话")
     private String tel2;
 
     /**
      * 组
      */
+    @ApiModelProperty("组")
     private String cgroup;
 
     /**
      * 公司ID
      */
     private String companyId;
+    @ApiModelProperty("公司id")
+    private String companyid;
 
     /**
      * 机构组织ID
      */
+    @ApiModelProperty("组织机构id")
     private String organizationid;
 
     /**
      * 国
      */
+    @ApiModelProperty("国")
     private String country;
 
     /**
      * 区
      */
+    @ApiModelProperty("区")
     private String region;
 
     /**
      * 省
      */
+    @ApiModelProperty("省")
     private String province;
 
     /**
      * 市
      */
+    @ApiModelProperty("市")
     private String city;
 
     /**
      * 地址
      */
+    @ApiModelProperty("地址")
     private String address;
 
     /**
      * 邮编
      */
+    @ApiModelProperty("邮编")
     private String zipcode;
 
     /**
      * 经营方式(1自营2加盟3代理4批发)
      */
+    @ApiModelProperty("经营方式(1自营2加盟3代理4批发)")
     private String mathod;
 
     /**
      * 经营模式
      */
+    @ApiModelProperty("经营模式")
     private String dealinpattern;
 
     /**
      * 评级
      */
+    @ApiModelProperty("评级")
     private Short clevel;
 
     /**
      * 渠道类别
      */
+    @ApiModelProperty("渠道类别")
     private String sort;
 
     /**
      * 业务员
      */
     private String saleman;
+    @ApiModelProperty("业务员")
     private Object salemans;
 
     private String propertylevel;
@@ -156,81 +188,97 @@ public class CustomerReqDto extends BaseReqDto {
     /**
      * 销售目标
      */
+    @ApiModelProperty("销售目标")
     private BigDecimal saletarget;
 
     /**
      * 经营费用
      */
+    @ApiModelProperty("经营费用")
     private BigDecimal fee;
 
     /**
      * 营业面积
      */
+    @ApiModelProperty("营业面积")
     private BigDecimal carea;
 
     /**
      * 保证金
      */
+    @ApiModelProperty("保证金")
     private BigDecimal deposit;
 
     /**
      * 备注
      */
+    @ApiModelProperty("备注")
     private String remark;
 
     /**
      * 信用额度
      */
+    @ApiModelProperty("信用额度")
     private Long credit;
 
     /**
      * 上级渠道
      */
+    @ApiModelProperty("上级渠道")
     private String parentchannelid;
 
     /**
      * 应收归集户口
      */
+    @ApiModelProperty("应收归集户口")
     private String accountcustomerId;
 
     /**
      * 应收户口
      */
+    @ApiModelProperty("应收户口")
     private Integer accountcustomerflag;
 
     /**
      * 零售价类型
      */
+    @ApiModelProperty("零售价类型")
     private String dppricetype;
 
     /**
      * 结算价类型
      */
+    @ApiModelProperty("结算价类型")
     private String balancepricetype;
 
     /**
      * 结算价是否从货品档案取
      */
+    @ApiModelProperty("结算价是否从货品档案获取")
     private Integer balancepricegetfromgoods;
 
     /**
      * 折扣
      */
+    @ApiModelProperty("折扣")
     private BigDecimal fdiscount;
 
     /**
      * 商场扣点
      */
+    @ApiModelProperty("商场扣点")
     private BigDecimal marketplacediscount;
 
     /**
      * 换货率
      */
+    @ApiModelProperty("换货率")
     private BigDecimal qiexchangerate;
 
     /**
      * 换货周期
      */
+    @ApiModelProperty("换货周期")
     private Integer qiexchangecyc;
 
     private BigDecimal exchangerate;
@@ -242,11 +290,13 @@ public class CustomerReqDto extends BaseReqDto {
     /**
      * VIP卡顺序(0先卡后促销1先促销后卡)
      */
+    @ApiModelProperty("VIP卡顺序")
     private Integer spromobeforevip;
 
     /**
      * 配货周期天数
      */
+    @ApiModelProperty("配货周期天数")
     private Integer sortcycdays;
 
     private BigDecimal nospromoscale;
@@ -269,21 +319,25 @@ public class CustomerReqDto extends BaseReqDto {
     /**
      * 是否停用
      */
+    @ApiModelProperty("是否停用")
     private Integer shutout;
 
     /**
      * 建立日期
      */
+    @ApiModelProperty("建立日期")
     private Date inputDate;
 
     /**
      * 更新日期
      */
+    @ApiModelProperty("更新日期")
     private Date updatetimestamp;
 
     /**
      * 允许负库存
      */
+    @ApiModelProperty("是否允许负库存")
     private Integer allowminusstock;
 
     /**
@@ -499,6 +553,7 @@ public class CustomerReqDto extends BaseReqDto {
     /**
      * 是否单独核算成本
      */
+    @ApiModelProperty("是否单独核算成本")
     private Integer iscalccost;
 
     /**
@@ -524,14 +579,66 @@ public class CustomerReqDto extends BaseReqDto {
     /**
      * 经营企业许可、备案编号（自动生成）
      */
+    @ApiModelProperty("经营企业许可，备案编号")
     private String brid;
     //渠道品牌
+    @ApiModelProperty("渠道品牌")
     private Object brands;
     private List<String> brandNames;
     //渠道开户行
+    @ApiModelProperty("渠道开户行")
     private String accountId;
     //渠道组
+    @ApiModelProperty("渠道组")
     private String customerGroup;
+
+    private Integer deleteFlag;
+    /**
+     * 开户行
+     */
+    @ApiModelProperty("开户行")
+    private String bank;
+
+    /**
+     * 开户行地址
+     */
+    @ApiModelProperty("开户行地址")
+    private String bankaddr;
+
+    /**
+     * 户名
+     */
+    @ApiModelProperty("户名")
+    private String accountsName;
+
+    /**
+     * 账号
+     */
+    @ApiModelProperty("账号")
+    private String accounts;
+
+    /**
+     * 行号
+     */
+    @ApiModelProperty("行号")
+    private String banknumber;
+
+    /**
+     * 开户电话
+     */
+    @ApiModelProperty("开户电话")
+    private String tel;
+
+    /**
+     * 银行电话
+     */
+    @ApiModelProperty("银行电话")
+    private String banktel;
+
+    @ApiModelProperty("开户行备注")
+    private String cmemo;
+
+    private String parentChannelId;
 
     public String getCustomerId() {
         return customerId;
@@ -1427,5 +1534,93 @@ public class CustomerReqDto extends BaseReqDto {
 
     public void setShutoutdatestr(String shutoutdatestr) {
         this.shutoutdatestr = shutoutdatestr;
+    }
+
+    public Integer getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Integer deleteFlag) {
+        this.deleteFlag = deleteFlag;
+    }
+
+    public String getBank() {
+        return bank;
+    }
+
+    public void setBank(String bank) {
+        this.bank = bank;
+    }
+
+    public String getBankaddr() {
+        return bankaddr;
+    }
+
+    public void setBankaddr(String bankaddr) {
+        this.bankaddr = bankaddr;
+    }
+
+    public String getAccountsName() {
+        return accountsName;
+    }
+
+    public void setAccountsName(String accountsName) {
+        this.accountsName = accountsName;
+    }
+
+    public String getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(String accounts) {
+        this.accounts = accounts;
+    }
+
+    public String getBanknumber() {
+        return banknumber;
+    }
+
+    public void setBanknumber(String banknumber) {
+        this.banknumber = banknumber;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getBanktel() {
+        return banktel;
+    }
+
+    public void setBanktel(String banktel) {
+        this.banktel = banktel;
+    }
+
+    public String getCmemo() {
+        return cmemo;
+    }
+
+    public void setCmemo(String cmemo) {
+        this.cmemo = cmemo;
+    }
+
+    public String getParentChannelId() {
+        return parentChannelId;
+    }
+
+    public void setParentChannelId(String parentChannelId) {
+        this.parentChannelId = parentChannelId;
+    }
+
+    public String getCompanyid() {
+        return companyid;
+    }
+
+    public void setCompanyid(String companyid) {
+        this.companyid = companyid;
     }
 }

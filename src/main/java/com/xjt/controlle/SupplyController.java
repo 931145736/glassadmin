@@ -36,7 +36,7 @@ public class SupplyController {
         return supplyService.insertSupply(reqDto);
     }
 
-    @UserLog("供货商列表")
+
     @PostMapping("/querySupplyList")
     @ApiOperation("供货商列表 可以分页查看")
     @ApiImplicitParams({
@@ -46,7 +46,7 @@ public class SupplyController {
     public BaseResDto querySupplyList(SupplyReqDto reqDto){
         return supplyService.querySupplyList(reqDto);
     }
-    @UserLog("查看供货商详情")
+
     @PostMapping("/querySupplyInfo")
     @ApiOperation("查看供货商详情")
     @ApiImplicitParam(name = "supplyNo",value = "供货商编号",required = true)

@@ -63,7 +63,7 @@ public class PureceiptController {
         reqDto.setPosted(1);
         return pureceiptService.checkPureceiptOrder(reqDto);
     }
-    @UserLog("查看厂家到货单列表")
+
     @SecurityParameter(outEncode = false)
     @PostMapping("/queryPureceiptOrderList")
     @ApiOperation("查看厂家到货单列表")
@@ -73,7 +73,7 @@ public class PureceiptController {
         return pureceiptService.queryPureceiptOrderList(reqDto);
     }
 
-    @UserLog("查看到货单详情")
+
     @SecurityParameter(outEncode = false)
     @PostMapping("/queryPureceiptDetail")
     @ApiOperation("查看到货单详情")

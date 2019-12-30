@@ -46,7 +46,7 @@ public class GoodsController {
 
 
 
-    @UserLog("查看货品列表")
+
     @QueryList
     @GetMapping("/queryGoodsList")
     @ApiOperation("查看货品列表")
@@ -64,7 +64,7 @@ public class GoodsController {
         return goodsService.queryGoodsList(reqDto);
     }
 
-    @UserLog("查看货品详情")
+
     @GetMapping("/queryGoodsInfo")
     @ApiOperation("查看货品详情")
     @ApiImplicitParam(name = "goodsid",value = "货品id",required = true)

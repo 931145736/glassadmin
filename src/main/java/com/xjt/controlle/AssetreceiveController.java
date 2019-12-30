@@ -49,14 +49,13 @@ public class AssetreceiveController {
         return assetreceiveService.insertAssetReceive(reqDto);
     }
 
-    @UserLog("查看物资领用单列表")
     @PostMapping("/queryReceiveList")
     @ApiOperation("查看物资领用单列表")
     public BaseResDto queryReceiveList(AssetreceiveReqDto reqDto){
         return assetreceiveService.queryAssetReceiveList(reqDto);
     }
 
-    @UserLog("查看领用单物资信息")
+
     @PostMapping("/queryReceiveAssetInfo")
     @ApiOperation("查看领用单物资信息")
     public BaseResDto queryReceiveAssetInfo(AssetreceiveReqDto reqDto){

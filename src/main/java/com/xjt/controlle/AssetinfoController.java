@@ -31,7 +31,7 @@ public class AssetinfoController {
 
     @Autowired
     private AssetinfoService assetinfoService;
-    @UserLog("查看物资列表")
+
     @PostMapping("/queryAssetinfoList")
     @ApiOperation("查看物资列表，id和名称，规格")
     public BaseResDto queryAssetinfoList(AssetinfoReqDto reqDto){

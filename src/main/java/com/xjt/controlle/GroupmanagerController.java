@@ -57,7 +57,7 @@ public class GroupmanagerController {
      * @param reqDto
      * @return
      */
-    @UserLog("查看管理组列表")
+
     @GetMapping("/queryGroupList")
     @ApiOperation("查看管理组列表")
     public BaseResDto queryGroupList(GroupmanagerReqDto reqDto){

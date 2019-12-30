@@ -89,7 +89,7 @@ public class MasterController  {
      * @param reqDto
      * @return
      */
-    @UserLog("查看用户列表")
+
     @SecurityParameter(outEncode = false)
     @PostMapping("/queryMasterList")
     @ApiOperation("分页查看用户列表")
@@ -107,7 +107,7 @@ public class MasterController  {
      * @param
      * @return
      */
-    @UserLog("查看用户详情")
+
     @SecurityParameter(outEncode = false)
     @PostMapping("/queryMasterInfo")
     @ApiOperation("查看单个用户信息")

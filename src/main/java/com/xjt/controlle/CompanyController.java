@@ -35,7 +35,7 @@ public class CompanyController {
     }
 
 
-    @UserLog("查看公司列表")
+
     @PostMapping("/queryCompanyList")
     @ApiOperation("查看公司列表 ")
     @ApiImplicitParams({
@@ -46,7 +46,7 @@ public class CompanyController {
         return companyService.queryCompanyList(reqDto);
     }
 
-    @UserLog("查看公司信息")
+
     @PostMapping("/queryCompanyInfo")
     @ApiOperation("查看公司信息")
     @ApiImplicitParam(name = "companyId",value = "公司编号",required = true)

@@ -159,6 +159,7 @@
              <foreach collection="customerIds" item="customerId" index="index" open="(" close=")" separator=",">
                  #{customerId,jdbcType=VARCHAR}
              </foreach>
+             and delete_flag = 1
 
     </select>
     <select id="queryCustomerLists" parameterType="com.xjt.dto.CustomerReqDto" resultMap="BaseResultMap">
@@ -181,6 +182,7 @@
               <if test="mathod != null and mathod != '' ">
                   and Mathod = #{mathod}
               </if>
+                 and delete_flag = 1
           </where>
 
     </select>
@@ -1330,4 +1332,9 @@
             BRID = #{brid,jdbcType=VARCHAR}
         where Customer_ID = #{customerId,jdbcType=VARCHAR}
     </update>
+   <update id="deleteCustomer">
+       update customer
+       set delete_flag = #{deleteFlag}
+       where Customer_ID = #{customerId,jdbcType=VARCHAR} and delete_flag != #{deleteFlag}
+   </update>
 </mapper>

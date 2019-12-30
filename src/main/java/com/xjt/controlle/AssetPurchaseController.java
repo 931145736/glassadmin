@@ -47,14 +47,13 @@ public class AssetPurchaseController {
         return purchaseService.checkAssetPurchase(reqDto);
     }
 
-    @UserLog("查看物资采购单列表")
     @PostMapping("/queryAssetPurchaseList")
     @ApiOperation("查看物资采购单列表")
     public BaseResDto queryAssetPurchaseList(AssetpurchaseReqDto reqDto){
         return purchaseService.queryAssetPurchaseList(reqDto);
     }
 
-    @UserLog("查看采购的物资详情")
+
     @PostMapping("/queryPurchaseAssetInfo")
     @ApiOperation("查看采购的物资详情")
     public BaseResDto queryPurchaseAssetInfo(AssetpurchaseReqDto reqDto){

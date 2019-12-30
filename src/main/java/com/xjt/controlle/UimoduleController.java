@@ -32,7 +32,6 @@ public class UimoduleController {
     @Autowired
     private UimoduleService uimoduleService;
 
-    @UserLog("查看一级菜单")
 
     @PostMapping("/queryOneList")
     @ApiOperation("查看一级菜单列表")
@@ -42,7 +41,7 @@ public class UimoduleController {
         return uimoduleService.queryOneMenu(reqDto);
     }
 
-    @UserLog("查看子集菜单")
+
     @MenuPower
     @PostMapping("/queryChildrenList")
     @ApiOperation("查看子集菜单")

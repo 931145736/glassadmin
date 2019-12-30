@@ -10,7 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,41 +52,5 @@ public class Test {
     }
 
  
-    public static void main(String[] args) throws ParseException {
-       /* GoodsReqDto goodsReqDto = new GoodsReqDto();
-        goodsReqDto.setGoodsno("abc01");
-        goodsReqDto.setGoodsname("珍视明滴眼液");
-        goodsReqDto.setGoodsmanuno("cj001");
-        List<GoodscolorKey> goodscolorKeys = new ArrayList<>();
-        GoodscolorKey goodscolorKey = new GoodscolorKey();
-        goodscolorKey.setColorid("1");
-        goodscolorKeys.add(goodscolorKey);
-        goodscolorKey = new GoodscolorKey();
-        goodscolorKey.setColorid("2");
-        goodscolorKeys.add(goodscolorKey);
-        List<Goodsscale> goodsscales = new ArrayList<>();
-        Goodsscale goodsscale = new Goodsscale();
-        goodsscale.setUnitprice(new BigDecimal(20.3));
-        goodsscale.setThickness(new BigDecimal(22));
-        goodsscale.setWholesaleprice(new BigDecimal(28));
-        goodsscales.add(goodsscale);
-        goodsReqDto.setGoodscolorKeys(goodscolorKeys);
-        goodsReqDto.setGoodsscales(goodsscales);
-        logger.info("货品信息"+JSONObject.toJSONString(goodsReqDto));*/
-        List<String> list = new ArrayList<>();
-        list.add("沉默王二");
-        list.add("一个文章真特么有趣的程序员");
 
-        for (String str : list) {
-            if (str.equals("沉默王二")) {
-                list.remove(str);
-            }
-        }
-
-
-
-
-        System.out.println(list);
-
-    }
 }

@@ -65,7 +65,7 @@ public class PurchaseController {
         return purchaseService.checkPurchaseOrder(reqDto);
     }
 
-    @UserLog("查看采购订单列表")
+
     @SecurityParameter(outEncode = false)
     @PostMapping("/queryPurchaseOrderList")
     @ApiOperation("查看采购订单列表")
@@ -78,7 +78,7 @@ public class PurchaseController {
         return purchaseService.PurchaseOrderLisy(reqDto);
     }
 
-    @UserLog("查看订单详情")
+
     @SecurityParameter(outEncode = false)
     @PostMapping("/queryOrderDetail")
     @ApiOperation("查看订单详情")

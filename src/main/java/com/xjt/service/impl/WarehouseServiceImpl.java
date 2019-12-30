@@ -186,6 +186,11 @@ public class WarehouseServiceImpl implements WarehouseService {
         if(!checkParams(reqDto,baseResDto)){
             return baseResDto;
         }
+        if(STRUtils.isEmpty(reqDto.getWarehouseNo())){
+            baseResDto.setResultMessage("仓库id is null");
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            return baseResDto;
+        }
         try{
             Warehouse warehouse = new Warehouse();
             BeanUtils.copyProperties(reqDto,warehouse);

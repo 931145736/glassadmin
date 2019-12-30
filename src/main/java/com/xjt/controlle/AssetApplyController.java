@@ -40,7 +40,7 @@ public class AssetApplyController {
         return assetApplyService.insertAssetApply(reqDto);
     }
 
-    @UserLog("查看物资申领表列表")
+
     @PostMapping("/queryApplyList")
     @ApiOperation("查看物资申领表列表")
     public BaseResDto queryApplyList(AssetapplyReqDto reqDto)
@@ -49,7 +49,7 @@ public class AssetApplyController {
     }
 
 
-    @UserLog("查看物资申领表详情")
+
     @PostMapping("/queryApplyDetail")
     @ApiOperation("查看物资申领表详情")
     public BaseResDto queryApplyDetail(AssetapplyReqDto reqDto){

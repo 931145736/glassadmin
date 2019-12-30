@@ -6,6 +6,9 @@ import com.xjt.dto.BaseResDto;
 import com.xjt.entity.DeleteOrderEntity;
 import com.xjt.service.DeleteOrderService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,6 +33,12 @@ public class DeleteOrderController {
     @UserLog("删除订单")
     @SecurityParameter(outEncode = false)
     @PostMapping("/deleteOrder")
+    @ApiOperation("删除订单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "orderId", value = "订单id", required = true),
+            @ApiImplicitParam(name = "requestType", value = "请求类型:1 采购单，2 通知单，3 来货单", required = true)
+    })
+
     public BaseResDto deleteOrder(@RequestBody DeleteOrderEntity entity){
         return deleteOrderService.deleteOrder(entity);
     }

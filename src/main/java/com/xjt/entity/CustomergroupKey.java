@@ -10,6 +10,7 @@ public class CustomergroupKey {
      * 分组名称
      */
     private String customergroup;
+    private Integer deleteFlag;
 
     public String getCustomerId() {
         return customerId;
@@ -25,5 +26,13 @@ public class CustomergroupKey {
 
     public void setCustomergroup(String customergroup) {
         this.customergroup = customergroup == null ? null : customergroup.trim();
+    }
+
+    public Integer getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Integer deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 }

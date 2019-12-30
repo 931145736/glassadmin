@@ -54,7 +54,6 @@ public class DatapermissionController {
      * @param reqDto requestType 1 :品牌，2：渠道，3：供货商， 4：仓库
      * @return
      */
-    @UserLog("查看管理组对应的权限")
     @GetMapping("/queryGroupPermission")
     @ApiOperation("查看管理组对应的各项权限")
     @ApiImplicitParams({

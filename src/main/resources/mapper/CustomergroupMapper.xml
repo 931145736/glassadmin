@@ -37,4 +37,9 @@
             </if>
         </trim>
     </insert>
+    <update id="deleteCustomer">
+        update customergroup
+        set delete_flag = #{deleteFlag}
+        where Customer_ID = #{customerId} and delete_flag != #{deleteFlag}
+    </update>
 </mapper>

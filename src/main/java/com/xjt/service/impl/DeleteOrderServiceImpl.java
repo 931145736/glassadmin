@@ -1,14 +1,17 @@
 package com.xjt.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xjt.business.DeleteOrderBusinessService;
 import com.xjt.dao.master.DeleteOrderDao;
 import com.xjt.dto.BaseResDto;
+import com.xjt.dto.CommonReqDto;
 import com.xjt.entity.DeleteOrderEntity;
 import com.xjt.enums.ResultCode;
 import com.xjt.service.DeleteOrderService;
 import com.xjt.utils.STRUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +31,8 @@ public class DeleteOrderServiceImpl implements DeleteOrderService {
     @Resource
     private DeleteOrderBusinessService businessService;
     private Logger logger = LoggerFactory.getLogger(DeleteOrderServiceImpl.class);
+    @Value("${deleteOrderEntity}")
+    private String deleteOrderEntity;
 
     /***
     *@Description 删除订单
@@ -48,9 +53,17 @@ public class DeleteOrderServiceImpl implements DeleteOrderService {
             baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
             return  baseResDto;
         }
+        if(type==null||type<1||type>3){
+            baseResDto.setResultCode(ResultCode.RESULT_CODE_EXCEPTION.getCode());
+            baseResDto.setResultMessage("request error");
+            return baseResDto;
+        }
         try{
+            JSONObject object = JSONObject.parseObject(deleteOrderEntity);
+            entity = JSONObject.parseObject(JSONObject.toJSONString(object.get(type)),DeleteOrderEntity.class);
+            entity.setOrderId(orderId);
 
-            //删除采购订单
+           /* //删除采购订单
             if(type==1){
                 entity.setOrderMaster("purchase");
                 entity.setOrderGoods("purchasegoods");
@@ -70,8 +83,8 @@ public class DeleteOrderServiceImpl implements DeleteOrderService {
                 entity.setOrderDetail("pureceiptdetail");
                 entity.setColumnMaster("PureceiptID");
                 entity.setColumnGoods("PureceiptGoodsID");
-            }
-           businessService.deleteOrder(entity);
+            }*/
+            businessService.deleteOrder(entity);
             logger.info("返回值"+entity.getResultValue());
 
         }catch (Exception e){

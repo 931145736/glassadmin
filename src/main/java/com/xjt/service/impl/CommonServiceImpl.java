@@ -143,10 +143,13 @@ public class CommonServiceImpl implements CommonService {
             return baseResDto;
         }
         try{
+            String id = reqDto.getColId();
             reqDto = addParams(requestType,reqDto,selectOptionList);
             if(requestType==7){
                 reqDto.setFilterCol("业务员");
             }
+            reqDto.setObjId(id);
+
             List<SelectListPojo> selectListPojos = commonDao.selectOptionList(reqDto);
             logger.info("数据库对象"+JSONObject.toJSONString(selectListPojos));
             baseResDto.setData(selectListPojos);

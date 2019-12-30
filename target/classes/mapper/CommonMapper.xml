@@ -35,8 +35,12 @@
          from ${tableName}
          <where>
              <if test="filterCol != null">
-                 ${filterColumn} = #{filterCol}
+                and   ${filterColumn} = #{filterCol}
              </if>
+             <if test=" objId != null">
+                 and ${colId} != #{objId}
+             </if>
+
          </where>
     </select>
 

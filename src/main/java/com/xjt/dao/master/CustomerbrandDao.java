@@ -18,9 +18,12 @@ public interface CustomerbrandDao {
 
     int updateByPrimaryKey(Customerbrand record);
 
-    List<Customerbrand> queryListByCId(@Param("customerIds") List<String> customerIds);
+    List<Customerbrand> queryListByCId( String customerId);
 
     //批量添加渠道品牌
     int insertCustomerBrandBatch(@Param("customerId") String customerId,@Param("brands") List<String> brands);
+
+
+    int deleteCustomer(@Param("customerId") String customerId);
 
 }

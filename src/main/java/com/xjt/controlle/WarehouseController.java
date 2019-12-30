@@ -34,7 +34,7 @@ public class WarehouseController {
         return warehouseService.insertWareHouse(reqDto);
     }
 
-    @UserLog("查看仓库列表")
+
     @SecurityParameter(outEncode = false)
     @PostMapping("/queryWarehouseList")
     @ApiOperation("查看仓库列表 可以分页查看")
@@ -47,7 +47,7 @@ public class WarehouseController {
         return warehouseService.queryWarehouseList(reqDto);
     }
 
-    @UserLog("查看仓库信息")
+
    @SecurityParameter(outEncode = false)
     @PostMapping("/queryWareInfo")
     @ApiOperation("查看仓库详细信息")
@@ -60,6 +60,8 @@ public class WarehouseController {
     @UserLog("更新仓库")
     @SecurityParameter(outEncode = false)
     @PostMapping("/updateWareHouse")
+    @ApiOperation("更新仓库")
+    @ApiImplicitParam(name = "warehouseNo", value = "仓库id", required = true)
     public BaseResDto updateWare(@RequestBody WarehouseReqDto reqDto){
         return warehouseService.updateWarehouseInfo(reqDto);
 
@@ -68,6 +70,12 @@ public class WarehouseController {
     @UserLog("停启用仓库")
     @SecurityParameter(outEncode = false)
     @PostMapping("/openOrStopWare")
+    @ApiOperation("停启用仓库")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "warehouseNo", value = "仓库id", required = true),
+            @ApiImplicitParam(name = "shutout", value = "是否停用 是 1 否 0", required = true)
+
+    })
     public BaseResDto openOrStopWare(@RequestBody WarehouseReqDto reqDto){
 
         return warehouseService.openOrCloseWare(reqDto);
@@ -76,6 +84,8 @@ public class WarehouseController {
     @UserLog("删除仓库")
     @SecurityParameter(outEncode = false)
     @PostMapping("/deleteWarehouse")
+    @ApiOperation("删除仓库")
+    @ApiImplicitParam(name = "warehouseNo", value = "仓库id", required = true)
     public BaseResDto deleteWarehouse(@RequestBody  WarehouseReqDto reqDto){
         return warehouseService.deleteWareHouse(reqDto);
     }

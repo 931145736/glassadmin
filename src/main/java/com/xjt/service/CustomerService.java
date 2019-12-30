@@ -10,4 +10,9 @@ public interface CustomerService {
     BaseResDto queryCustomerInfo(CustomerReqDto reqDto);
 
     BaseResDto queryCustomerList(CustomerReqDto reqDto);
+
+    BaseResDto deleteCustomer(CustomerReqDto reqDto);
+
+    BaseResDto updateCustomer(CustomerReqDto reqDto);
+
 }
