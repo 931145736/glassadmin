@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xjt.dao.master.CustomerbrandDao" >
+
+    <resultMap id="BaseResultMap" type="com.xjt.entity.Customerbrand" >
+        <id column="Customer_ID" property="customerId" jdbcType="VARCHAR" />
+        <id column="Brand" property="brand" jdbcType="VARCHAR" />
+        <result column="cArea" property="carea" jdbcType="DECIMAL" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        Customer_ID, Brand, cArea
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xjt.entity.Customerbrand" >
+        select 
+        <include refid="Base_Column_List" />
+        from customerbrand
+        where Customer_ID = #{customerId,jdbcType=VARCHAR}
+          and Brand = #{brand,jdbcType=VARCHAR}
+    </select>
+    <select id="queryListByCId" parameterType="java.util.List" resultMap="BaseResultMap" resultType="com.xjt.entity.Customerbrand">
+        select
+	      t1.Brand,t2.brand_name brandName
+        from customerbrand t1 inner join dictbrand t2 on t1.Brand = t2.id
+        where t1.Customer_ID  = #{customerId}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.xjt.entity.Customerbrand" >
+        delete from customerbrand
+        where Customer_ID = #{customerId,jdbcType=VARCHAR}
+          and Brand = #{brand,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.xjt.entity.Customerbrand" >
+        insert into customerbrand (Customer_ID, Brand, cArea
+            )
+        values (#{customerId,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{carea,jdbcType=DECIMAL}
+            )
+    </insert>
+    <insert id="insertCustomerBrandBatch">
+         insert into customerbrand (Customer_ID, Brand
+            )
+          values
+          <foreach collection="brands" item="item" separator=",">
+              (#{customerId},#{item})
+          </foreach>
+    </insert>
+
+
+    <insert id="insertSelective" parameterType="com.xjt.entity.Customerbrand" >
+        insert into customerbrand
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="customerId != null" >
+                Customer_ID,
+            </if>
+            <if test="brand != null" >
+                Brand,
+            </if>
+            <if test="carea != null" >
+                cArea,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="customerId != null" >
+                #{customerId,jdbcType=VARCHAR},
+            </if>
+            <if test="brand != null" >
+                #{brand,jdbcType=VARCHAR},
+            </if>
+            <if test="carea != null" >
+                #{carea,jdbcType=DECIMAL},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.xjt.entity.Customerbrand" >
+        update customerbrand
+        <set >
+            <if test="carea != null" >
+                cArea = #{carea,jdbcType=DECIMAL},
+            </if>
+        </set>
+        where Customer_ID = #{customerId,jdbcType=VARCHAR}
+          and Brand = #{brand,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.xjt.entity.Customerbrand" >
+        update customerbrand
+        set cArea = #{carea,jdbcType=DECIMAL}
+        where Customer_ID = #{customerId,jdbcType=VARCHAR}
+          and Brand = #{brand,jdbcType=VARCHAR}
+    </update>
+    <delete id="deleteCustomer">
+        delete from  customerbrand
+        where Customer_ID = #{customerId,jdbcType=VARCHAR}
+    </delete>
+</mapper>

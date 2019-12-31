@@ -1,0 +1,39 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.xjt.config.FastDFSConfig",
+      "name": "fdfs",
+      "type": "com.xjt.config.FastDFSConfig"
+    },
+    {
+      "sourceType": "com.xjt.config.MybatisDbMasterConfig",
+      "name": "spring.datasource.master",
+      "sourceMethod": "dataSource()",
+      "type": "javax.sql.DataSource"
+    },
+    {
+      "sourceType": "com.xjt.config.MybatisDbOtherConfig",
+      "name": "spring.datasource.other",
+      "sourceMethod": "dataSource()",
+      "type": "javax.sql.DataSource"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.xjt.config.FastDFSConfig",
+      "name": "fdfs.fdfs-storage-port",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.xjt.config.FastDFSConfig",
+      "name": "fdfs.h-t-t-p-p-r-o-d-o-c-o-l",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.xjt.config.FastDFSConfig",
+      "name": "fdfs.req-host",
+      "type": "java.lang.String"
+    }
+  ]
+}
